@@ -1,0 +1,8 @@
+**/bin/
+**/obj/
+reports/
+.vs/
+.idea/
+*.user
+*.suo
+TECHNICAL_NOTES.md

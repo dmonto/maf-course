@@ -7,7 +7,7 @@ internal sealed record Config(
     Uri ProjectEndpoint, string ProjectApiVersion,
     Uri OpenAiBase, string ChatDeployment, string ResponsesDeployment, string EmbeddingsDeployment,
     Uri SearchEndpoint, string SearchIndex, string StorageAccount, string StorageContainer,
-    bool WriteTests, Uri? OllamaEndpoint, string? OllamaModel)
+    bool WriteTests)
 {
     public static Config Load(Func<string, string?>? read = null)
     {
@@ -58,23 +58,11 @@ internal sealed record Config(
         var projectVersion = Optional("AZURE_AI_PROJECT_API_VERSION") ?? "v1";
         if (!Regex.IsMatch(projectVersion, @"^(v1|\d{4}-\d{2}-\d{2}(-preview)?)$"))
             throw new CheckException("AZURE_AI_PROJECT_API_VERSION must be v1 or the API version assigned by the coordinator.");
-        Uri? ollama = null;
-        if (Optional("OLLAMA_HOST") is { } host)
-        {
-            if (!Uri.TryCreate(host.TrimEnd('/') + "/", UriKind.Absolute, out ollama) ||
-                ollama.Scheme is not ("http" or "https") || ollama.UserInfo.Length > 0 ||
-                ollama.Query.Length > 0 || ollama.Fragment.Length > 0 || ollama.AbsolutePath != "/")
-                throw new CheckException("OLLAMA_HOST must be an HTTP(S) service root, for example http://localhost:11434.");
-        }
-        var model = Optional("OLLAMA_MODEL");
-        if (model is not null && (model.Contains('<') || model.Contains('>')))
-            throw new CheckException("Replace the OLLAMA_MODEL placeholder, or leave it empty.");
-        if (model is not null && ollama is null) throw new CheckException("Set OLLAMA_HOST when setting OLLAMA_MODEL.");
         var chat = Required("AZURE_OPENAI_DEPLOYMENT_1", "AZURE_OPENAI_CHAT_FAST_DEPLOYMENT", "AZURE_OPENAI_DEPLOYMENT_NAME");
         return new Config(GuidValue("TENANT_ID"), GuidValue("SUBSCRIPTION_ID"), Required("RESOURCE_GROUP"),
             project, projectVersion, openAi, chat, Optional("AZURE_OPENAI_RESPONSES_DEPLOYMENT") ?? chat,
             Required("AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT", "AZURE_OPENAI_EMBEDDING_DEPLOYMENT"),
-            search, index, account, container, write == "1", ollama, model);
+            search, index, account, container, write == "1");
     }
 }
 

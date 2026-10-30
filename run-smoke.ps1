@@ -14,16 +14,14 @@ function Invoke-CheckedTool {
 
 try {
     Set-Location $PSScriptRoot
-    foreach ($tool in @("git", "dotnet", "az", "docker")) {
+    foreach ($tool in @("git", "dotnet", "az")) {
         if (-not (Get-Command $tool -ErrorAction SilentlyContinue)) { throw "$tool is missing from PATH. Install it before the course." }
     }
     $sdk = Invoke-CheckedTool "dotnet" @("--version")
     if ($sdk -notmatch '^10\.') { throw "The repository requires a stable .NET 10 SDK. Check dotnet --list-sdks and global.json." }
     $null = Invoke-CheckedTool "git" @("--version")
     $null = Invoke-CheckedTool "az" @("version", "--output", "json")
-    try { $null = Invoke-CheckedTool "docker" @("info", "--format", "{{.ServerVersion}}") }
-    catch { throw "Docker daemon is unavailable. Start Docker Desktop/Engine and check your user permissions." }
-    Write-Host "[PASS] Local tools: Git, .NET 10 SDK, Azure CLI and Docker daemon."
+    Write-Host "[PASS] Local tools: Git, .NET 10 SDK and Azure CLI."
 
     if ([string]::IsNullOrWhiteSpace($env:TENANT_ID) -or [string]::IsNullOrWhiteSpace($env:SUBSCRIPTION_ID)) {
         throw "Load your edited configuration first: . .\student.env.ps1"

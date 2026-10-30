@@ -18,7 +18,7 @@ $env:AZURE_OPENAI_RESPONSES_DEPLOYMENT = "chat-quality"
 $env:AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT = "embedding-lab"
 
 # Precreated Search index and Blob container assigned by the coordinator.
-$env:AZURE_AI_SEARCH_ENDPOINT = "https://srch-maf-nov2026.search.windows.net"
+$env:AZURE_AI_SEARCH_ENDPOINT = "https://srch-maf-nov2026-s1.search.windows.net"
 $env:AZURE_AI_SEARCH_INDEX_NAME = "maf-support-vector-index"
 $env:AZURE_STORAGE_ACCOUNT = "stmafnov2026"
 $env:AZURE_STORAGE_CONTAINER = "curso-maf-shared"
@@ -27,9 +27,3 @@ $env:AZURE_STORAGE_BLOB_ENDPOINT="https://stmafnov2026.blob.core.windows.net"
 # Optional write checks: 1 creates and removes synthetic temporary resources.
 # Ask the coordinator whether your assigned lab roles allow these checks.
 $env:SMOKE_WRITE_TESTS = "0"
-
-# Local-model lab only. Leave both empty to skip; use the assigned model name.
-$env:OLLAMA_HOST = ""
-$env:OLLAMA_MODEL = ""
-# Example: $env:OLLAMA_HOST = "http://localhost:11434"
-# Then:    ollama pull $env:OLLAMA_MODEL

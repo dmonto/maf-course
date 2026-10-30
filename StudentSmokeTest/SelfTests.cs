@@ -47,11 +47,24 @@ internal static class SelfTests
             var runner = new Runner(quiet: true);
             await new Checks(TestConfig(), tokens, http).ExecuteAsync(runner);
             Assert(runner.Passed && runner.Results.Count(r => r.Status == "PASS") == 7);
-            Assert(runner.Results.Count(r => r.Status == "SKIP") == 3);
+            Assert(runner.Results.Count(r => r.Status == "SKIP") == 2);
             Assert(fake.ChatRequests == 2 && fake.SawToolResult && fake.ResponsesStoreDisabled && fake.SawDocumentQuery);
             Assert(tokens.Scopes.Contains(Checks.AiScope) && tokens.Scopes.Contains(Checks.SearchScope) &&
                 tokens.Scopes.Contains(Checks.StorageScope) && tokens.Scopes.Contains(Checks.ArmScope));
             Assert(fake.SawBearer && fake.BlobCount == 0 && fake.IndexCount == 0);
+        });
+        await Test("Legacy local-model settings cannot block core readiness", async () =>
+        {
+            using var fake = new FakeService();
+            using var http = new HttpClient(fake);
+            var runner = new Runner(quiet: true);
+            var config = TestConfig(overrides: new()
+            {
+                ["OLLAMA_HOST"] = "not-a-valid-endpoint",
+                ["OLLAMA_MODEL"] = "<unavailable-model>"
+            });
+            await new Checks(config, new FakeCredential(), http).ExecuteAsync(runner);
+            Assert(runner.Passed && runner.Results.Count == 9);
         });
         await Test("Optional writes verify content and clean both temporary resources", async () =>
         {

@@ -11,7 +11,7 @@ cd maf-course
 
 ## 2. Check your workstation and accounts
 
-- [ ] .NET **10 SDK**, compatible Visual Studio or VS Code, Git, Azure CLI and Docker installed; Docker running.
+- [ ] .NET **10 SDK**, compatible Visual Studio or VS Code, Git and Azure CLI installed.
 - [ ] **32 GB RAM** and **50 GB free disk space**, as specified in the syllabus.
 - [ ] Assigned corporate account and working MFA; access to Azure Portal and Foundry.
 - [ ] Access to the lab SharePoint site, course Slack and assigned Azure DevOps organization.
@@ -65,13 +65,13 @@ $env:SMOKE_WRITE_TESTS = "1"
 
 Creates, verifies and deletes a synthetic blob and temporary Search index. Cleanup failures name the remaining item.
 
-For local models: set `OLLAMA_HOST="http://localhost:11434"` and the assigned `OLLAMA_MODEL`, start Ollama, run `ollama pull $env:OLLAMA_MODEL`, then rerun. Empty settings: `SKIP`; configured service/model failure: `FAIL`.
+Docker, Podman, Ollama and Foundry Local are not required or checked by this smoke test. Container and local-model labs are validated separately.
 
 ## Quick error guide
 
 | Symptom | What to do |
 |---|---|
-| Missing tool/Docker | Install the .NET 10 **SDK** and tools; start Docker; check PATH/permissions. |
+| Missing tool | Install the .NET 10 **SDK**, Git and Azure CLI; check PATH/permissions. |
 | Wrong context/login/401 | Repeat step 4; check tenant, MFA and Conditional Access. |
 | 403 | Administrator: check data-plane roles/scope, role propagation and firewall. |
 | 404 | Check project, deployment, index and container names. |

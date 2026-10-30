@@ -38,10 +38,7 @@ internal sealed class Checks(Config config, TokenCredential credential, HttpClie
             runner.Skip("Blob write / read / delete", "SMOKE_WRITE_TESTS=0; write permissions have not been verified.");
             runner.Skip("Search create / upload / query / delete", "SMOKE_WRITE_TESTS=0; index-management and write permissions have not been verified.");
         }
-        if (config.OllamaEndpoint is null)
-            runner.Skip("Ollama", "Optional: OLLAMA_HOST is empty.");
-        else
-            await runner.RunAsync("Ollama", OllamaAsync);
+
     }
 
     private async Task<HttpResponseMessage> SendAsync(HttpMethod method, Uri uri, string? scope,
@@ -257,22 +254,5 @@ internal sealed class Checks(Config config, TokenCredential credential, HttpClie
         }
         if (failure is not null) System.Runtime.ExceptionServices.ExceptionDispatchInfo.Capture(failure).Throw();
         return "Unique temporary index created, document uploaded/queried, and index deleted.";
-    }
-
-    private async Task<string> OllamaAsync(CancellationToken ct)
-    {
-        using var tags = await JsonAsync(HttpMethod.Get, new Uri(config.OllamaEndpoint!, "api/tags"), null, ct);
-        if (!tags.RootElement.TryGetProperty("models", out var models) || models.ValueKind != JsonValueKind.Array)
-            throw new InvalidDataException();
-        if (config.OllamaModel is null) return "Server reachable. Set OLLAMA_MODEL to also verify model availability and inference.";
-        var requested = config.OllamaModel.Contains(':') ? config.OllamaModel : config.OllamaModel + ":latest";
-        bool exists = models.EnumerateArray().Any(m => m.TryGetProperty("name", out var name) &&
-            (name.GetString() == requested || name.GetString() == config.OllamaModel));
-        if (!exists) throw new CheckException("Assigned Ollama model is not downloaded. Run ollama pull $env:OLLAMA_MODEL, then retry.");
-        using var inference = await JsonAsync(HttpMethod.Post, new Uri(config.OllamaEndpoint!, "api/generate"), null, ct,
-            new { model = config.OllamaModel, prompt = "Reply OK.", stream = false, options = new { num_predict = 32 } });
-        if (!inference.RootElement.TryGetProperty("response", out var text) || string.IsNullOrWhiteSpace(text.GetString()))
-            throw new CheckException("Ollama returned no text. Check the assigned model and available memory.");
-        return "Assigned model is downloaded and returned an inference response.";
     }
 }

@@ -1,6 +1,4 @@
 <Solution>
-  <Project Path="Exercises/ex01-provider-selection/SelectionSolution.csproj" />
-  <Project Path="Exercises/ex02-provider-comparison/ComparisonSolution.csproj" />
   <Project Path="Shared/Unit02.Common/Unit02.Common.csproj" />
   <Project Path="Verification/Unit02.Checks.csproj" />
   <Project Path="v01-foundry-architecture/BoundaryDemo.csproj" />

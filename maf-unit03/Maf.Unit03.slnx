@@ -8,7 +8,4 @@
   <Project Path="v06-result-management/ResultManagement.csproj" />
   <Project Path="v07-user-interaction/UserInteraction.csproj" />
   <Project Path="v08-error-handling/ErrorHandling.csproj" />
-  <Project Path="Exercises/ex01-trust-boundaries/TrustBoundaries.csproj" />
-  <Project Path="Exercises/ex02-support-contact/SupportContact.csproj" />
-  <Project Path="Verification/Unit03.Checks.csproj" />
 </Solution>

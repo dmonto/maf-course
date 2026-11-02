@@ -1,0 +1,14 @@
+<Solution>
+  <Project Path="Shared/Unit03.Common/Unit03.Common.csproj" />
+  <Project Path="v01-bounded-capability/BoundedCapability.csproj" />
+  <Project Path="v02-tool-registration/ToolRegistration.csproj" />
+  <Project Path="v03-conversational-context/ConversationalContext.csproj" />
+  <Project Path="v04-agent-lifecycle/AgentLifecycle.csproj" />
+  <Project Path="v05-dependency-injection/DependencyInjection.csproj" />
+  <Project Path="v06-result-management/ResultManagement.csproj" />
+  <Project Path="v07-user-interaction/UserInteraction.csproj" />
+  <Project Path="v08-error-handling/ErrorHandling.csproj" />
+  <Project Path="Exercises/ex01-trust-boundaries/TrustBoundaries.csproj" />
+  <Project Path="Exercises/ex02-support-contact/SupportContact.csproj" />
+  <Project Path="Verification/Unit03.Checks.csproj" />
+</Solution>

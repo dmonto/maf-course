@@ -1,0 +1,82 @@
+{
+  "unit": 3,
+  "title": "Agent Fundamentals: Agents, Tools, Context and Lifecycle",
+  "source": "https://app.gitbook.com/s/5NyZDQFujwe6GeJ3CBCA/session-1/unit-3",
+  "snapshotDate": "2026-10-30",
+  "examples": [
+    {
+      "id": "v01",
+      "directory": "v01-bounded-capability",
+      "project": "v01-bounded-capability/BoundedCapability.csproj",
+      "topic": "Formal definition of an agent",
+      "example": "Define a bounded capability",
+      "usesModel": true
+    },
+    {
+      "id": "v02",
+      "directory": "v02-tool-registration",
+      "project": "v02-tool-registration/ToolRegistration.csproj",
+      "topic": "Tool registration",
+      "example": "Separate schema from enforcement",
+      "usesModel": false
+    },
+    {
+      "id": "v03",
+      "directory": "v03-conversational-context",
+      "project": "v03-conversational-context/ConversationalContext.csproj",
+      "topic": "Conversational context management",
+      "example": "Follow-up context and fresh evidence",
+      "usesModel": true
+    },
+    {
+      "id": "v04",
+      "directory": "v04-agent-lifecycle",
+      "project": "v04-agent-lifecycle/AgentLifecycle.csproj",
+      "topic": "Agent lifecycle",
+      "example": "Conversation reset",
+      "usesModel": true
+    },
+    {
+      "id": "v05",
+      "directory": "v05-dependency-injection",
+      "project": "v05-dependency-injection/DependencyInjection.csproj",
+      "topic": "Dependency injection",
+      "example": "Complete conversational service-status agent",
+      "usesModel": true
+    },
+    {
+      "id": "v06",
+      "directory": "v06-result-management",
+      "project": "v06-result-management/ResultManagement.csproj",
+      "topic": "Result management",
+      "example": "A completed refusal",
+      "usesModel": true
+    },
+    {
+      "id": "v07",
+      "directory": "v07-user-interaction",
+      "project": "v07-user-interaction/UserInteraction.csproj",
+      "topic": "User interaction",
+      "example": "Ambiguity after two lookups",
+      "usesModel": true
+    },
+    {
+      "id": "v08",
+      "directory": "v08-error-handling",
+      "project": "v08-error-handling/ErrorHandling.csproj",
+      "topic": "Error handling",
+      "example": "Diagnose a failure before changing the prompt",
+      "usesModel": true
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex01",
+      "project": "Exercises/ex01-trust-boundaries/TrustBoundaries.csproj"
+    },
+    {
+      "id": "ex02",
+      "project": "Exercises/ex02-support-contact/SupportContact.csproj"
+    }
+  ]
+}

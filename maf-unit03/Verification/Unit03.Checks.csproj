@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Shared/Unit03.Common/Unit03.Common.csproj" />
+    <ProjectReference Include="../Exercises/ex01-trust-boundaries/TrustBoundaries.csproj" />
+    <ProjectReference Include="../Exercises/ex02-support-contact/SupportContact.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense para saber los atributos posibles.
+    // Mantenga el puntero para ver las descripciones de los existentes atributos.
+    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+    {
+      "name": "Debug proyecto actual",
+      "type": "coreclr",
+      "request": "launch",
+      "program": "${fileDirname}/bin/Debug/net10.0/${fileBasenameNoExtension}.dll",
+      "cwd": "${fileDirname}",
+      "console": "integratedTerminal",
+      "args": "${input:arguments}"
+    }        
+    ],
+  "inputs": [
+    {
+      "id": "arguments",
+      "type": "promptString",
+      "description": "Argumentos de ejecución (Enter = ninguno)",
+      "default": ""
+    }
+  ]    
+}

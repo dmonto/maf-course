@@ -1,0 +1,60 @@
+{
+  "unit": 2,
+  "language": "en",
+  "framework": "net10.0",
+  "source_blob": "106810494e3f98aab50cd03382e81f93ccea2e20",
+  "examples": [
+    {
+      "directory": "v01-foundry-architecture",
+      "project": "BoundaryDemo.csproj",
+      "section": "Azure AI Foundry architecture"
+    },
+    {
+      "directory": "v02-azure-openai",
+      "project": "AzureDeployments.csproj",
+      "section": "Integration with Azure OpenAI"
+    },
+    {
+      "directory": "v03-foundry-models",
+      "project": "FoundryClassifiers.csproj",
+      "section": "Use of models hosted in Microsoft Foundry"
+    },
+    {
+      "directory": "v04-foundry-local",
+      "project": "LocalModel.csproj",
+      "section": "Connection to local models"
+    },
+    {
+      "directory": "v05-endpoint-management",
+      "project": "ProviderProbe.csproj",
+      "section": "Endpoint management"
+    },
+    {
+      "directory": "v06-model-versioning",
+      "project": "ModelRegression.csproj",
+      "section": "Model versioning"
+    },
+    {
+      "directory": "v07-consumption-cost",
+      "project": "CostCalculator.csproj",
+      "section": "Consumption cost control"
+    },
+    {
+      "directory": "v08-model-observability",
+      "project": "ObservabilityDemo.csproj",
+      "section": "Model observability"
+    }
+  ],
+  "exercise_solutions": [
+    "Exercises/ex01-provider-selection",
+    "Exercises/ex02-provider-comparison"
+  ],
+  "shared_environment": ".env",
+  "shared_code": "Shared/Unit02.Common",
+  "providers": [
+    "azure",
+    "foundry",
+    "foundry-local"
+  ],
+  "python_reference": "v05-endpoint-management/Python/provider_probe.py"
+}

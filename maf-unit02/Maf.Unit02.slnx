@@ -1,0 +1,14 @@
+<Solution>
+  <Project Path="Exercises/ex01-provider-selection/SelectionSolution.csproj" />
+  <Project Path="Exercises/ex02-provider-comparison/ComparisonSolution.csproj" />
+  <Project Path="Shared/Unit02.Common/Unit02.Common.csproj" />
+  <Project Path="Verification/Unit02.Checks.csproj" />
+  <Project Path="v01-foundry-architecture/BoundaryDemo.csproj" />
+  <Project Path="v02-azure-openai/AzureDeployments.csproj" />
+  <Project Path="v03-foundry-models/FoundryClassifiers.csproj" />
+  <Project Path="v04-foundry-local/LocalModel.csproj" />
+  <Project Path="v05-endpoint-management/ProviderProbe.csproj" />
+  <Project Path="v06-model-versioning/ModelRegression.csproj" />
+  <Project Path="v07-consumption-cost/CostCalculator.csproj" />
+  <Project Path="v08-model-observability/ObservabilityDemo.csproj" />
+</Solution>

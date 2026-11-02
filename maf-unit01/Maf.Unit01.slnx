@@ -1,5 +1,4 @@
 <Solution>
   <Project Path="shared/Unit01.Shared.csproj" />
   <Project Path="v01-native-integration/Unit01.Intro.csproj" />
-  <Project Path="exercise-solutions/ex02-evidence-limit/Unit01.Exercise02.csproj" />
 </Solution>

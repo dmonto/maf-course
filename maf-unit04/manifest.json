@@ -1,0 +1,88 @@
+{
+  "unit": 4,
+  "source": "https://diego-montoliu.gitbook.io/maf-course/session-2/unit-4",
+  "examples": [
+    {
+      "id": "v01",
+      "directory": "v01-initial-project-configuration",
+      "project": "v01-initial-project-configuration/Unit04.V01.csproj",
+      "heading": "Initial project configuration",
+      "profile": "ConfigurationOnly"
+    },
+    {
+      "id": "v02",
+      "directory": "v02-model-registration",
+      "project": "v02-model-registration/Unit04.V02.csproj",
+      "heading": "Model registration",
+      "profile": "Registration"
+    },
+    {
+      "id": "v03",
+      "directory": "v03-tool-definition",
+      "project": "v03-tool-definition/Unit04.V03.csproj",
+      "heading": "Tool definition",
+      "profile": "Tools"
+    },
+    {
+      "id": "v04",
+      "directory": "v04-basic-execution",
+      "project": "v04-basic-execution/Unit04.V04.csproj",
+      "heading": "Basic execution",
+      "profile": "Full"
+    },
+    {
+      "id": "v05",
+      "directory": "v05-devui-observability",
+      "project": "v05-devui-observability/Unit04.V05.csproj",
+      "heading": "Observability with DevUI",
+      "profile": "Full"
+    },
+    {
+      "id": "v06",
+      "directory": "v06-structured-logging",
+      "project": "v06-structured-logging/Unit04.V06.csproj",
+      "heading": "Structured logging",
+      "profile": "Full"
+    },
+    {
+      "id": "v07",
+      "directory": "v07-prompt-management",
+      "project": "v07-prompt-management/Unit04.V07.csproj",
+      "heading": "Prompt management",
+      "profile": "Full"
+    },
+    {
+      "id": "v08",
+      "directory": "v08-basic-state-management",
+      "project": "v08-basic-state-management/Unit04.V08.csproj",
+      "heading": "Basic state management",
+      "profile": "Full"
+    },
+    {
+      "id": "v09",
+      "directory": "v09-initial-testing",
+      "project": "v09-initial-testing/Unit04.V09.csproj",
+      "heading": "Initial testing",
+      "profile": "Full"
+    },
+    {
+      "id": "v10",
+      "directory": "v10-behavior-validation",
+      "project": "v10-behavior-validation/Unit04.V10.csproj",
+      "heading": "Behavior validation",
+      "profile": "Full"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex01",
+      "directory": "Exercises/ex01-evidence-diagnosis",
+      "project": "Exercises/ex01-evidence-diagnosis/EvidenceDiagnosis.csproj"
+    },
+    {
+      "id": "ex02",
+      "directory": "Exercises/ex02-expiring-conversations",
+      "project": "Exercises/ex02-expiring-conversations/ExpiringConversations.csproj"
+    }
+  ]
+}

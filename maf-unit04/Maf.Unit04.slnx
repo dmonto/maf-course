@@ -1,0 +1,16 @@
+<Solution>
+  <Project Path="Exercises/ex01-evidence-diagnosis/EvidenceDiagnosis.csproj" />
+  <Project Path="Exercises/ex02-expiring-conversations/ExpiringConversations.csproj" />
+  <Project Path="Shared/Unit04.Common/Unit04.Common.csproj" />
+  <Project Path="Verification/Unit04.Checks.csproj" />
+  <Project Path="v01-initial-project-configuration/Unit04.V01.csproj" />
+  <Project Path="v02-model-registration/Unit04.V02.csproj" />
+  <Project Path="v03-tool-definition/Unit04.V03.csproj" />
+  <Project Path="v04-basic-execution/Unit04.V04.csproj" />
+  <Project Path="v05-devui-observability/Unit04.V05.csproj" />
+  <Project Path="v06-structured-logging/Unit04.V06.csproj" />
+  <Project Path="v07-prompt-management/Unit04.V07.csproj" />
+  <Project Path="v08-basic-state-management/Unit04.V08.csproj" />
+  <Project Path="v09-initial-testing/Unit04.V09.csproj" />
+  <Project Path="v10-behavior-validation/Unit04.V10.csproj" />
+</Solution>

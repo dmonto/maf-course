@@ -1,0 +1,10 @@
+<Project>
+  <ItemGroup>
+    <PackageVersion Include="Azure.AI.OpenAI" Version="2.9.0-beta.1" />
+    <PackageVersion Include="Azure.Identity" Version="1.21.0" />
+    <PackageVersion Include="Microsoft.Agents.AI.OpenAI" Version="1.24.0" />
+    <PackageVersion Include="Microsoft.Agents.AI.Hosting" Version="1.24.0-preview.261006.1" />
+    <PackageVersion Include="Microsoft.Agents.AI.Hosting.OpenAI" Version="1.24.0-alpha.261006.1" />
+    <PackageVersion Include="Microsoft.Agents.AI.DevUI" Version="1.24.0-preview.261006.1" />
+  </ItemGroup>
+</Project>

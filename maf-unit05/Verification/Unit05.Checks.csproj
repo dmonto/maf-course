@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+ <ItemGroup>
+  <ProjectReference Include="../Shared/Unit05.Common/Unit05.Common.csproj" />
+  <ProjectReference Include="../Exercises/ex01-maintenance-contract/MaintenanceContract.csproj" />
+  <ProjectReference Include="../Exercises/ex02-human-review/HumanReview.csproj" />
+ </ItemGroup>
+</Project>

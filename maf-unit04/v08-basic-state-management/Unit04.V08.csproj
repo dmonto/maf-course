@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup><ProjectReference Include="../Shared/Unit04.Common/Unit04.Common.csproj" /></ItemGroup>
+</Project>

@@ -1,0 +1,71 @@
+{
+  "unit": 5,
+  "examples": [
+    {
+      "id": "v01",
+      "directory": "v01-prompt-principles",
+      "project": "v01-prompt-principles/Unit05.V01.csproj",
+      "heading": "Prompt design principles"
+    },
+    {
+      "id": "v02",
+      "directory": "v02-instruction-separation",
+      "project": "v02-instruction-separation/Unit05.V02.csproj",
+      "heading": "Separation between system and user instructions"
+    },
+    {
+      "id": "v03",
+      "directory": "v03-controlled-tool-calling",
+      "project": "v03-controlled-tool-calling/Unit05.V03.csproj",
+      "heading": "Controlled tool calling"
+    },
+    {
+      "id": "v04",
+      "directory": "v04-input-validation",
+      "project": "v04-input-validation/Unit05.V04.csproj",
+      "heading": "Input validation"
+    },
+    {
+      "id": "v05",
+      "directory": "v05-unwanted-behaviors",
+      "project": "v05-unwanted-behaviors/Unit05.V05.csproj",
+      "heading": "Prevention of unwanted behaviors"
+    },
+    {
+      "id": "v06",
+      "directory": "v06-encapsulated-tools",
+      "project": "v06-encapsulated-tools/Unit05.V06.csproj",
+      "heading": "Encapsulation of logic in tools"
+    },
+    {
+      "id": "v07",
+      "directory": "v07-structured-responses",
+      "project": "v07-structured-responses/Unit05.V07.csproj",
+      "heading": "Structured responses"
+    },
+    {
+      "id": "v08",
+      "directory": "v08-parameter-control",
+      "project": "v08-parameter-control/Unit05.V08.csproj",
+      "heading": "Temperature and parameter control"
+    },
+    {
+      "id": "v09",
+      "directory": "v09-prompt-testing",
+      "project": "v09-prompt-testing/Unit05.V09.csproj",
+      "heading": "Prompt testing"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex01",
+      "directory": "Exercises/ex01-maintenance-contract",
+      "project": "Exercises/ex01-maintenance-contract/MaintenanceContract.csproj"
+    },
+    {
+      "id": "ex02",
+      "directory": "Exercises/ex02-human-review",
+      "project": "Exercises/ex02-human-review/HumanReview.csproj"
+    }
+  ]
+}

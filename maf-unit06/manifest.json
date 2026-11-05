@@ -1,0 +1,69 @@
+{
+  "unit": 6,
+  "gitbook_url": "https://diego-montoliu.gitbook.io/maf-course/session-3/unit-6",
+  "examples": [
+    {
+      "id": "v01",
+      "directory": "v01-in-session-memory",
+      "project": "v01-in-session-memory/Unit06.V01.csproj",
+      "section": "In-session memory",
+      "purpose": "Reuse a session and compare a fresh session."
+    },
+    {
+      "id": "v02",
+      "directory": "v02-database-persistence",
+      "project": "v02-database-persistence/Unit06.V02.csproj",
+      "section": "Persistence in external databases",
+      "purpose": "Persist one turn and restore it in another process."
+    },
+    {
+      "id": "v03",
+      "directory": "v03-complete-turn-truncation",
+      "project": "v03-complete-turn-truncation/Unit06.V03.csproj",
+      "section": "Truncation strategies",
+      "purpose": "Prune complete turns while preserving function-call/result pairs."
+    },
+    {
+      "id": "v04",
+      "directory": "v04-contextual-enrichment",
+      "project": "v04-contextual-enrichment/Unit06.V04.csproj",
+      "section": "Contextual enrichment",
+      "purpose": "Run the complete persistent assistant with caller-bound case and status tools."
+    },
+    {
+      "id": "v05",
+      "directory": "v05-replica-resume",
+      "project": "v05-replica-resume/Unit06.V05.csproj",
+      "section": "Use of distributed storage",
+      "purpose": "Simulate replica A and B as separate processes using one local SQLite store."
+    },
+    {
+      "id": "v06",
+      "directory": "v06-consistency-control",
+      "project": "v06-consistency-control/Unit06.V06.csproj",
+      "section": "Consistency control",
+      "purpose": "Stage two candidates at the same revision and reject the stale write."
+    },
+    {
+      "id": "v07",
+      "directory": "v07-conversation-auditing",
+      "project": "v07-conversation-auditing/Unit06.V07.csproj",
+      "section": "Conversation auditing",
+      "purpose": "Inspect the latest ten committed-turn metadata rows."
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex01",
+      "directory": "Exercises/ex01-confirmed-operating-system",
+      "project": "Exercises/ex01-confirmed-operating-system/ConfirmedOperatingSystem.csproj",
+      "title": "Preserve a confirmed fact beyond the conversation window"
+    },
+    {
+      "id": "ex02",
+      "directory": "Exercises/ex02-configurable-idle-expiry",
+      "project": "Exercises/ex02-configurable-idle-expiry/ConfigurableIdleExpiry.csproj",
+      "title": "Make the memory lifetime explicit and test expiry"
+    }
+  ]
+}

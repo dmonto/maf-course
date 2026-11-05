@@ -1,0 +1,9 @@
+<Project>
+  <ItemGroup>
+    <PackageVersion Include="Azure.AI.OpenAI" Version="2.9.0-beta.1" />
+    <PackageVersion Include="Azure.Identity" Version="1.21.0" />
+    <PackageVersion Include="Microsoft.Agents.AI.OpenAI" Version="1.24.0" />
+    <PackageVersion Include="Microsoft.Data.Sqlite" Version="10.0.0" />
+    <PackageVersion Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.3" />
+  </ItemGroup>
+</Project>

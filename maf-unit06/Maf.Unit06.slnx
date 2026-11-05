@@ -1,0 +1,13 @@
+<Solution>
+  <Project Path="Shared/Unit06.Common/Unit06.Common.csproj" />
+  <Project Path="v01-in-session-memory/Unit06.V01.csproj" />
+  <Project Path="v02-database-persistence/Unit06.V02.csproj" />
+  <Project Path="v03-complete-turn-truncation/Unit06.V03.csproj" />
+  <Project Path="v04-contextual-enrichment/Unit06.V04.csproj" />
+  <Project Path="v05-replica-resume/Unit06.V05.csproj" />
+  <Project Path="v06-consistency-control/Unit06.V06.csproj" />
+  <Project Path="v07-conversation-auditing/Unit06.V07.csproj" />
+  <Project Path="Exercises/ex01-confirmed-operating-system/ConfirmedOperatingSystem.csproj" />
+  <Project Path="Exercises/ex02-configurable-idle-expiry/ConfigurableIdleExpiry.csproj" />
+  <Project Path="Verification/Unit06.Checks.csproj" />
+</Solution>

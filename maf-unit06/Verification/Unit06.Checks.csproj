@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Shared/Unit06.Common/Unit06.Common.csproj" />
+    <Compile Include="../Exercises/ex02-configurable-idle-expiry/IdlePolicy.cs" Link="IdlePolicy.cs" />
+  </ItemGroup>
+</Project>

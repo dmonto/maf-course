@@ -1,0 +1,6 @@
+bin/
+obj/
+data/
+output/
+.env
+*.user

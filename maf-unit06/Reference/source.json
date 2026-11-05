@@ -1,0 +1,8 @@
+{
+  "retrieved_utc": "2026-11-05",
+  "space_id": "5NyZDQFujwe6GeJ3CBCA",
+  "page_id": "CuFL1T1JUV3nA2WKXFz8",
+  "path": "session-3/unit-6",
+  "sha256": "b0e7aed2e8f3f30eda4246cdd1a59a4ef27a06e1ca5796aa4502bad5701b4ec9",
+  "note": "Read-only source snapshot; the packaged projects use shared code and a common root .env."
+}

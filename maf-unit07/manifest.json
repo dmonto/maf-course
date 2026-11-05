@@ -1,0 +1,71 @@
+{
+  "source": "https://diego-montoliu.gitbook.io/maf-course/session-3/unit-7",
+  "examples": [
+    {
+      "id": "v01",
+      "directory": "v01-task-graphs",
+      "topic": "Definition of task graphs",
+      "project": "v01-task-graphs/Unit07.V01.csproj"
+    },
+    {
+      "id": "v02",
+      "directory": "v02-conditional-transitions",
+      "topic": "Conditional transitions",
+      "project": "v02-conditional-transitions/Unit07.V02.csproj"
+    },
+    {
+      "id": "v03",
+      "directory": "v03-error-handling",
+      "topic": "Error handling in workflows",
+      "project": "v03-error-handling/Unit07.V03.csproj"
+    },
+    {
+      "id": "v04",
+      "directory": "v04-human-review",
+      "topic": "Human-in-the-loop integration",
+      "project": "v04-human-review/Unit07.V04.csproj"
+    },
+    {
+      "id": "v05",
+      "directory": "v05-intermediate-validations",
+      "topic": "Intermediate validations",
+      "project": "v05-intermediate-validations/Unit07.V05.csproj"
+    },
+    {
+      "id": "v06",
+      "directory": "v06-sequential-orchestration",
+      "topic": "Sequential orchestration",
+      "project": "v06-sequential-orchestration/Unit07.V06.csproj"
+    },
+    {
+      "id": "v07",
+      "directory": "v07-parallel-evidence",
+      "topic": "Task parallelization",
+      "project": "v07-parallel-evidence/Unit07.V07.csproj"
+    },
+    {
+      "id": "v08",
+      "directory": "v08-workflow-persistence",
+      "topic": "Workflow persistence",
+      "project": "v08-workflow-persistence/Unit07.V08.csproj"
+    },
+    {
+      "id": "v09",
+      "directory": "v09-workflow-observability",
+      "topic": "Workflow observability",
+      "project": "v09-workflow-observability/Unit07.V09.csproj"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex01",
+      "directory": "Exercises/ex01-evidence-quality-gate",
+      "project": "Exercises/ex01-evidence-quality-gate/Unit07.EX01.csproj"
+    },
+    {
+      "id": "ex02",
+      "directory": "Exercises/ex02-idempotent-escalation",
+      "project": "Exercises/ex02-idempotent-escalation/Unit07.EX02.csproj"
+    }
+  ]
+}

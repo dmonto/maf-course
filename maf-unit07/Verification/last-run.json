@@ -1,0 +1,266 @@
+{
+  "checks": 21,
+  "result": "passed",
+  "parallelEvidenceMs": 507,
+  "serialEvidenceMs": 811,
+  "liveInference": "not-run",
+  "cases": [
+    {
+      "project": "v01",
+      "arguments": [
+        "run",
+        "vpn",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 0,
+      "stage": "information-ready"
+    },
+    {
+      "project": "v02",
+      "arguments": [
+        "run",
+        "vpn",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 0,
+      "stage": "information-ready"
+    },
+    {
+      "project": "v05",
+      "arguments": [
+        "run",
+        "vpn",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 0,
+      "stage": "information-ready"
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "run",
+        "vpn",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 0,
+      "stage": "information-ready"
+    },
+    {
+      "project": "v09",
+      "arguments": [
+        "run",
+        "vpn",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 0,
+      "stage": "information-ready"
+    },
+    {
+      "project": "v02",
+      "arguments": [
+        "run",
+        "payroll",
+        "--decision",
+        "yes",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 0,
+      "stage": "escalation-approved"
+    },
+    {
+      "project": "v03",
+      "arguments": [
+        "run",
+        "payroll",
+        "--fail",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 1,
+      "stage": null
+    },
+    {
+      "project": "v04",
+      "arguments": [
+        "run",
+        "payroll",
+        "--decision",
+        "no",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 0,
+      "stage": "escalation-rejected"
+    },
+    {
+      "project": "v05",
+      "arguments": [
+        "run",
+        "unknown",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 1,
+      "stage": null
+    },
+    {
+      "project": "v06",
+      "arguments": [
+        "run",
+        "payroll",
+        "--decision",
+        "yes",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 0,
+      "stage": "escalation-approved"
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "run",
+        "vpn",
+        "--state",
+        "verify-0315bb8f",
+        "--status-delay-ms",
+        "300",
+        "--guide-delay-ms",
+        "500"
+      ],
+      "exitCode": 0,
+      "stage": "information-ready"
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "run",
+        "vpn",
+        "--state",
+        "verify-0315bb8f",
+        "--serial",
+        "--status-delay-ms",
+        "300",
+        "--guide-delay-ms",
+        "500"
+      ],
+      "exitCode": 0,
+      "stage": "information-ready"
+    },
+    {
+      "project": "v08",
+      "arguments": [
+        "pause",
+        "payroll",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 0,
+      "stage": null
+    },
+    {
+      "project": "v08",
+      "arguments": [
+        "resume",
+        "--decision",
+        "yes",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 0,
+      "stage": "escalation-approved"
+    },
+    {
+      "project": "ex01",
+      "arguments": [
+        "run",
+        "vpn",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 0,
+      "stage": "information-ready"
+    },
+    {
+      "project": "ex01",
+      "arguments": [
+        "run",
+        "payroll",
+        "--decision",
+        "yes",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 0,
+      "stage": "escalation-approved"
+    },
+    {
+      "project": "ex01",
+      "arguments": [
+        "run",
+        "payroll",
+        "--stale",
+        "--state",
+        "verify-0315bb8f"
+      ],
+      "exitCode": 1,
+      "stage": null
+    },
+    {
+      "project": "ex02",
+      "arguments": [
+        "run",
+        "payroll",
+        "--decision",
+        "no",
+        "--state",
+        "verify-0315bb8f-reject"
+      ],
+      "exitCode": 0,
+      "stage": "escalation-rejected"
+    },
+    {
+      "project": "ex02",
+      "arguments": [
+        "run",
+        "payroll",
+        "--decision",
+        "yes",
+        "--fail-after-save",
+        "--state",
+        "verify-0315bb8f-recovery"
+      ],
+      "exitCode": 1,
+      "stage": null
+    },
+    {
+      "project": "ex02",
+      "arguments": [
+        "resume",
+        "--state",
+        "verify-0315bb8f-recovery"
+      ],
+      "exitCode": 0,
+      "stage": "escalation-created"
+    },
+    {
+      "project": "ex02",
+      "arguments": [
+        "run",
+        "payroll",
+        "--decision",
+        "yes",
+        "--state",
+        "verify-0315bb8f-recovery"
+      ],
+      "exitCode": 0,
+      "stage": "escalation-created"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Use the approved self-service password-reset portal. Support never asks for a current password or a one-time authentication code. If reset is unavailable, contact the help desk using the approved contact directory.

@@ -1,0 +1,72 @@
+using System.Text.RegularExpressions;
+
+internal sealed record LabSettings(
+    Uri OpenAIEndpoint, string ChatDeployment, string EmbeddingDeployment,
+    Uri SearchEndpoint, string IndexName, int Dimensions, string CatalogVersion)
+{
+    public static LabSettings Load()
+    {
+        static string Required(string name)
+        {
+            string value = Environment.GetEnvironmentVariable(name)?.Trim() ?? "";
+            if (value.Length == 0 || value.Contains('<'))
+                throw new InvalidOperationException($"Load the assigned {name}.");
+            return value;
+        }
+        static Uri Endpoint(string name, string suffix)
+        {
+            var uri = new Uri(Required(name));
+            if (uri.Scheme != "https" || !uri.Host.EndsWith(suffix,
+                StringComparison.OrdinalIgnoreCase) || uri.AbsolutePath != "/" ||
+                uri.Query.Length != 0 || uri.UserInfo.Length != 0)
+                throw new InvalidOperationException($"Invalid resource-root {name}.");
+            return uri;
+        }
+        string index = Required("AZURE_AI_SEARCH_INDEX_NAME");
+        if (!Regex.IsMatch(index, "^[a-z0-9][a-z0-9-]{1,126}[a-z0-9]$") || index.Contains("--"))
+            throw new InvalidOperationException("Invalid assigned index name.");
+        int dimensions = int.Parse(Environment.GetEnvironmentVariable(
+            "AZURE_OPENAI_EMBEDDING_DIMENSIONS") ?? "1536");
+        if (dimensions is < 1 or > 4096)
+            throw new InvalidOperationException("Invalid embedding dimensions.");
+        return new(Endpoint("AZURE_OPENAI_ENDPOINT", ".openai.azure.com"),
+            Required("AZURE_OPENAI_DEPLOYMENT_NAME"),
+            Required("AZURE_OPENAI_EMBEDDING_DEPLOYMENT"),
+            Endpoint("AZURE_AI_SEARCH_ENDPOINT", ".search.windows.net"),
+            index, dimensions, Environment.GetEnvironmentVariable(
+                "RAG_CATALOG_VERSION") ?? "v1");
+    }
+}
+
+// These are operator-selected test profiles, not an authentication system.
+internal sealed record CallerScope(string Tenant, string[] Groups)
+{
+    public static CallerScope ForProfile(string profile) => profile switch
+    {
+        "employee" => new("training-a", ["employees"]),
+        "payroll" => new("training-a", ["employees", "payroll-team"]),
+        "other-tenant" => new("training-b", ["employees"]),
+        "none" => new("training-a", []),
+        _ => throw new ArgumentException("Unknown synthetic profile.")
+    };
+
+    public string Filter(string version)
+    {
+        static string Quote(string value) => "'" + value.Replace("'", "''") + "'";
+        if (Groups.Length == 0) return "false";
+        string groups = string.Join(" or ", Groups.Select(g => $"g eq {Quote(g)}"));
+        return $"tenant_id eq {Quote(Tenant)} and catalog_version eq {Quote(version)} " +
+            $"and allowed_groups/any(g: {groups})";
+    }
+}
+
+internal sealed record KnowledgeDocument(
+    string DocumentId, string Title, string SourceFile, string TenantId,
+    string[] AllowedGroups, string CatalogVersion)
+{
+    public string[] Chunks { get; init; } = [];
+}
+
+internal sealed record SearchHit(
+    string Id, string DocumentId, string Title, string SourceFile,
+    string Content, string TenantId, string CatalogVersion, double Score);

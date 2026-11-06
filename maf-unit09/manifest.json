@@ -1,0 +1,97 @@
+{
+  "unit": 9,
+  "title": "RAG with Microsoft Agent Framework",
+  "sourcePage": "https://app.gitbook.com/s/5NyZDQFujwe6GeJ3CBCA/session-4/unit-9",
+  "sourceReadDate": "2026-11-06",
+  "examples": [
+    {
+      "id": "v01",
+      "directory": "v01-rag-fundamentals",
+      "topic": "RAG fundamentals",
+      "project": "v01-rag-fundamentals/Unit09.V01.csproj",
+      "expected": "Answers the VPN question using authorized guide chunks; displays source IDs. Demo uses evidence text without a model."
+    },
+    {
+      "id": "v02",
+      "directory": "v02-document-indexing",
+      "topic": "Document indexing",
+      "project": "v02-document-indexing/Unit09.V02.csproj",
+      "expected": "Four local Markdown documents produce five chunks. In live mode this creates/updates the assigned index and uploads the fixture."
+    },
+    {
+      "id": "v03",
+      "directory": "v03-vector-database",
+      "topic": "Integration with vector databases",
+      "project": "v03-vector-database/Unit09.V03.csproj",
+      "expected": "Runs the same question through keyword, vector and hybrid retrieval; returns up to three chunks per mode."
+    },
+    {
+      "id": "v04",
+      "directory": "v04-contextual-retrieval",
+      "topic": "Contextual retrieval",
+      "project": "v04-contextual-retrieval/Unit09.V04.csproj",
+      "expected": "Reports missing recovery-time evidence. With profile none, returns the fixed explanation and never calls a chat model."
+    },
+    {
+      "id": "v05",
+      "directory": "v05-secure-document-access",
+      "topic": "Secure document access",
+      "project": "v05-secure-document-access/Unit09.V05.csproj",
+      "expected": "Employee results exclude payroll; tenant A cannot see BRAVO-CANARY; tenant B can; an empty permission set returns zero evidence."
+    },
+    {
+      "id": "v06",
+      "directory": "v06-permission-control",
+      "topic": "Permission control",
+      "project": "v06-permission-control/Unit09.V06.csproj",
+      "expected": "Builds an actual AIFunction schema with query as its only argument. Tenant and group filters are bound by the application."
+    },
+    {
+      "id": "v07",
+      "directory": "v07-index-updates",
+      "topic": "Index updates",
+      "project": "v07-index-updates/Unit09.V07.csproj",
+      "expected": "Stages and uploads v2, queries v1 and v2 independently, and leaves the serving version unchanged. Live mode needs index-write access."
+    },
+    {
+      "id": "v08",
+      "directory": "v08-accuracy-evaluation",
+      "topic": "Accuracy evaluation",
+      "project": "v08-accuracy-evaluation/Unit09.V08.csproj",
+      "expected": "Runs one selected case from the manual evaluation matrix. Use --case unsupported, payroll-denied, payroll-allowed, vpn, tenant-isolation or empty-scope."
+    },
+    {
+      "id": "v09",
+      "directory": "v09-corporate-storage",
+      "topic": "Integration with corporate storage",
+      "project": "v09-corporate-storage/Unit09.V09.csproj",
+      "expected": "Downloads the manifest and four Markdown files from unit09/ in the assigned container, then validates and chunks them. Demo copies local files."
+    },
+    {
+      "id": "v10",
+      "directory": "v10-enterprise-pattern",
+      "topic": "Best practices for enterprise environments",
+      "project": "v10-enterprise-pattern/Unit09.V10.csproj",
+      "expected": "Combines typed knowledge evidence with a separately identified synthetic status source. Payroll produces a review proposal; no external action is executed."
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex01",
+      "directory": "Exercises/ex01-expired-knowledge",
+      "project": "Exercises/ex01-expired-knowledge/Unit09.Ex01.csproj",
+      "expected": "Expired and missing-expiry VPN chunks are excluded; future-dated chunks return; payroll ACL is preserved."
+    },
+    {
+      "id": "ex02",
+      "directory": "Exercises/ex02-retrieval-regressions",
+      "project": "Exercises/ex02-retrieval-regressions/Unit09.Ex02.csproj",
+      "expected": "Five retrieval cases produce a JSON report; --force-failure returns exit code 1."
+    }
+  ],
+  "verification": {
+    "id": "verify",
+    "directory": "Verification",
+    "project": "Verification/Unit09.Checks.csproj"
+  }
+}

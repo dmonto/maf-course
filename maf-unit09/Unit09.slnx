@@ -1,0 +1,15 @@
+<Solution>
+  <Project Path="v01-rag-fundamentals/Unit09.V01.csproj" />
+  <Project Path="v02-document-indexing/Unit09.V02.csproj" />
+  <Project Path="v03-vector-database/Unit09.V03.csproj" />
+  <Project Path="v04-contextual-retrieval/Unit09.V04.csproj" />
+  <Project Path="v05-secure-document-access/Unit09.V05.csproj" />
+  <Project Path="v06-permission-control/Unit09.V06.csproj" />
+  <Project Path="v07-index-updates/Unit09.V07.csproj" />
+  <Project Path="v08-accuracy-evaluation/Unit09.V08.csproj" />
+  <Project Path="v09-corporate-storage/Unit09.V09.csproj" />
+  <Project Path="v10-enterprise-pattern/Unit09.V10.csproj" />
+  <Project Path="Exercises/ex01-expired-knowledge/Unit09.Ex01.csproj" />
+  <Project Path="Exercises/ex02-retrieval-regressions/Unit09.Ex02.csproj" />
+  <Project Path="Verification/Unit09.Checks.csproj" />
+</Solution>

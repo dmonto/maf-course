@@ -1,0 +1,144 @@
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Text.Json;
+using System.Text.RegularExpressions;
+using Azure.Core;
+
+internal sealed class SearchStore(
+    LabSettings settings, TokenCredential credential, HttpClient http,
+    Func<string, CancellationToken, Task<float[]>> embed, IIndexExtension? extension = null)
+{
+    private object[] ExtendFields(object[] fields) => [.. fields, .. extension?.Fields() ?? []];
+
+    private const string ApiVersion = "2025-09-01";
+
+    private async Task<JsonDocument> SendAsync(
+        HttpMethod method, string path, object body, CancellationToken ct)
+    {
+        var token = await credential.GetTokenAsync(new TokenRequestContext(
+            ["https://search.azure.com/.default"]), ct);
+        var uri = new Uri(settings.SearchEndpoint, $"{path}?api-version={ApiVersion}");
+        using var request = new HttpRequestMessage(method, uri);
+        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token.Token);
+        request.Content = JsonContent.Create(body);
+        using var response = await http.SendAsync(request, ct);
+        if (!response.IsSuccessStatusCode)
+            throw new HttpRequestException($"Search returned HTTP {(int)response.StatusCode}.");
+        string json = await response.Content.ReadAsStringAsync(ct);
+        return JsonDocument.Parse(json);
+    }
+
+    private async Task<float[]> VectorAsync(string text, CancellationToken ct)
+    {
+        float[] vector = await embed(text, ct);
+        if (vector.Length != settings.Dimensions || vector.Any(x => !float.IsFinite(x)))
+            throw new InvalidOperationException("Embedding does not match the index dimensions.");
+        return vector;
+    }
+
+    public async Task SeedAsync(KnowledgeDocument[] documents, CancellationToken ct)
+    {
+        if (documents.Length is 0 or > 20)
+            throw new ArgumentException("The fixture must contain 1 to 20 documents.");
+        var keys = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var doc in documents)
+        {
+            if (!Regex.IsMatch(doc.DocumentId ?? "", "^[a-z0-9-]{1,50}$") ||
+                !Regex.IsMatch(doc.CatalogVersion ?? "", "^[a-z0-9-]{1,20}$") ||
+                string.IsNullOrWhiteSpace(doc.Title) || string.IsNullOrWhiteSpace(doc.SourceFile) ||
+                string.IsNullOrWhiteSpace(doc.TenantId) || doc.AllowedGroups is null ||
+                doc.AllowedGroups.Length == 0 || doc.AllowedGroups.Any(string.IsNullOrWhiteSpace) ||
+                doc.Chunks is null || doc.Chunks.Length is 0 or > 20 ||
+                doc.Chunks.Any(x => string.IsNullOrWhiteSpace(x) || x.Length > 1500) ||
+                !keys.Add($"{doc.TenantId}:{doc.DocumentId}:{doc.CatalogVersion}"))
+                throw new ArgumentException("Invalid or duplicate knowledge fixture.");
+        }
+        static object Field(string name, bool searchable = false, bool filterable = false,
+            bool key = false, string type = "Edm.String") => new
+            { name, type, key, searchable, filterable, retrievable = name != "allowed_groups" };
+        var schema = new
+        {
+            name = settings.IndexName,
+            fields = ExtendFields(new object[]
+            {
+                Field("id", key: true), Field("document_id", filterable: true),
+                Field("title", searchable: true), Field("content", searchable: true),
+                Field("source_file"), Field("tenant_id", filterable: true),
+                Field("catalog_version", filterable: true),
+                Field("allowed_groups", filterable: true, type: "Collection(Edm.String)"),
+                new { name = "content_vector", type = "Collection(Edm.Single)",
+                    searchable = true, retrievable = false, dimensions = settings.Dimensions,
+                    vectorSearchProfile = "rag-profile" }
+            }),
+            vectorSearch = new
+            {
+                algorithms = new[] { new { name = "rag-hnsw", kind = "hnsw",
+                    hnswParameters = new { metric = "cosine" } } },
+                profiles = new[] { new { name = "rag-profile", algorithm = "rag-hnsw" } }
+            }
+        };
+        using var indexResult = await SendAsync(HttpMethod.Put,
+            $"indexes/{settings.IndexName}", schema, ct);
+        var actions = new List<Dictionary<string, object>>();
+        foreach (var doc in documents)
+        for (int i = 0; i < doc.Chunks.Length; i++)
+        {
+            string id = JsonSerializer.Serialize(new
+                { doc.TenantId, doc.DocumentId, doc.CatalogVersion, ordinal = i });
+            // A URL-safe encoding prevents unusual tenant identifiers breaking the key.
+            id = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+                System.Text.Encoding.UTF8.GetBytes(id))).ToLowerInvariant();
+            var action = new Dictionary<string, object>
+            {
+                ["@search.action"] = "upload", ["id"] = id,
+                ["document_id"] = doc.DocumentId, ["title"] = doc.Title,
+                ["source_file"] = doc.SourceFile, ["content"] = doc.Chunks[i],
+                ["tenant_id"] = doc.TenantId, ["allowed_groups"] = doc.AllowedGroups,
+                ["catalog_version"] = doc.CatalogVersion,
+                ["content_vector"] = await VectorAsync(doc.Title + "\n" + doc.Chunks[i], ct)
+            };
+            extension?.AddValues(doc, action);
+            actions.Add(action);
+        }
+        using var result = await SendAsync(HttpMethod.Post,
+            $"indexes/{settings.IndexName}/docs/index", new { value = actions }, ct);
+        var outcomes = result.RootElement.GetProperty("value").EnumerateArray().ToArray();
+        if (outcomes.Length != actions.Count || outcomes.Any(x => !x.GetProperty("status").GetBoolean()))
+            throw new InvalidOperationException("At least one chunk was not indexed; do not activate this version.");
+        Console.WriteLine($"Indexed {actions.Count} chunks. Verify visibility before querying a new version.");
+    }
+
+    public async Task<SearchHit[]> SearchAsync(
+        CallerScope scope, string mode, string question, CancellationToken ct)
+    {
+        if (mode is not ("keyword" or "vector" or "hybrid"))
+            throw new ArgumentException("Mode must be keyword, vector or hybrid.");
+        if (string.IsNullOrWhiteSpace(question) || question.Length > 1000)
+            throw new ArgumentException("Question must contain 1 to 1000 characters.");
+        if (scope.Groups.Length == 0) return [];
+        var body = new Dictionary<string, object>
+        {
+            ["filter"] = scope.Filter(settings.CatalogVersion) + (extension?.FilterSuffix(DateTimeOffset.UtcNow) ?? ""), ["top"] = 3,
+            ["select"] = "id,document_id,title,content,source_file,tenant_id,catalog_version",
+            ["searchFields"] = "title,content"
+        };
+        if (mode != "vector") body["search"] = question;
+        if (mode != "keyword")
+        {
+            body["vectorFilterMode"] = "preFilter";
+            body["vectorQueries"] = new[] { new { kind = "vector",
+                vector = await VectorAsync(question, ct), fields = "content_vector", k = 10 } };
+        }
+        using var result = await SendAsync(HttpMethod.Post,
+            $"indexes/{settings.IndexName}/docs/search", body, ct);
+        SearchHit[] hits = result.RootElement.GetProperty("value").EnumerateArray().Select(x =>
+            new SearchHit(x.GetProperty("id").GetString()!, x.GetProperty("document_id").GetString()!,
+                x.GetProperty("title").GetString()!, x.GetProperty("source_file").GetString()!,
+                x.GetProperty("content").GetString()!, x.GetProperty("tenant_id").GetString()!,
+                x.GetProperty("catalog_version").GetString()!, x.GetProperty("@search.score").GetDouble()))
+            .ToArray();
+        if (hits.Any(x => x.TenantId != scope.Tenant || x.CatalogVersion != settings.CatalogVersion))
+            throw new InvalidOperationException("Returned evidence has the wrong scope or version.");
+        return hits;
+    }
+}

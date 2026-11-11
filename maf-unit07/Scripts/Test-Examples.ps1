@@ -11,7 +11,12 @@ function Invoke-Check {
     param([string]$Id, [string[]]$Cli, [int]$ExpectedExit = 0, [string]$ExpectedText)
     $entry = @((@($manifest.examples) + @($manifest.exercises)) | Where-Object { $_.id -eq $Id })[0]
     $project = Join-Path $unit07Root $entry.project
-    $output = @(& dotnet run --no-build --project $project -- @Cli --demo 2>&1)
+    # Windows PowerShell 5.1 turns native stderr into terminating errors under 'Stop';
+    # expected-failure checks write JSON to stderr, so capture it with 'Continue'.
+    $previousPreference = $ErrorActionPreference
+    $ErrorActionPreference = 'Continue'
+    try { $output = @(& dotnet run --no-build --project $project -- @Cli --demo 2>&1) }
+    finally { $ErrorActionPreference = $previousPreference }
     $exitCode = $LASTEXITCODE
     $text = $output -join "`n"
     if ($exitCode -ne $ExpectedExit) { throw "${Id}: unexpected exit code $exitCode. $text" }

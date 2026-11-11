@@ -1,6 +1,4 @@
 <Solution>
- <Project Path="Exercises/ex01-maintenance-contract/MaintenanceContract.csproj" />
- <Project Path="Exercises/ex02-human-review/HumanReview.csproj" />
  <Project Path="Shared/Unit05.Common/Unit05.Common.csproj" />
  <Project Path="Verification/Unit05.Checks.csproj" />
  <Project Path="v01-prompt-principles/Unit05.V01.csproj" />

@@ -1,0 +1,244 @@
+{
+  "verifiedAtUtc": "2026-11-06T16:40:33.878815+00:00",
+  "sdk": "10.0.100",
+  "liveAzureTested": false,
+  "processCases": [
+    {
+      "project": "v01",
+      "arguments": [
+        "--demo"
+      ],
+      "exitCode": 0,
+      "stage": "information-ready",
+      "passed": true
+    },
+    {
+      "project": "v02",
+      "arguments": [
+        "--demo"
+      ],
+      "exitCode": 0,
+      "stage": "delegation-complete",
+      "passed": true
+    },
+    {
+      "project": "v03",
+      "arguments": [
+        "--demo"
+      ],
+      "exitCode": 2,
+      "stage": "needs-review",
+      "passed": true
+    },
+    {
+      "project": "v04",
+      "arguments": [
+        "--demo"
+      ],
+      "exitCode": 0,
+      "stage": "communication-verified",
+      "passed": true
+    },
+    {
+      "project": "v05",
+      "arguments": [
+        "--demo"
+      ],
+      "exitCode": 0,
+      "stage": "role-boundaries-verified",
+      "passed": true
+    },
+    {
+      "project": "v06",
+      "arguments": [
+        "--demo"
+      ],
+      "exitCode": 0,
+      "stage": "isolation-verified",
+      "passed": true
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "--demo"
+      ],
+      "exitCode": 0,
+      "stage": "escalation-proposal",
+      "passed": true
+    },
+    {
+      "project": "v08",
+      "arguments": [
+        "--demo"
+      ],
+      "exitCode": 0,
+      "stage": "scalability-observed",
+      "passed": true
+    },
+    {
+      "project": "v09",
+      "arguments": [
+        "--demo"
+      ],
+      "exitCode": 0,
+      "stage": "patterns-compared",
+      "passed": true
+    },
+    {
+      "project": "v10",
+      "arguments": [
+        "--demo"
+      ],
+      "exitCode": 0,
+      "stage": "checks-passed",
+      "passed": true
+    },
+    {
+      "project": "ex01",
+      "arguments": [
+        "--demo"
+      ],
+      "exitCode": 0,
+      "stage": "scoped-delegation-verified",
+      "passed": true
+    },
+    {
+      "project": "ex02",
+      "arguments": [
+        "--demo"
+      ],
+      "exitCode": 0,
+      "stage": "replay-handling-verified",
+      "passed": true
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "vpn",
+        "--demo"
+      ],
+      "exitCode": 0,
+      "stage": "information-ready",
+      "passed": true
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "payroll",
+        "--demo"
+      ],
+      "exitCode": 0,
+      "stage": "escalation-proposal",
+      "passed": true
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "combined",
+        "--demo",
+        "--fail-network"
+      ],
+      "exitCode": 2,
+      "stage": "needs-review",
+      "passed": true
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "payroll",
+        "--demo",
+        "--conflict"
+      ],
+      "exitCode": 2,
+      "stage": "needs-review",
+      "passed": true
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "combined",
+        "--demo",
+        "--serial"
+      ],
+      "exitCode": 0,
+      "stage": "escalation-proposal",
+      "passed": true
+    },
+    {
+      "project": "v08",
+      "arguments": [
+        "--demo",
+        "--cases",
+        "3"
+      ],
+      "exitCode": 0,
+      "stage": "scalability-observed",
+      "passed": true
+    },
+    {
+      "project": "ex01",
+      "arguments": [
+        "--demo",
+        "--deny-identity"
+      ],
+      "exitCode": 2,
+      "stage": "needs-review",
+      "passed": true
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "unknown",
+        "--demo"
+      ],
+      "exitCode": 1,
+      "stage": null,
+      "passed": true
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "--demo",
+        "--live"
+      ],
+      "exitCode": 1,
+      "stage": null,
+      "passed": true
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "payroll",
+        "--demo",
+        "--fail-network"
+      ],
+      "exitCode": 1,
+      "stage": null,
+      "passed": true
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "--demo",
+        "--unknown"
+      ],
+      "exitCode": 1,
+      "stage": null,
+      "passed": true
+    },
+    {
+      "project": "v07",
+      "arguments": [
+        "--live"
+      ],
+      "exitCode": 1,
+      "stage": null,
+      "passed": true
+    }
+  ],
+  "internalChecks": {
+    "Stage": "checks-passed",
+    "Checks": 33,
+    "Coverage": "contracts, deadlines, cancellation, case isolation, scopes, replay and publication races"
+  }
+}

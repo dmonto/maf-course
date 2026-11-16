@@ -105,8 +105,11 @@ internal sealed class LabContext : IDisposable
             foreach (string file in files) File.Copy(Path.Combine(Root, "Knowledge", file), Path.Combine(target, file), true);
             return target;
         }
-        string account = Environment.GetEnvironmentVariable("AZURE_STORAGE_ACCOUNT_NAME") ?? "";
-        string container = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONTAINER_NAME") ?? "";
+        // The common .env uses AZURE_STORAGE_ACCOUNT / AZURE_STORAGE_CONTAINER; accept the *_NAME variants too.
+        static string Env(string name, string alt) =>
+            Environment.GetEnvironmentVariable(name) is { Length: > 0 } v ? v : Environment.GetEnvironmentVariable(alt) ?? "";
+        string account = Env("AZURE_STORAGE_ACCOUNT", "AZURE_STORAGE_ACCOUNT_NAME");
+        string container = Env("AZURE_STORAGE_CONTAINER", "AZURE_STORAGE_CONTAINER_NAME");
         if (!Regex.IsMatch(account, "^[a-z0-9]{3,24}$") || !Regex.IsMatch(container, "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"))
             throw new ArgumentException("Set the assigned storage account and container in the common .env.");
         var token = await _credential.GetTokenAsync(new TokenRequestContext(["https://storage.azure.com/.default"]), Token);

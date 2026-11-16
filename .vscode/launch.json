@@ -1,25 +1,38 @@
 {
-    // Use IntelliSense para saber los atributos posibles.
-    // Mantenga el puntero para ver las descripciones de los existentes atributos.
-    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+    // Abra cualquier archivo dentro de la carpeta del ejemplo (p. ej. Program.cs de v02) y pulse F5.
     "version": "0.2.0",
     "configurations": [
     {
-      "name": "Debug proyecto actual",
+      "name": "Debug ejemplo actual (vNN)",
       "type": "coreclr",
       "request": "launch",
-      "program": "${fileDirname}/bin/Debug/net10.0/${fileBasenameNoExtension}.dll",
+      "preLaunchTask": "build-current-project",
+      "program": "${fileDirname}/bin/Debug/net10.0/${input:unit}.${input:example}.dll",
       "cwd": "${fileDirname}",
       "console": "integratedTerminal",
       "args": "${input:arguments}"
-    }        
+    }
     ],
   "inputs": [
     {
+      "id": "unit",
+      "type": "pickString",
+      "description": "Unidad (debe coincidir con la carpeta abierta)",
+      "options": ["Unit04", "Unit05", "Unit06", "Unit07", "Unit08", "Unit09"],
+      "default": "Unit07"
+    },
+    {
+      "id": "example",
+      "type": "pickString",
+      "description": "Ejemplo a depurar (debe coincidir con la carpeta abierta)",
+      "options": ["V01", "V02", "V03", "V04", "V05", "V06", "V07", "V08", "V09", "V10"],
+      "default": "V02"
+    },
+    {
       "id": "arguments",
       "type": "promptString",
-      "description": "Argumentos de ejecución (Enter = ninguno)",
-      "default": ""
+      "description": "Argumentos de ejecución",
+      "default": "combined --demo"
     }
-  ]    
+  ]
 }

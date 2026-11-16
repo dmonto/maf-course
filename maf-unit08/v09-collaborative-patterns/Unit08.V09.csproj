@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup><PackageReference Include="Microsoft.Agents.AI.Workflows" /></ItemGroup>
+  <ItemGroup><ProjectReference Include="../Shared/Unit08.Common/Unit08.Common.csproj" /></ItemGroup>
+</Project>

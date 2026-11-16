@@ -1,0 +1,16 @@
+<Solution>
+  <Project Path="Shared/Unit08.Common/Unit08.Common.csproj" />
+  <Project Path="v01-coordinator-architecture/Unit08.V01.csproj" />
+  <Project Path="v02-task-delegation/Unit08.V02.csproj" />
+  <Project Path="v03-conflict-resolution/Unit08.V03.csproj" />
+  <Project Path="v04-inter-agent-communication/Unit08.V04.csproj" />
+  <Project Path="v05-role-management/Unit08.V05.csproj" />
+  <Project Path="v06-shared-state/Unit08.V06.csproj" />
+  <Project Path="v07-centralized-supervision/Unit08.V07.csproj" />
+  <Project Path="v08-scalability/Unit08.V08.csproj" />
+  <Project Path="v09-collaborative-patterns/Unit08.V09.csproj" />
+  <Project Path="v10-coordination-checks/Unit08.V10.csproj" />
+  <Project Path="Exercises/ex01-scoped-identity-delegation/Unit08.EX01.csproj" />
+  <Project Path="Exercises/ex02-idempotent-report-acceptance/Unit08.EX02.csproj" />
+  <Project Path="Verification/Unit08.Checks.csproj" />
+</Solution>

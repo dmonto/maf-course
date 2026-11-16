@@ -1,0 +1,92 @@
+{
+  "unit": 8,
+  "source": "https://app.gitbook.com/s/5NyZDQFujwe6GeJ3CBCA/session-4/unit-8",
+  "examples": [
+    {
+      "id": "v01",
+      "directory": "v01-coordinator-architecture",
+      "project": "v01-coordinator-architecture/Unit08.V01.csproj",
+      "section": "Coordinator-specialist architecture",
+      "defaultScenario": "vpn"
+    },
+    {
+      "id": "v02",
+      "directory": "v02-task-delegation",
+      "project": "v02-task-delegation/Unit08.V02.csproj",
+      "section": "Task delegation",
+      "defaultScenario": "combined"
+    },
+    {
+      "id": "v03",
+      "directory": "v03-conflict-resolution",
+      "project": "v03-conflict-resolution/Unit08.V03.csproj",
+      "section": "Conflict resolution",
+      "defaultScenario": "payroll"
+    },
+    {
+      "id": "v04",
+      "directory": "v04-inter-agent-communication",
+      "project": "v04-inter-agent-communication/Unit08.V04.csproj",
+      "section": "Inter-agent communication",
+      "defaultScenario": "combined"
+    },
+    {
+      "id": "v05",
+      "directory": "v05-role-management",
+      "project": "v05-role-management/Unit08.V05.csproj",
+      "section": "Role management",
+      "defaultScenario": "vpn"
+    },
+    {
+      "id": "v06",
+      "directory": "v06-shared-state",
+      "project": "v06-shared-state/Unit08.V06.csproj",
+      "section": "Shared state control",
+      "defaultScenario": "combined"
+    },
+    {
+      "id": "v07",
+      "directory": "v07-centralized-supervision",
+      "project": "v07-centralized-supervision/Unit08.V07.csproj",
+      "section": "Centralized supervision",
+      "defaultScenario": "combined"
+    },
+    {
+      "id": "v08",
+      "directory": "v08-scalability",
+      "project": "v08-scalability/Unit08.V08.csproj",
+      "section": "Multi-agent scalability",
+      "defaultScenario": "combined"
+    },
+    {
+      "id": "v09",
+      "directory": "v09-collaborative-patterns",
+      "project": "v09-collaborative-patterns/Unit08.V09.csproj",
+      "section": "Collaborative patterns",
+      "defaultScenario": "combined"
+    },
+    {
+      "id": "v10",
+      "directory": "v10-coordination-checks",
+      "project": "v10-coordination-checks/Unit08.V10.csproj",
+      "section": "Coordination best practices",
+      "defaultScenario": "combined"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex01",
+      "directory": "Exercises/ex01-scoped-identity-delegation",
+      "project": "Exercises/ex01-scoped-identity-delegation/Unit08.EX01.csproj",
+      "section": "Scoped identity delegation",
+      "defaultScenario": "combined"
+    },
+    {
+      "id": "ex02",
+      "directory": "Exercises/ex02-idempotent-report-acceptance",
+      "project": "Exercises/ex02-idempotent-report-acceptance/Unit08.EX02.csproj",
+      "section": "Idempotent report acceptance",
+      "defaultScenario": "combined"
+    }
+  ]
+}

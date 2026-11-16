@@ -1,0 +1,1 @@
+Only an authorized payroll operator may propose retrying a delayed payroll batch. Confirm the batch identifier and obtain approval before a retry. Do not modify employee records. This procedure does not state whether payroll is currently degraded.

@@ -23,9 +23,15 @@ internal sealed class SearchStore(
         request.Content = JsonContent.Create(body);
         using var response = await http.SendAsync(request, ct);
         if (!response.IsSuccessStatusCode)
-            throw new HttpRequestException($"Search returned HTTP {(int)response.StatusCode}.");
+        {
+            // The service error body names the offending field or setting; keep it short.
+            string detail = await response.Content.ReadAsStringAsync(ct);
+            if (detail.Length > 600) detail = detail[..600] + "...";
+            throw new HttpRequestException($"Search returned HTTP {(int)response.StatusCode} for {method} {path}: {detail}");
+        }
         string json = await response.Content.ReadAsStringAsync(ct);
-        return JsonDocument.Parse(json);
+        // Updating an existing index (PUT) returns 204 No Content with an empty body.
+        return JsonDocument.Parse(string.IsNullOrWhiteSpace(json) ? "{}" : json);
     }
 
     private async Task<float[]> VectorAsync(string text, CancellationToken ct)

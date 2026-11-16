@@ -1,0 +1,13 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+    {
+      "label": "build-current-project",
+      "type": "process",
+      "command": "dotnet",
+      "args": ["build", "${fileDirname}", "--nologo", "-v", "q"],
+      "problemMatcher": "$msCompile",
+      "group": "build"
+    }
+    ]
+}

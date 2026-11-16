@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Shared/Unit08.Common/Unit08.Common.csproj" />
+    <ProjectReference Include="../Exercises/ex02-idempotent-report-acceptance/Unit08.EX02.csproj" />
+    <ProjectReference Include="../Exercises/ex01-scoped-identity-delegation/Unit08.EX01.csproj" />
+  </ItemGroup>
+</Project>

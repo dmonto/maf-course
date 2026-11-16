@@ -1,0 +1,34 @@
+[
+  {
+    "documentId": "vpn-guide",
+    "title": "VPN troubleshooting for Windows 11",
+    "sourceFile": "vpn-guide.md",
+    "tenantId": "training-a",
+    "allowedGroups": ["employees"],
+    "catalogVersion": "v1"
+  },
+  {
+    "documentId": "payroll-guide",
+    "title": "Payroll batch retry procedure",
+    "sourceFile": "payroll-guide.md",
+    "tenantId": "training-a",
+    "allowedGroups": ["payroll-team"],
+    "catalogVersion": "v1"
+  },
+  {
+    "documentId": "password-guide",
+    "title": "Password reset help",
+    "sourceFile": "password-guide.md",
+    "tenantId": "training-a",
+    "allowedGroups": ["employees"],
+    "catalogVersion": "v1"
+  },
+  {
+    "documentId": "vpn-tenant-b",
+    "title": "Tenant B VPN procedure",
+    "sourceFile": "tenant-b-vpn.md",
+    "tenantId": "training-b",
+    "allowedGroups": ["employees"],
+    "catalogVersion": "v1"
+  }
+]

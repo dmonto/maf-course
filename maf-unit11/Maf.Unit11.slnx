@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="Shared/Unit11.Common/Unit11.Common.csproj" />
+  <Project Path="v01-integration-with-queues/Unit11.V01.csproj" />
+  <Project Path="v02-real-time-streaming/Unit11.V02.csproj" />
+  <Project Path="v03-external-events/Unit11.V03.csproj" />
+  <Project Path="v04-asynchronous-retries/Unit11.V04.csproj" />
+  <Project Path="v05-concurrency/Unit11.V05.csproj" />
+  <Project Path="v06-event-persistence/Unit11.V06.csproj" />
+  <Project Path="v07-enterprise-events/Unit11.V07.csproj" />
+  <Project Path="Tests/Unit11.Checks/Unit11.Checks.csproj" />
+</Solution>

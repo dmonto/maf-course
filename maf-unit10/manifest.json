@@ -1,0 +1,82 @@
+{
+  "unit": 10,
+  "sourceUrl": "https://app.gitbook.com/s/5NyZDQFujwe6GeJ3CBCA/session-5/unit-10",
+  "examples": [
+    {
+      "id": "v01",
+      "directory": "v01-rest-apis",
+      "project": "v01-rest-apis/Unit10.V01.csproj",
+      "title": "Connection to REST APIs"
+    },
+    {
+      "id": "v02",
+      "directory": "v02-database-integration",
+      "project": "v02-database-integration/Unit10.V02.csproj",
+      "title": "Integration with databases"
+    },
+    {
+      "id": "v03",
+      "directory": "v03-slack-integration",
+      "project": "v03-slack-integration/Unit10.V03.csproj",
+      "title": "Integration with Slack"
+    },
+    {
+      "id": "v04",
+      "directory": "v04-credential-management",
+      "project": "v04-credential-management/Unit10.V04.csproj",
+      "title": "Secure credential management"
+    },
+    {
+      "id": "v05",
+      "directory": "v05-access-control",
+      "project": "v05-access-control/Unit10.V05.csproj",
+      "title": "Access control"
+    },
+    {
+      "id": "v06",
+      "directory": "v06-external-data-validation",
+      "project": "v06-external-data-validation/Unit10.V06.csproj",
+      "title": "External data validation"
+    },
+    {
+      "id": "v07",
+      "directory": "v07-external-error-management",
+      "project": "v07-external-error-management/Unit10.V07.csproj",
+      "title": "External error management"
+    },
+    {
+      "id": "v08",
+      "directory": "v08-legacy-orchestration",
+      "project": "v08-legacy-orchestration/Unit10.V08.csproj",
+      "title": "Orchestration with legacy systems"
+    },
+    {
+      "id": "v09",
+      "directory": "v09-integration-best-practices",
+      "project": "v09-integration-best-practices/Unit10.V09.csproj",
+      "title": "Integration best practices"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "ex01",
+      "directory": "Exercises/ex01-owner-scoped-tickets",
+      "project": "Exercises/ex01-owner-scoped-tickets/Unit10.EX01.csproj",
+      "title": "Exercise 1: add an owner-scoped ticket tool"
+    },
+    {
+      "id": "ex02",
+      "directory": "Exercises/ex02-legacy-maintenance-freeze",
+      "project": "Exercises/ex02-legacy-maintenance-freeze/Unit10.EX02.csproj",
+      "title": "Exercise 2: enforce a legacy maintenance freeze"
+    }
+  ],
+  "verification": [
+    {
+      "id": "verify",
+      "directory": "Verification",
+      "project": "Verification/Unit10.VERIFY.csproj",
+      "title": "Integration contract verification"
+    }
+  ]
+}

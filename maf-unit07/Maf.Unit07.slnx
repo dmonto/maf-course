@@ -9,6 +9,4 @@
   <Project Path="v07-parallel-evidence/Unit07.V07.csproj" />
   <Project Path="v08-workflow-persistence/Unit07.V08.csproj" />
   <Project Path="v09-workflow-observability/Unit07.V09.csproj" />
-  <Project Path="Exercises/ex01-evidence-quality-gate/Unit07.EX01.csproj" />
-  <Project Path="Exercises/ex02-idempotent-escalation/Unit07.EX02.csproj" />
 </Solution>

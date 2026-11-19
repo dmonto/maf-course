@@ -1,0 +1,12 @@
+<Solution>
+  <Project Path="v01-rest-apis/Unit10.V01.csproj" />
+  <Project Path="v02-database-integration/Unit10.V02.csproj" />
+  <Project Path="v03-slack-integration/Unit10.V03.csproj" />
+  <Project Path="v04-credential-management/Unit10.V04.csproj" />
+  <Project Path="v05-access-control/Unit10.V05.csproj" />
+  <Project Path="v06-external-data-validation/Unit10.V06.csproj" />
+  <Project Path="v07-external-error-management/Unit10.V07.csproj" />
+  <Project Path="v08-legacy-orchestration/Unit10.V08.csproj" />
+  <Project Path="v09-integration-best-practices/Unit10.V09.csproj" />
+  <Project Path="Verification/Unit10.VERIFY.csproj" />
+</Solution>

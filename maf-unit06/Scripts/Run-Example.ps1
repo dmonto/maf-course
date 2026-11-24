@@ -16,7 +16,7 @@ if ($ConfirmOS -and $Example -ne 'ex01') { throw '-ConfirmOS belongs to ex01.' }
 if ($VerifyExpiry -and $Example -ne 'ex02') { throw '-VerifyExpiry belongs to ex02.' }
 $unit06Root = Split-Path $PSScriptRoot -Parent
 $manifest = Get-Content (Join-Path $unit06Root 'manifest.json') -Raw | ConvertFrom-Json
-$match = @((@($manifest.examples) + @($manifest.exercises)) |
+$match = @((@($manifest.examples)  |
     Where-Object { $_.id -eq $Example -or $_.directory -eq $Example })
 if ($match.Count -ne 1) { throw 'Use v01 through v07, ex01 or ex02.' }
 $project = Join-Path $unit06Root $match[0].project

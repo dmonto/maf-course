@@ -16,7 +16,7 @@ $PSNativeCommandUseErrorActionPreference = $false
 if ($Demo -and $Live) { throw 'Choose -Demo or -Live.' }
 $unit09Root = Split-Path $PSScriptRoot -Parent
 $manifest = Get-Content (Join-Path $unit09Root 'manifest.json') -Raw | ConvertFrom-Json
-$items = @($manifest.examples) + @($manifest.exercises) + @($manifest.verification)
+$items = @($manifest.examples)  + @($manifest.verification)
 $match = @($items | Where-Object { $_.id -eq $Example -or $_.directory -eq $Example })
 if ($match.Count -ne 1) { throw 'Choose v01 through v10, ex01, ex02 or verify.' }
 if ($Live -and $Example -eq 'verify') { throw 'Verification uses local dependency doubles.' }

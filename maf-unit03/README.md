@@ -1,7 +1,5 @@
 # MAF Unit 3 - agent fundamentals examples
 
-Eight complete .NET 10 console projects implement every blue-example section of the current Unit 3. Shared modules and the only active `.env` live at the package root. All code comments, instructions and possible exercise solutions are in English.
-
 ## Contents
 
 | Directory | GitBook section | Main behavior |
@@ -14,12 +12,8 @@ Eight complete .NET 10 console projects implement every blue-example section of 
 | `v06-result-management` | Result management | Distinguish a completed invocation from successful record retrieval |
 | `v07-user-interaction` | User interaction | Clarify ambiguity and missing context; offer interactive input |
 | `v08-error-handling` | Error handling | Distinguish business refusal, failure before/after tools, timeout and empty output |
-| `Exercises/ex01-trust-boundaries` | Exercise 1 | Possible design and executable synthetic ticket/approval solution |
-| `Exercises/ex02-support-contact` | Exercise 2 | Second injected read tool with the same per-turn budget |
 
 `Shared/Unit03.Common` contains reusable configuration, catalog access, caller scope, tool execution, session lifecycle and model connection. `Scripts` contains PowerShell launchers. `Verification` runs independent behavior checks. Reports go to `output/` inside this package, created on first use. No model weights, credentials or SDK binaries are bundled.
-
-`Execution control` has no standalone blue example in the current page: its controls are implemented in the shared host and tools and demonstrated by v05/v08 and Verification. `Design best practices` has no independent blue example: its principles apply across the pack, and Exercise 2 is solved separately. This preserves one example project per section with a blue example.
 
 ## 1. Configure the shared root file
 
@@ -64,8 +58,6 @@ Restore needs NuGet access unless the required packages are already cached. The 
 ```
 
 Demo mode uses a labelled deterministic **scripted model double** inside the real MAF `ChatClientAgent` and `FunctionInvokingChatClient` pipeline. MAF still invokes the registered functions and stores session history. Synthetic client-request counts describe that local simulation; they are not Azure usage or model-quality measurements. Timings measure local work only. No automatic fallback from a failed live request to the scripted model exists.
-
-The v02 registration example always runs locally and makes no model requests, in either mode. Exercise 1 also always runs locally. Other projects call the assigned Azure model when `-Live` is selected.
 
 ## 4. Run against the assigned Azure deployment
 
@@ -112,16 +104,7 @@ The first case fails before any catalog access; the second retains evidence of a
 
 Defaults match the GitBook application: 2,000 input characters, 45 seconds per turn, four configured function iterations, 800 output tokens, three tool-body attempts per turn and eight completed turns per conversation. Tunable values are in the shared `.env`. An iteration limit may still allow a final model request with tools disabled. A batch can contain several tool requests. Additional attempts do not read the catalog after the tool-body budget is exhausted. Cancellation is cooperative and does not roll back prior work.
 
-## 7. Possible exercise solutions
-
-```powershell
-& ./Scripts/Run-Example.ps1 -Example ex01 -Demo -NoBuild
-& ./Scripts/Run-Example.ps1 -Example ex02 -Demo -NoBuild
-& ./Scripts/Run-Example.ps1 -Example ex02 -Live -NoBuild
 ```
-
-See `Exercises/README.md` and the solution-specific READMEs. They are instructor reference implementations, with a design table for Exercise 1 and an executable contact tool for Exercise 2. Both remain separate from the eight example projects. This request does not change the student-facing GitBook exercise statements.
-
 ## 8. Read evidence and verify locally
 
 ```powershell

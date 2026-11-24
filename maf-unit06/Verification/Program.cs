@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Microsoft.Data.Sqlite;
 using Unit06.Common;
-using Unit06.Exercise02;
+
 
 return await ConsoleApp.RunAsync(args, async (settings, options) =>
 {

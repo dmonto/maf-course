@@ -10,7 +10,7 @@ $ErrorActionPreference = 'Stop'
 if ($Demo -and $Live) { throw 'Select either -Demo or -Live.' }
 $unit04Root = Split-Path $PSScriptRoot -Parent
 $manifest = Get-Content (Join-Path $unit04Root 'manifest.json') -Raw | ConvertFrom-Json
-$match = @((@($manifest.examples) + @($manifest.exercises)) | Where-Object {
+$match = @((@($manifest.examples)  | Where-Object {
     $_.id -eq $Example -or $_.directory -eq $Example
 })
 if ($match.Count -ne 1) { throw 'Use v01 through v10, ex01 or ex02.' }

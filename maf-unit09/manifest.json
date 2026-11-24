@@ -75,20 +75,6 @@
       "expected": "Combines typed knowledge evidence with a separately identified synthetic status source. Payroll produces a review proposal; no external action is executed."
     }
   ],
-  "exercises": [
-    {
-      "id": "ex01",
-      "directory": "Exercises/ex01-expired-knowledge",
-      "project": "Exercises/ex01-expired-knowledge/Unit09.Ex01.csproj",
-      "expected": "Expired and missing-expiry VPN chunks are excluded; future-dated chunks return; payroll ACL is preserved."
-    },
-    {
-      "id": "ex02",
-      "directory": "Exercises/ex02-retrieval-regressions",
-      "project": "Exercises/ex02-retrieval-regressions/Unit09.Ex02.csproj",
-      "expected": "Five retrieval cases produce a JSON report; --force-failure returns exit code 1."
-    }
-  ],
   "verification": {
     "id": "verify",
     "directory": "Verification",

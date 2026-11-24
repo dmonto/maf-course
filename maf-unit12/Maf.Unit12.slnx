@@ -1,0 +1,13 @@
+<Solution>
+  <Project Path="Shared/Unit12.Common/Unit12.Common.csproj" />
+  <Project Path="v01-automated-response-evaluation/Unit12.V01.csproj" />
+  <Project Path="v02-quality-metrics/Unit12.V02.csproj" />
+  <Project Path="v03-regression-testing/Unit12.V03.csproj" />
+  <Project Path="v04-comparative-model-evaluation/Unit12.V04.csproj" />
+  <Project Path="v05-tool-validation/Unit12.V05.csproj" />
+  <Project Path="v06-drift-control/Unit12.V06.csproj" />
+  <Project Path="v07-testing-automation/Unit12.V07.csproj" />
+  <Project Path="v08-ci-cd-integration/Unit12.V08.csproj" />
+  <Project Path="v09-result-analysis/Unit12.V09.csproj" />
+  <Project Path="Verification/Unit12.Checks.csproj" />
+</Solution>

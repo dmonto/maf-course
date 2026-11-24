@@ -21,4 +21,3 @@ dotnet run -- --catalog payroll
 dotnet run -- --catalog billing
 ```
 
-Expected results: payroll is `degraded`; billing is `unknown`. The JSON has the same `service`, `status`, `detail` and `source` fields as GitBook. Freshness handling belongs to the separate exercise solution and is not implemented here.

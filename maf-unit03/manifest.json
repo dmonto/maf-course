@@ -68,15 +68,5 @@
       "example": "Diagnose a failure before changing the prompt",
       "usesModel": true
     }
-  ],
-  "exercises": [
-    {
-      "id": "ex01",
-      "project": "Exercises/ex01-trust-boundaries/TrustBoundaries.csproj"
-    },
-    {
-      "id": "ex02",
-      "project": "Exercises/ex02-support-contact/SupportContact.csproj"
-    }
   ]
 }

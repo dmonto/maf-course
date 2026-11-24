@@ -14,7 +14,7 @@ For the assigned Azure deployment, fill in the root `.env`, run `Scripts/Login-A
 
 Temperature and TopP remain unset. Reports retain MaxOutputTokens, MaxIterations and TimeoutSeconds. Differences observed with the scripted demo are not a model-quality estimate.
 
-The demo client is explicitly labelled deterministic synthetic software. It exercises the real MAF tool and typed-output pipeline but does not measure Azure connectivity, model behavior or prompt quality. Live failures do not fall back to demo output.
+The demo client is explicitly labelled deterministic synthetic software. It checks the real MAF tool and typed-output pipeline but does not measure Azure connectivity, model behavior or prompt quality. Live failures do not fall back to demo output.
 
 ## Shared source
 

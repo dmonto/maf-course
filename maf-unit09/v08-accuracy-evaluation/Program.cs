@@ -13,7 +13,7 @@ return await Runner.RunAsync("v08", args, async c =>
     string id = c.Options.Get("--case", "recovery");
     if (!cases.TryGetValue(id, out var selected)) throw new ArgumentException("Unknown matrix case.");
     var observed = await c.AnswerAsync(selected.Profile, selected.Question);
-    string review = "Inspect each claim and citation against the returned evidence. This example does not implement the exercise regression runner.";
+    string review = "Inspect each claim and citation against the returned evidence. ";
 
     // Readable summary; the RESULT JSON line below stays last.
     var json = System.Text.Json.JsonSerializer.SerializeToElement(observed, Output.Json);

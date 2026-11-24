@@ -2,7 +2,6 @@
 
 Prompt and Tool Design: How to Guide Agents to Do the Right Thing.
 
-Nine executable projects correspond to the nine GitBook sections that contain examples, including narrative examples without code blocks. The tenth section contains best practices and Exercise 2; its possible solution is in the separate Exercises directory. Stable code, prompt files and one .env are shared from the package root.
 
 ## Prerequisites and checkout
 
@@ -61,8 +60,6 @@ Use the HTTPS resource-root endpoint for AzureOpenAIClient, rather than a Foundr
 & ./Scripts/Login-Azure.ps1
 & ./Scripts/Run-Example.ps1 -Example v06 -Live -NoBuild
 ```
-
-A failed live request stays failed; it does not switch to scripted output. v04 and the first exercise perform no inference in either mode.
 
 Every executable finds the package root by locating Maf.Unit05.slnx in the ancestors of the current directory or executable directory. The dotenv reader supports NAME=value and quoted literal values without shell execution or expression expansion. Nonempty process variables take precedence over the file. Clear an old process variable or use a new terminal after changing a value previously imported into that terminal. CLI -Demo/-Live and -PromptVersion explicitly select the requested mode/version.
 
@@ -132,24 +129,11 @@ This script saves each case and a checks.csv under output/prompt-results. It che
 
 Single-run exit codes match the original application: 0 for contract-accepted, 1 for execution failure, and 2 for contract-rejected. Rejected single-run reports have answer=null and an errors list. Comparison and matrix projects aggregate these results; a failed candidate returns a nonzero exit code.
 
-## Separate exercise solutions
-
-```powershell
-& ./Scripts/Run-Example.ps1 -Example ex01 -Demo
-& ./Scripts/Run-Example.ps1 -Example ex02 -Demo
-```
-
-ex01 provides a maintenance-window method contract, typed UTC fixtures, validation and three expected cases. The exercise asks for design before implementation, so no maintenance tool is registered or executed.
-
-ex02 adds RequiresHumanReview only to its own output type. Its default cases demonstrate true for combined payroll status/guidance, false for payroll status alone and false for combined VPN status/guidance. The validator rejects a fabricated true flag with no supporting evidence. The flag is a recommendation and performs no action. Use -Live to request this extended contract from the assigned model.
-
 ## Verification and source comparison
 
 ```powershell
 & ./Scripts/Test-Offline.ps1
 ```
-
-Verification checks the real MAF tool pipeline, typed parsing, input and scope boundaries, shared budgets, fabricated fields, the documented semantic-validation gap and both possible exercise solutions. Demo checks do not evaluate a live model's behavior. See VALIDATION.md for the completed build and test results.
 
 The Reference directory retains extracted original executable blocks; they are not additional build projects. GITBOOK-MAPPING.md explains how each example maps to the page and lists the shared-code extraction changes. The ZIP creation does not modify GitBook.
 

@@ -2,7 +2,7 @@
 
 Your First Agent with MAF in .NET: Configuration, Models and DevUI Observability.
 
-Ten executable projects map to the ten GitBook sections, including examples described without a code block. Shared implementation and configuration live at the package root. Two possible exercise solutions live under `Exercises`.
+Ten executable projects map to the ten GitBook sections, including examples described without a code block. Shared implementation and configuration live at the package root. 
 
 ## Prerequisites and checkout
 
@@ -47,7 +47,7 @@ Terminal 2:
 & ./Scripts/Test-Example.ps1 -Example v04
 ```
 
-Open `http://127.0.0.1:5050/devui`, select `service-desk`, and ask about payroll or VPN. The demo client supports streaming so the actual DevUI and protocol endpoint can exercise the MAF tool/session pipeline. All demo inference is scripted and synthetic; it neither contacts Azure nor measures model quality or token costs.
+Open `http://127.0.0.1:5050/devui`, select `service-desk`, and ask about payroll or VPN. The demo client supports streaming so the actual DevUI and protocol endpoint can check the MAF tool/session pipeline. All demo inference is scripted and synthetic; it neither contacts Azure nor measures model quality or token costs.
 
 Stop a running host with Ctrl+C before launching another project on the default port. Each example has its own README with commands and expected observations. A non-default port can be selected consistently:
 
@@ -76,7 +76,7 @@ Use the HTTPS resource root for AzureOpenAIClient. A Foundry project path and an
 & ./Scripts/Run-Example.ps1 -Example v04 -Live
 ```
 
-In another terminal, run the same section test. Health proves local readiness; a live grounded chat additionally exercises the selected Azure deployment. Failed live execution never falls back to the scripted client.
+In another terminal, run the same section test. Health proves local readiness; a live grounded chat additionally checks the selected Azure deployment. Failed live execution never falls back to the scripted client.
 
 The application loads `.env` automatically from the directory containing `Maf.Unit04.slnx`, searching ancestors of the current directory and executable directory. Nonempty process environment variables take precedence, so a value previously imported into a terminal can override later `.env` edits. To use a changed `.env` value, clear the corresponding process variable or start a clean terminal. `Scripts/Import-Env.ps1` imports the same simple NAME=value syntax when a PowerShell command needs those settings. It does not execute the file or expand shell expressions.
 
@@ -116,28 +116,6 @@ Package versions match the topic: Azure.AI.OpenAI 2.9.0-beta.1, Azure.Identity 1
 dotnet restore ./Maf.Unit04.slnx --locked-mode
 if ($LASTEXITCODE -ne 0) { throw 'Locked restore failed.' }
 ```
-
-## Possible exercise solutions
-
-Print the reference diagnosis for Exercise 1:
-
-```powershell
-& ./Scripts/Run-Example.ps1 -Example ex01
-```
-
-Start the separate expiry solution for Exercise 2:
-
-```powershell
-& ./Scripts/Run-Example.ps1 -Example ex02 -Demo
-```
-
-Then, in another terminal:
-
-```powershell
-& ./Exercises/ex02-expiring-conversations/Test-Expiry.ps1
-```
-
-The solution uses `CONVERSATION_IDLE_SECONDS=60`. Its test waits beyond that interval, demonstrates HTTP 410 and creates a new conversation. The ordinary examples have no idle-expiry solution. See each exercise README for the reasoning, race-prevention mechanism and bounded expired-ID policy.
 
 ## Verification
 

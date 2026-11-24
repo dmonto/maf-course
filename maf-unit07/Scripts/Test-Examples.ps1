@@ -9,7 +9,7 @@ $manifest = Get-Content (Join-Path $unit07Root 'manifest.json') -Raw | ConvertFr
 $prefix = 'smoke-' + [Guid]::NewGuid().ToString('N').Substring(0, 8)
 function Invoke-Check {
     param([string]$Id, [string[]]$Cli, [int]$ExpectedExit = 0, [string]$ExpectedText)
-    $entry = @((@($manifest.examples) + @($manifest.exercises)) | Where-Object { $_.id -eq $Id })[0]
+    $entry = @((@($manifest.examples)  | Where-Object { $_.id -eq $Id })[0]
     $project = Join-Path $unit07Root $entry.project
     # Windows PowerShell 5.1 turns native stderr into terminating errors under 'Stop';
     # expected-failure checks write JSON to stderr, so capture it with 'Continue'.

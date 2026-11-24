@@ -113,7 +113,6 @@ public static class LabHost
                 builder.Services.AddOpenAIConversations();
             }
         }
-        // Exercise 2 replaces only IChatHandler; ordinary projects retain the baseline handler.
         configureServices?.Invoke(builder.Services);
         var app = builder.Build();
         if (profile != LabProfile.ConfigurationOnly)

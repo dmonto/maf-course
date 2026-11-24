@@ -74,7 +74,6 @@ internal sealed class LabContext : IDisposable
         }
         else
         {
-            // A deterministic evidence display exercises wiring only; no language model runs.
             string q = question.ToLowerInvariant();
             string? doc = q.Contains("vpn") || q.Contains("tunnel") ? "vpn-guide" : q.Contains("payroll") ? "payroll-guide" : q.Contains("password") ? "password-guide" : null;
             var relevant = hits.Where(h => h.DocumentId == doc).ToArray();

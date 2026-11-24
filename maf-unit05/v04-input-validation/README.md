@@ -14,7 +14,7 @@ For the assigned Azure deployment, fill in the root `.env`, run `Scripts/Login-A
 
 No model calls occur in either mode. Expect ok, invalid-input, not-available and not-available, then tool-budget-exceeded on the fourth recorded attempt shared across both tools.
 
-The demo client is explicitly labelled deterministic synthetic software. It exercises the real MAF tool and typed-output pipeline but does not measure Azure connectivity, model behavior or prompt quality. Live failures do not fall back to demo output.
+The demo client is explicitly labelled deterministic synthetic software. It checks the real MAF tool and typed-output pipeline but does not measure Azure connectivity, model behavior or prompt quality. Live failures do not fall back to demo output.
 
 ## Shared source
 

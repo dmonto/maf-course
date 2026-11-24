@@ -1,6 +1,6 @@
 # v02: Model registration
 
-Registers service-desk and resolves it at startup. /health reports the agent name and selected deployment. A capability-description request exercises the configured model; no business tool is registered yet.
+Registers service-desk and resolves it at startup. /health reports the agent name and selected deployment. A capability-description request checks the configured model; no business tool is registered yet.
 
 ## Run from the package root
 
@@ -24,6 +24,6 @@ Stop the previous host with Ctrl+C before starting another example on port 5050.
 
 `Program.cs` is this section's executable entry point. Its project references `Shared/Unit04.Common`; all projects use the root `.env`, `appsettings.json` and `Prompts`. The full extracted directory is required.
 
-Registers service-desk and resolves it at startup. /health reports the agent name and selected deployment. A capability-description request exercises the configured model; no business tool is registered yet.
+Registers service-desk and resolves it at startup. /health reports the agent name and selected deployment. A capability-description request checks the configured model; no business tool is registered yet.
 
 The demo client is deterministic synthetic software inside the real MAF function/session pipeline. It does not establish Azure connectivity or model quality. Live inference failures are reported; there is no automatic switch to demo mode.

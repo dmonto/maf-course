@@ -2,7 +2,7 @@
 
 Memory, State and Long Conversations: Persistent Agents and Durable Contexts in MAF.
 
-Seven projects correspond to the seven GitBook sections containing examples, including the narrative examples about replicas and conflicting requests. Each has its own executable entry point. Stable implementation code is shared under `Shared/Unit06.Common`, with one `.env` at this package root. Possible exercise solutions are isolated in `Exercises`.
+Seven projects correspond to the seven GitBook sections containing examples, including the narrative examples about replicas and conflicting requests. Each has its own executable entry point. Stable implementation code is shared under `Shared/Unit06.Common`, with one `.env` at this package root. 
 
 ## Prerequisites and installation
 
@@ -41,8 +41,6 @@ The initializer creates `.env` from `.env.example` only when missing. The execut
 | v06 | Consistency control | Both candidates load revision N; the stale candidate is rejected after the winner commits |
 | v07 | Conversation auditing | Latest ten committed-turn metadata rows; optional audit-only mode |
 
-Long-context management, Security in persistent memory and Robust state design contain no separate blue example in the current source. Their policies are implemented in the shared code; Exercise 2 belongs to Robust state design. See [GITBOOK-MAPPING.md](GITBOOK-MAPPING.md).
-
 ## Demo and live modes
 
 The default `.env` selects `demo`. The deterministic `ScriptedMemoryClient` runs inside the real MAF session, history, function-calling and serialization pipeline. Its responses are explicitly labelled. It is not an LLM, does not establish prompt quality and is never used as a fallback for a failed live request.
@@ -67,8 +65,6 @@ Use the HTTPS resource-root endpoint for `AzureOpenAIClient`, rather than a Foun
 `-Demo` and `-Live` explicitly override the file's execution mode. Nonempty process environment variables take precedence over `.env` values. The dotenv reader treats values as literal strings; it performs no shell execution or interpolation. Clear stale process variables or open a new terminal after changing values previously imported into the terminal.
 
 Demo and live providers have different compatibility keys. Default session IDs include the mode. When choosing your own session ID, use a new ID if switching providers; a mismatched stored configuration fails with `config-mismatch`.
-
-v03 always performs local session/history operations without inference. `-Audit` on v02, v04, v07 and the exercise projects reads local metadata without inference. Live requests in other paths use Azure and can incur model usage.
 
 ## v01: in-session memory
 
@@ -111,8 +107,6 @@ $session = 'context-' + [Guid]::NewGuid().ToString('N').Substring(0,8)
 
 Expect `GetCaseContext` for the case request and a fresh `GetServiceStatus` call for each status question. The synthetic catalog returns VPN `healthy` and payroll `degraded`. These are controlled records, not real infrastructure checks. Tool names executed in the run appear in `toolCalls`; retained tool results are part of the framework session snapshot.
 
-The model receives no tool for changing the case stage. Business state is application-owned. The baseline does not implement the confirmed-operating-system extension; its solution is in `Exercises/ex01-confirmed-operating-system`.
-
 ## v05: independent replica processes
 
 Run these commands in the same package, or one in each of two PowerShell windows:
@@ -154,8 +148,6 @@ The audit contains run IDs, revisions, timestamps, input/output character counts
 & ./Scripts/Test-Examples.ps1 -NoBuild
 & ./Scripts/Test-Memory.ps1
 ```
-
-The first script executes all seven profiles and both exercise solutions in explicit demo mode. The second launches a new process for every turn and checks restart recall, separation between conversation IDs, bounded history and seven committed-turn rows. For real-model checks:
 
 ```powershell
 & ./Scripts/Test-Memory.ps1 -Live

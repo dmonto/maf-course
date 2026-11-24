@@ -16,8 +16,6 @@ The runtime choices are **Azure OpenAI**, **Microsoft Foundry Models** and **Fou
 | v06-model-versioning | Baseline/candidate regression comparison | 6 |
 | v07-consumption-cost | Call and case cost | 0 |
 | v08-model-observability | Repeated requests and operational evidence | 3 by default |
-| Exercises/ex01-provider-selection | Possible solution to Exercise 1 | 0 |
-| Exercises/ex02-provider-comparison | Possible solution to Exercise 2 | 2 |
 
 `Shared/Unit02.Common` contains reusable configuration, clients, synthetic task data, quality checks, metrics, cost calculations and selection helpers. `Verification` provides independent checks. `Scripts` contains preparation and run commands. Reports are written under `output`, created on first run. No model weights or SDK binaries are bundled.
 
@@ -53,8 +51,6 @@ Package versions are centralized and locked. Azure.AI.OpenAI is a prerelease. Th
 & ./Scripts/Run-Example.ps1 -Example v03 -Demo
 & ./Scripts/Test-Offline.ps1
 ```
-
-Demo mode is explicitly synthetic: no model requests, credentials or real consumption. Its timings and token counts are not measurements. Package restore still needs access to NuGet unless the packages are already cached. The offline test builds and runs the checks, all eight demonstrations and both exercise solutions.
 
 ## 4. Prepare and use Foundry Local
 
@@ -98,10 +94,6 @@ Each model call records provider, requested and returned model identifiers, resp
 The summary checker is a deliberately small lexical check for the supplied service, impact and unknown recovery time; manually review the answer as well. It is not a general semantic evaluator. Connection success does not imply task success. Outputs save metadata and check results without raw prompts or answers; model text appears only in the console by default.
 
 `elapsedMs` measures the SDK request, including authentication/model loading when that happens during the request. It excludes process startup and client construction. The Python reference measures the agent run. Keep timing boundaries aligned when making comparisons. A few samples or demo outputs do not establish p50/p95 performance for a real workload. The observability example does not install an OpenTelemetry exporter or submit logs to Application Insights.
-
-## Exercise solutions and mapping
-
-See [Exercises/README.md](Exercises/README.md) for the instructor-only possible solutions and [GITBOOK-MAPPING.md](GITBOOK-MAPPING.md) for exact section mapping. The projects are separate applications, not incremental patches: keep the shared root alongside each project.
 
 ## Troubleshooting
 

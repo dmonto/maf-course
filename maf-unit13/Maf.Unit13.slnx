@@ -1,0 +1,14 @@
+<Solution>
+  <Project Path="Shared/Unit13.Common/Unit13.Common.csproj" />
+  <Project Path="v01-granular-access-control/Unit13.V01.csproj" />
+  <Project Path="v02-identity-management/Unit13.V02.csproj" />
+  <Project Path="v03-sensitive-data-protection/Unit13.V03.csproj" />
+  <Project Path="v04-interaction-auditing/Unit13.V04.csproj" />
+  <Project Path="v05-retention-policies/Unit13.V05.csproj" />
+  <Project Path="v06-model-exposure-control/Unit13.V06.csproj" />
+  <Project Path="v07-risk-assessment/Unit13.V07.csproj" />
+  <Project Path="v08-regulatory-compliance/Unit13.V08.csproj" />
+  <Project Path="v09-pipeline-governance/Unit13.V09.csproj" />
+  <Project Path="v10-enterprise-best-practices/Unit13.V10.csproj" />
+  <Project Path="Verification/Unit13.Checks.csproj" />
+</Solution>

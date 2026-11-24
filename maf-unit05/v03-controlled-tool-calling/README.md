@@ -14,7 +14,7 @@ For the assigned Azure deployment, fill in the root `.env`, run `Scripts/Login-A
 
 Status uses GetServiceStatus; guidance uses GetSupportGuidance; the combined case uses both; the missing-subject case requests clarification with no tool call. Every case has fresh tools and evidence.
 
-The demo client is explicitly labelled deterministic synthetic software. It exercises the real MAF tool and typed-output pipeline but does not measure Azure connectivity, model behavior or prompt quality. Live failures do not fall back to demo output.
+The demo client is explicitly labelled deterministic synthetic software. It checks the real MAF tool and typed-output pipeline but does not measure Azure connectivity, model behavior or prompt quality. Live failures do not fall back to demo output.
 
 ## Shared source
 

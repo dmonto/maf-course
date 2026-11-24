@@ -2,7 +2,6 @@
 
 Validated on 2026-11-05 with .NET SDK 10.0.403 on Linux. The package targets .NET 10 and includes `global.json` plus per-project package lock files.
 
-- All twelve projects (nine examples, two exercise solutions and one shared library) built with zero warnings and zero errors.
 - Locked dependency restoration was checked against the included lock files.
 - `Verification/verify.py` passed 21 process-level acceptance checks. Its captured result is `Verification/last-run.json`.
 - `Scripts/Test-Examples.ps1 -NoBuild` passed its deterministic smoke checks in PowerShell 7.6.9.
@@ -12,4 +11,3 @@ The checks cover healthy and degraded routes, approval and rejection, three exha
 
 The measured evidence-read durations in the captured Python run were 507 ms for concurrent reads and 811 ms for sequential reads with configured delays of 300 ms and 500 ms. Timing is observational and is not used as a machine-speed assertion.
 
-Demo mode still uses the real MAF workflow, request-port and checkpoint implementation. Only the language-generation step is deterministic C# text. Live Azure inference, Azure CLI login/RBAC and Windows PowerShell 5.1 execution were not exercised with course credentials. No external ticketing API, DevUI host or OpenTelemetry exporter is configured by these examples.

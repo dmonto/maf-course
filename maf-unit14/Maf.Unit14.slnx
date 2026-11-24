@@ -1,0 +1,15 @@
+<Solution>
+  <Project Path="Shared/Unit14.Common/Unit14.Common.csproj" />
+  <Project Path="Shared/Unit14.Api/Unit14.Api.csproj" />
+  <Project Path="v01-agent-containerization/Unit14.V01.csproj" />
+  <Project Path="v02-app-service-deployment/Unit14.V02.csproj" />
+  <Project Path="v03-aks-architecture/Unit14.V03.csproj" />
+  <Project Path="v04-autoscaling-management/Unit14.V04.csproj" />
+  <Project Path="v05-production-monitoring/Unit14.V05.csproj" />
+  <Project Path="v06-configuration-management/Unit14.V06.csproj" />
+  <Project Path="v07-pipeline-integration/Unit14.V07.csproj" />
+  <Project Path="v08-version-control/Unit14.V08.csproj" />
+  <Project Path="v09-environment-management/Unit14.V09.csproj" />
+  <Project Path="v10-rollback-strategies/Unit14.V10.csproj" />
+  <Project Path="Verification/Unit14.Checks.csproj" />
+</Solution>

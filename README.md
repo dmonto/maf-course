@@ -65,7 +65,7 @@ $env:SMOKE_WRITE_TESTS = "1"
 
 Creates, verifies and deletes a synthetic blob and temporary Search index. Cleanup failures name the remaining item.
 
-Docker, Podman, Ollama and Foundry Local are not required or checked by this smoke test. Container and local-model labs are validated separately.
+Container labs use **Podman**; see [Unit 14](maf-unit14/README.md). This core smoke test does not check Podman, Ollama or Foundry Local. Container and local-model labs are validated separately.
 
 ## Quick error guide
 

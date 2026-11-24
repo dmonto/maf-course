@@ -86,7 +86,7 @@ public sealed class ConversationStore
             """;
         AddScope(command, actor, sessionId);
         command.Parameters.AddWithValue("$config", agentConfig);
-        // Runtime-type serialization lets the separate exercise extend CaseState.
+        
         command.Parameters.AddWithValue("$state", JsonSerializer.Serialize(state, state.GetType()));
         command.Parameters.AddWithValue("$payload", payload);
         command.Parameters.AddWithValue("$expires", _clock.GetUtcNow().Add(lifetime).ToUnixTimeSeconds());

@@ -72,17 +72,5 @@
       "heading": "Behavior validation",
       "profile": "Full"
     }
-  ],
-  "exercises": [
-    {
-      "id": "ex01",
-      "directory": "Exercises/ex01-evidence-diagnosis",
-      "project": "Exercises/ex01-evidence-diagnosis/EvidenceDiagnosis.csproj"
-    },
-    {
-      "id": "ex02",
-      "directory": "Exercises/ex02-expiring-conversations",
-      "project": "Exercises/ex02-expiring-conversations/ExpiringConversations.csproj"
-    }
   ]
 }

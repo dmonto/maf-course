@@ -1,6 +1,6 @@
 # Unit 10 - REST, databases and Slack (.NET 10)
 
-Nine independent example projects follow the nine sections of the current [GitBook Unit 10](https://app.gitbook.com/s/5NyZDQFujwe6GeJ3CBCA/session-5/unit-10). Shared implementation, agent instructions and one `.env` live at this unit root. The two instructor exercise solutions are separate projects under `Exercises/`. Source comments and instructions are in English.
+Nine independent example projects follow the nine sections of the current [GitBook Unit 10](https://app.gitbook.com/s/5NyZDQFujwe6GeJ3CBCA/session-5/unit-10). Shared implementation, agent instructions and one `.env` live at this unit root. 
 
 ## Quick start
 
@@ -50,7 +50,6 @@ Keep example directories together with `Shared/`, `Prompts/`, `manifest.json`, t
 | v08 | Orchestration with legacy systems | `v08-legacy-orchestration` | VPN01/D is translated into vpn/degraded before preparing the update |
 | v09 | Integration best practices | `v09-integration-best-practices` | Complete preview or seven local acceptance checks |
 
-The conceptual legacy example has executable code in v08 even though its GitBook section contains no full listing. V09 implements the concluding integration walkthrough and verification table. The owner predicate and maintenance-freeze rule are implemented only in the instructor solution projects.
 
 ## Useful runs and expected results
 
@@ -158,16 +157,7 @@ Each project stores its synthetic database under `data/<example>/<synthetic-subj
 
 Use a new ID only for a separately reviewed operation. The archive excludes generated databases, build outputs and reports. Fresh extraction therefore starts with empty delivery ledgers.
 
-## Instructor solutions
-
-- `Exercises/ex01-owner-scoped-tickets` adds ownership to its own synthetic database, registers `GetMyOpenTicketIds`, returns at most five IDs, preserves tenant/service/owner/open-status predicates and leaves the aggregate count unchanged. The model can supply only `service`. An employee receives A-101, not another owner's ticket or the training-b ticket.
-- `Exercises/ex02-legacy-maintenance-freeze` adds an isolated maintenance adapter and its own synthetic HTTP response fixtures. `Y` blocks before review or claim; `N` preserves the reviewed send; unknown flags and mismatched services fail validation. It also repeats a completed operation ID. It runs only with the local demo and makes no real Slack request.
-
-`Exercises/` contains complete instructor solutions. No GitBook page was edited as part of generating this pack.
-
 ## Source alignment and verification
-
-`Reference/unit10-gitbook.md` records the page retrieved on 7 November 2026. `Reference/Original/` preserves the six original listings as text, and `source.json` records provenance and a page hash. `Shared/Contracts.cs` and `Shared/Connectors.cs` match the retrieved listings byte for byte. `Shared/Stores.cs` keeps the original SQL queries and ledger; its seed INSERT explicitly names the four baseline columns so that rerunning Exercise 1 also works after adding ownership. `Prompts/integration.txt` retains the page's agent instructions. The fixture adds a legacy status endpoint; the shared host adds root `.env` loading, per-project storage and reusable notification orchestration.
 
 The pinned packages remain Azure.AI.OpenAI 2.9.0-beta.1, Azure.Identity 1.21.0, Microsoft.Agents.AI.OpenAI 1.24.0, Microsoft.Data.Sqlite 10.0.10 and SQLitePCLRaw.lib.e_sqlite3 3.53.3. Lock files are provided; subsequent restores can use `dotnet restore .\Unit10.slnx --locked-mode --disable-parallel`.
 

@@ -17,7 +17,7 @@ $PSNativeCommandUseErrorActionPreference = $false
 if ($Demo -and $Live) { throw 'Select either -Demo or -Live.' }
 $unit08Root = Split-Path $PSScriptRoot -Parent
 $manifest = Get-Content (Join-Path $unit08Root 'manifest.json') -Raw | ConvertFrom-Json
-$match = @((@($manifest.examples) + @($manifest.exercises)) |
+$match = @((@($manifest.examples)  |
     Where-Object { $_.id -eq $Example -or $_.directory -eq $Example })
 if ($match.Count -ne 1) { throw 'Use v01 through v10, ex01 or ex02.' }
 if ($DenyIdentity -and $match[0].id -ne 'ex01') { throw '-DenyIdentity belongs to ex01.' }

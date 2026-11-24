@@ -72,21 +72,5 @@
       "section": "Coordination best practices",
       "defaultScenario": "combined"
     }
-  ],
-  "exercises": [
-    {
-      "id": "ex01",
-      "directory": "Exercises/ex01-scoped-identity-delegation",
-      "project": "Exercises/ex01-scoped-identity-delegation/Unit08.EX01.csproj",
-      "section": "Scoped identity delegation",
-      "defaultScenario": "combined"
-    },
-    {
-      "id": "ex02",
-      "directory": "Exercises/ex02-idempotent-report-acceptance",
-      "project": "Exercises/ex02-idempotent-report-acceptance/Unit08.EX02.csproj",
-      "section": "Idempotent report acceptance",
-      "defaultScenario": "combined"
-    }
   ]
 }

@@ -4,7 +4,6 @@ Date: 2026-11-05. Runtime: .NET SDK 10.0.100 on Linux x64. Source: current GitBo
 
 ## Results
 
-- All eleven projects in Maf.Unit06.slnx built successfully: seven examples, two exercise solutions, the shared library and the boundary-check executable. Zero warnings and zero errors.
 - Seventeen cross-process checks passed: same/fresh session recall, SQLite commit and second-process restoration, function-call/result preservation, real MAF tool invocation, fresh synthetic status lookup, independent replica processes, deterministic stale-write rejection, committed-turn auditing, confirmed-fact provenance, typed-fact survival after pruning, expiry before inference, four invalid lifetime settings and the 60-second valid setting.
 - Twenty-one additional repository checks passed against real SQLite and the real MAF session/serialization pipeline. They cover typed state, tenant/owner and audit separation, parameterized lookup, duplicate creation, rollback of both revision and payload on audit failure, current tool ownership/case checks, lifetime boundaries, expired restoration and incompatible schema refusal.
 - Two additional process checks passed: a stored demo session rejected a live-provider compatibility mismatch before constructing a live client; the package's shared .env and database resolved when its executable was launched from outside the package directory.

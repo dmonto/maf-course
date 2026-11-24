@@ -11,9 +11,9 @@ foreach ($folder in Get-ChildItem $courseRoot -Directory -Filter 'v??-*') {
     dotnet run --no-build --project $project.FullName -- --demo
     if ($LASTEXITCODE -ne 0) { throw "Demo failed: $($folder.Name)" }
 }
-foreach ($folder in Get-ChildItem (Join-Path $courseRoot 'Exercises') -Directory) {
+foreach ($folder in Get-ChildItem  -Directory) {
     $project = Get-ChildItem $folder.FullName -Filter '*.csproj' | Select-Object -First 1
     dotnet run --no-build --project $project.FullName -- --demo
-    if ($LASTEXITCODE -ne 0) { throw "Exercise demo failed: $($folder.Name)" }
+    if ($LASTEXITCODE -ne 0) { throw "Demo failed: $($folder.Name)" }
 }
 Write-Host 'Build, checks and all synthetic demonstrations passed.'

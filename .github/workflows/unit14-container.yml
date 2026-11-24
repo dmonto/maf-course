@@ -1,0 +1,83 @@
+name: Unit 14 container portability
+on:
+  pull_request:
+    paths:
+      - "maf-unit14/**"
+      - ".github/workflows/unit14-container.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  portability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: maf-unit14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Restore and compile
+        run: |
+          dotnet restore Maf.Unit14.slnx --locked-mode -m:1
+          dotnet build Maf.Unit14.slnx --no-restore -m:1
+      - name: Run local examples and boundary checks
+        shell: pwsh
+        run: ./Scripts/Test-All.ps1 -NoBuild
+      - name: Prepare Podman
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y podman
+          podman info
+      - name: Build candidate image
+        run: podman build --format docker --file Containerfile --build-arg RELEASE_VERSION=14.1.0 -t localhost/maf-status:14.1.0 .
+      - name: Start fixture container
+        run: >-
+          podman run -d --name maf-status-ci --read-only --tmpfs /tmp
+          -p 127.0.0.1:8080:8080 localhost/maf-status:14.1.0
+      - name: Verify container contract
+        run: >-
+          python Python/smoke.py --base http://127.0.0.1:8080
+          --release 14.1.0 --mode fixture --output artifacts/container-smoke.json
+      - name: Retain container logs
+        if: always()
+        run: |
+          mkdir -p artifacts
+          podman logs maf-status-ci > artifacts/container.log 2>&1 || true
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit14-portability
+          path: maf-unit14/artifacts/
+          retention-days: 7
+      - name: Remove fixture container
+        if: always()
+        run: podman rm -f maf-status-ci || true
+  windows-shell-compatibility:
+    runs-on: windows-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: maf-unit14
+        shell: powershell
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Verify Windows PowerShell 5.1 runtime
+        run: |
+          if ($PSVersionTable.PSEdition -ne 'Desktop' -or $PSVersionTable.PSVersion.Major -ne 5) {
+            throw 'Run this job with Windows PowerShell 5.1.'
+          }
+          ./Scripts/Initialize-Environment.ps1
+          ./Scripts/Test-All.ps1

@@ -1,7 +1,5 @@
 using System.Text.Json;
 using Unit05.Common;
-using Unit05.Exercise01;
-using Unit05.Exercise02;
 
 int checks = 0;
 void Check(bool condition, string name)
@@ -13,7 +11,7 @@ ToolResult Read(string raw) => JsonSerializer.Deserialize<ToolResult>(raw)!;
 Environment.SetEnvironmentVariable("PROMPT_VERSION", "v2");
 var settings = CourseSettings.Load(new Arguments(["--demo"]));
 
-// Both prompts exercise real MAF function calling and generic typed output parsing.
+// Both prompts check real MAF function calling and generic typed output parsing.
 foreach (string version in new[] { "v1", "v2" })
     foreach (var c in AcceptanceCases.All)
     {
@@ -69,28 +67,6 @@ Check(AnswerValidator.Check(bad, combined.Evidence).Contains("missing-or-mixed-s
 Check(AnswerValidator.Check(new() { Outcome = "answered", Summary = "All fine." }, []).Length > 0, "answer without evidence refused");
 Check(AnswerValidator.Check(new() { Outcome = "unavailable", Summary = "No data." }, []).Contains("missing-unavailable-evidence"), "unavailable requires a failed lookup");
 
-// Exercise 1 remains a design contract, without registering a maintenance tool.
-var fixture = MaintenanceContract.ValidFixture();
-Check(MaintenanceContract.Validate(fixture).Length == 0, "UTC maintenance fixture");
-Check(MaintenanceContract.Validate(fixture with { Data = fixture.Data! with { EndUtc = fixture.Data.StartUtc } }).Contains("invalid-window-order"), "end must follow start");
-Check(MaintenanceContract.Validate(fixture with { Data = fixture.Data! with { StartUtc = fixture.Data.StartUtc.ToOffset(TimeSpan.FromHours(1)) } }).Contains("timestamps-must-be-utc"), "explicit UTC offset");
-Check(MaintenanceContract.Validate(new(false, "not-available")).Length == 0, "unavailable maintenance result");
-Check(MaintenanceContract.Validate(new(false, "not-available", fixture.Data)).Contains("failure-must-not-return-data"), "maintenance failures contain no record");
-
-// Exercise 2 adds a field only to its own response type.
-foreach (var (message, expected) in new[]
-{
-    ("What is payroll status and what should I do next?", true),
-    ("What is the current status of payroll?", false),
-    ("What is VPN status and what should I do next?", false)
-})
-{
-    var report = await AgentRunner.RunAsync<HumanReviewAnswer>(settings, message, false,
-        HumanReviewContract.Validate, HumanReviewContract.Instructions, HumanReviewContract.FormatDemoAnswer);
-    Check(report.Outcome == "contract-accepted", "extended response accepted");
-    Check(report.Answer!.RequiresHumanReview == expected, "correct human-review recommendation");
-    Check(!report.Answer.ActionExecuted, "review recommendation performs no action");
-}
 var forged = new HumanReviewAnswer { Outcome = "clarification", Summary = "Which service?", RequiresHumanReview = true };
 Check(HumanReviewContract.Validate(forged, []).Contains("human-review-evidence-mismatch"), "fabricated review flag refused");
 var wrongServiceEvidence = combined.Evidence.Select(e => e.Tool == "GetSupportGuidance"

@@ -13,4 +13,4 @@ foreach ($id in 'v01','v02','v03','v04','v05','v06','v07','v08','v09','v10','ex0
 }
 & dotnet run --no-build --project (Join-Path $unit08Root 'Verification/Unit08.Checks.csproj')
 if ($LASTEXITCODE -ne 0) { throw 'Contract and concurrency checks failed.' }
-Write-Host 'PASS: all example entry points, both exercise solutions and the deeper checks.'
+Write-Host 'PASS: all example entry points, and the deeper checks.'

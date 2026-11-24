@@ -22,4 +22,3 @@ $env:MAF_MODEL_PROVIDER = 'azure'
 if ($LASTEXITCODE -ne 0) { throw 'Python Azure probe failed.' }
 ```
 
-The local key `notneeded` is an SDK compatibility placeholder. Azure uses an Azure CLI bearer-token provider. Secrets are not printed. `elapsedMs` measures the Python agent run; compare timing boundaries before comparing it with another implementation. There is no Python `--demo` switch. Capture a resolved Python dependency list with `pip freeze` for a reproducible instructor environment.

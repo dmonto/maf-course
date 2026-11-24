@@ -9,7 +9,6 @@ Source snapshot and pack validation date: 2026-10-30.
 | Locked restore | Passed against all included packages.lock.json files |
 | Independent policy, tool and session checks | 36 passed, using real MAF classes and a labelled scripted model |
 | Eight example entry points | All passed in demo mode through the PowerShell launcher |
-| Both possible exercise solutions | Passed in local/demo mode |
 | Alternative repository injection | Passed |
 | PowerShell syntax | All four scripts parsed successfully in PowerShell 7.5.2 |
 | Shared environment import | Executed successfully against the root template |

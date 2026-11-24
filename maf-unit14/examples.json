@@ -1,0 +1,78 @@
+[
+  {
+    "id": "v01",
+    "section": "Agent containerization",
+    "directory": "v01-agent-containerization",
+    "project": "v01-agent-containerization/Unit14.V01.csproj",
+    "observation": "A real fixture HTTP host passes the Python deployment probe."
+  },
+  {
+    "id": "v02",
+    "section": "Deployment to App Service",
+    "directory": "v02-app-service-deployment",
+    "project": "v02-app-service-deployment/Unit14.V02.csproj",
+    "observation": "An offline sitecontainers plan records port, identity and digest requirements."
+  },
+  {
+    "id": "v03",
+    "section": "Architecture on AKS",
+    "directory": "v03-aks-architecture",
+    "project": "v03-aks-architecture/Unit14.V03.csproj",
+    "observation": "Complete internal Kubernetes manifests are rendered as JSON."
+  },
+  {
+    "id": "v04",
+    "section": "Autoscaling management",
+    "directory": "v04-autoscaling-management",
+    "project": "v04-autoscaling-management/Unit14.V04.csproj",
+    "observation": "A bounded HPA and quota calculation distinguish the scaling layers."
+  },
+  {
+    "id": "v05",
+    "section": "Production monitoring",
+    "directory": "v05-production-monitoring",
+    "project": "v05-production-monitoring/Unit14.V05.csproj",
+    "observation": "Health, API results, instance identity and measured sample latency are checked."
+  },
+  {
+    "id": "v06",
+    "section": "Configuration management",
+    "directory": "v06-configuration-management",
+    "project": "v06-configuration-management/Unit14.V06.csproj",
+    "observation": "The shared environment and Azure credential boundaries are inspected."
+  },
+  {
+    "id": "v07",
+    "section": "Pipeline integration",
+    "directory": "v07-pipeline-integration",
+    "project": "v07-pipeline-integration/Unit14.V07.csproj",
+    "observation": "A portability gate accepts the host and rejects a deliberately wrong release."
+  },
+  {
+    "id": "v08",
+    "section": "Version control",
+    "directory": "v08-version-control",
+    "project": "v08-version-control/Unit14.V08.csproj",
+    "observation": "Actual assembly SHA-256 and release metadata are recorded without inventing an image digest."
+  },
+  {
+    "id": "v09",
+    "section": "Environment management",
+    "directory": "v09-environment-management",
+    "project": "v09-environment-management/Unit14.V09.csproj",
+    "observation": "The same release is mapped to local, verification and production identity contracts."
+  },
+  {
+    "id": "v10",
+    "section": "Rollback strategies",
+    "directory": "v10-rollback-strategies",
+    "project": "v10-rollback-strategies/Unit14.V10.csproj",
+    "observation": "A bad fixture contract is rejected and a restored release is verified."
+  },
+  {
+    "id": "checks",
+    "section": "Verification",
+    "directory": "Verification",
+    "project": "Verification/Unit14.Checks.csproj"
+  }
+]

@@ -1,6 +1,5 @@
 using System.Text.Json;
 using Unit08.Common;
-using Unit08.Exercises;
 
 int checks = 0;
 void Require(bool passed, string name)
@@ -58,7 +57,7 @@ var conflict = await supervisor.RunAsync(new("conflict", "payroll"), new(Conflic
 Require(conflict.Reports.Single().ErrorCode == "unsupported-observation" && conflict.Brief is null,
     "Contradiction blocks synthesis");
 
-// Exercise an actual cancellation deadline in addition to the injected timeout.
+// Check an actual cancellation deadline in addition to the injected timeout.
 var timeoutSettings = settings with { SpecialistTimeoutSeconds = 1, NetworkDelayMs = 1200, ServiceDelayMs = 0 };
 var timeoutSupervisor = new Supervisor(new DemoBackend(timeoutSettings), timeoutSettings, new(false));
 var timedOut = await timeoutSupervisor.RunAsync(new("timeout", "combined"), new(), CancellationToken.None);

@@ -133,7 +133,6 @@ public static class WorkflowHost
                             await run.SendResponseAsync(request.Request.CreateResponse(choice == "yes"));
                             break;
                         case WorkflowOutputEvent output:
-                            // Exercise hosts can yield their own typed outcome contract.
                             outputs.Add(output.Data);
                             completed = true;
                             break;

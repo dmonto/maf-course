@@ -2,7 +2,7 @@
 
 Workflows in MAF: Task Graphs, Decisions and Humans in the Loop.
 
-Nine executable .NET projects cover the examples in the current GitBook unit, including its narrative timeout example. Each project has a separate entry point and state directory. Stable contracts, executors, model setup, dotenv loading and hosting live under `Shared/Unit07.Common`. The two possible exercise solutions live under `Exercises`.
+Nine executable .NET projects cover the examples in the current GitBook unit, including its narrative timeout example. Each project has a separate entry point and state directory. Stable contracts, executors, model setup, dotenv loading and hosting live under `Shared/Unit07.Common`. 
 
 ## Install and build
 
@@ -58,7 +58,6 @@ Model package versions match the GitBook listings and Unit 6. `Microsoft.Agents.
 | `v08-workflow-persistence` | Workflow persistence | Checkpoint a review and resume it in a new process |
 | `v09-workflow-observability` | Workflow observability | Structured events, correlation, elapsed time and optional live drafting |
 
-The final section, Real-world enterprise use cases, contains a design table and Exercise 2 rather than a separate blue executable example. Its exercise is implemented in `Exercises/ex02-idempotent-escalation`.
 
 ## v01: inspect the task graph
 
@@ -116,8 +115,6 @@ if ($LASTEXITCODE -eq 0) { throw 'Invalid service was accepted.' }
 dotnet run --no-build --project ./v05-intermediate-validations/Unit07.V05.csproj -- run vpn --case INVALID --demo
 if ($LASTEXITCODE -eq 0) { throw 'Invalid case was accepted.' }
 ```
-
-Invalid input fails before evidence retrieval or drafting. The baseline also rejects a blank/oversized symptom and an empty/oversized draft. Its draft check validates shape and size, not factual accuracy. Exercise 1's timestamp and freshness gate are deliberately absent from this baseline.
 
 ## v06: inspect sequential dependencies
 
@@ -178,10 +175,6 @@ $state = 'live-' + [Guid]::NewGuid().ToString('N').Substring(0, 8)
 Live mode calls the assigned deployment and may incur usage. It uses Azure CLI identity, a bounded model deadline and the original drafting instructions. It does not silently fall back to a deterministic answer if Azure fails. The configuration key includes provider and live endpoint/deployment identity.
 
 This is the unit's console event stream; no DevUI host or OpenTelemetry exporter is added. Redirect console output if local logs need to be retained. Review output includes the synthetic proposal text.
-
-## Exercise solutions and verification
-
-See [Exercises/README.md](Exercises/README.md) for the two possible instructor solutions. Neither solution is required by any `v01`–`v09` project.
 
 ```powershell
 & ./Scripts/Test-Examples.ps1 -NoBuild

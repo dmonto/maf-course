@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: maf-agent
+  namespace: maf-lab
+  annotations:
+    azure.workload.identity/client-id: "<ASSIGNED_WORKLOAD_CLIENT_ID>"
+---
+# Merge the following fields into the Deployment pod template in k8s.yaml.
+# This second document is a strategic merge patch, not a full Deployment.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maf-status
+  namespace: maf-lab
+spec:
+  template:
+    metadata:
+      labels:
+        azure.workload.identity/use: "true"
+    spec:
+      serviceAccountName: maf-agent
+      containers:
+        - name: api
+          env:
+            - name: Runner__Mode
+              value: azure
+            - name: Runner__Identity
+              value: workload
+            - name: AZURE_OPENAI_ENDPOINT
+              value: "<ASSIGNED_AZURE_OPENAI_ENDPOINT>"
+            - name: AZURE_OPENAI_DEPLOYMENT_NAME
+              value: "<ASSIGNED_DEPLOYMENT_NAME>"

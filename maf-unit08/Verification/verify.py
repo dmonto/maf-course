@@ -18,7 +18,7 @@ def main():
     sdk = str(Path(options.dotnet).resolve())
     root = Path(__file__).resolve().parents[1]
     manifest = json.loads((root / "manifest.json").read_text())
-    entries = {e["id"]: e for e in manifest["examples"] + manifest["exercises"]}
+    entries = {e["id"]: e for e in manifest["examples"] }
     environment = dict(os.environ, NETWORK_DELAY_MS="5", SERVICE_DELAY_MS="10")
     records = []
 

@@ -11,7 +11,7 @@ return await CourseApp.RunAsync(args, async context =>
     {
         foreach (var (connection, destination) in new[] { (baseline, baselineRuns), (candidate, candidateRuns) })
         {
-            // Deliberately introduce one synthetic regression so demo mode exercises rejection.
+            // Deliberately introduce one synthetic regression so demo mode does rejection.
             string answer = context.Demo && connection == candidate && incident.Id == "INC-003"
                 ? "Service: Inventory\nImpact: Stock synchronization is delayed.\nNext step: Recovery in 15 minutes."
                 : incident.DemoAnswer;

@@ -5,7 +5,6 @@ using System.Text;
 using System.Text.Json;
 using Microsoft.Data.Sqlite;
 
-// Extension points keep exercise rules in their separate solution projects.
 public interface IIntakePolicy
 {
     void Validate(SupportEvent e);

@@ -1,8 +1,6 @@
 using System.Text.Json;
 using Microsoft.Extensions.AI;
 using Unit03.Common;
-using Unit03.Exercises.TrustBoundaries;
-using Unit03.Exercises.SupportContact;
 
 List<string> checks = [];
 return await CourseApp.RunAsync(["--demo"], async context =>

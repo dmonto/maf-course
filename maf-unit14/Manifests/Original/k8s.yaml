@@ -1,0 +1,92 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: maf-lab
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: maf-status
+  namespace: maf-lab
+spec:
+  replicas: 2
+  revisionHistoryLimit: 3
+  progressDeadlineSeconds: 180
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: maf-status
+  template:
+    metadata:
+      labels:
+        app: maf-status
+    spec:
+      terminationGracePeriodSeconds: 35
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: api
+          image: <IMAGE>
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: Runner__Mode
+              value: fixture
+            - name: Runner__Concurrency
+              value: "2"
+          resources:
+            requests:
+              cpu: 250m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 512Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: [ALL]
+          volumeMounts:
+            - name: temp
+              mountPath: /tmp
+          startupProbe:
+            httpGet:
+              path: /health/live
+              port: http
+            periodSeconds: 2
+            failureThreshold: 30
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: http
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: http
+            periodSeconds: 10
+      volumes:
+        - name: temp
+          emptyDir:
+            sizeLimit: 64Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: maf-status
+  namespace: maf-lab
+spec:
+  type: ClusterIP
+  selector:
+    app: maf-status
+  ports:
+    - port: 80
+      targetPort: http

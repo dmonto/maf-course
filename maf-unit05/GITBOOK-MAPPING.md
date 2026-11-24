@@ -15,13 +15,9 @@ Source: https://diego-montoliu.gitbook.io/maf-course/session-2/unit-5
 | `v09` | Prompt testing | Runs the nine-case acceptance matrix for both instruction versions, using fresh tools and evidence for every case. |
 
 
-The tenth H2, Enterprise best practices, has a review table and Exercise 2 but no separate example. Its possible solution is under Exercises/ex02-human-review. The maintenance contract exercise from Prevention of unwanted behaviors is under Exercises/ex01-maintenance-contract.
-
 ## Shared-code extraction
 
 The source presents one console application across several sections. Each ZIP example is an independent executable project referencing stable code at the root. Both original prompt files are preserved. ServiceTools retains the catalog, caller scope, result shape, injection fixture and shared three-attempt budget. AnswerValidator retains its original business-field checks, including the documented free-text semantic-validation gap.
-
-Contracts are public for cross-project references. SupportAnswer is inheritable so the separate second exercise can extend it without copying baseline fields. Ordinary examples still request precisely the baseline output fields.
 
 The root .env replaces manually sourcing student.env.ps1. Azure endpoint, deployment and PROMPT_VERSION variable names match the source. The app resolves its prompt files from the package root rather than copying them into each project's output. Run metadata adds explicit execution mode, prompt hash and parameter values; this does not change the business contract.
 

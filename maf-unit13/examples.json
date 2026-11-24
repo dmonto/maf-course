@@ -1,0 +1,72 @@
+[
+  {
+    "id": "v01",
+    "section": "Granular access control",
+    "directory": "v01-granular-access-control",
+    "project": "v01-granular-access-control/Unit13.V01.csproj",
+    "azure": false
+  },
+  {
+    "id": "v02",
+    "section": "Identity management",
+    "directory": "v02-identity-management",
+    "project": "v02-identity-management/Unit13.V02.csproj",
+    "azure": false
+  },
+  {
+    "id": "v03",
+    "section": "Protection of sensitive data",
+    "directory": "v03-sensitive-data-protection",
+    "project": "v03-sensitive-data-protection/Unit13.V03.csproj",
+    "azure": false
+  },
+  {
+    "id": "v04",
+    "section": "Interaction auditing",
+    "directory": "v04-interaction-auditing",
+    "project": "v04-interaction-auditing/Unit13.V04.csproj",
+    "azure": true
+  },
+  {
+    "id": "v05",
+    "section": "Retention policies",
+    "directory": "v05-retention-policies",
+    "project": "v05-retention-policies/Unit13.V05.csproj",
+    "azure": false
+  },
+  {
+    "id": "v06",
+    "section": "Model exposure control",
+    "directory": "v06-model-exposure-control",
+    "project": "v06-model-exposure-control/Unit13.V06.csproj",
+    "azure": false
+  },
+  {
+    "id": "v07",
+    "section": "Risk assessment",
+    "directory": "v07-risk-assessment",
+    "project": "v07-risk-assessment/Unit13.V07.csproj",
+    "azure": false
+  },
+  {
+    "id": "v08",
+    "section": "Regulatory compliance",
+    "directory": "v08-regulatory-compliance",
+    "project": "v08-regulatory-compliance/Unit13.V08.csproj",
+    "azure": false
+  },
+  {
+    "id": "v09",
+    "section": "Pipeline governance",
+    "directory": "v09-pipeline-governance",
+    "project": "v09-pipeline-governance/Unit13.V09.csproj",
+    "azure": false
+  },
+  {
+    "id": "v10",
+    "section": "Enterprise best practices",
+    "directory": "v10-enterprise-best-practices",
+    "project": "v10-enterprise-best-practices/Unit13.V10.csproj",
+    "azure": true
+  }
+]

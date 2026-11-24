@@ -1,12 +1,12 @@
 {
-    "id":  "EVT-CDAC4D2A1CA048978B79CD9E052467F0",
-    "tenant":  "training-a",
-    "data":  {
-                 "summary":  "Synthetic training observation for vpn.",
-                 "status":  "degraded",
-                 "service":  "vpn"
-             },
-    "correlationId":  "9e091247-4026-4d3f-a154-48722716d84a",
-    "type":  "ServiceStatusChanged.v1",
-    "occurredAtUtc":  "2026-11-19T12:51:13.8259721+00:00"
+  "data": {
+    "status": "degraded",
+    "service": "vpn",
+    "summary": "Synthetic training observation for vpn."
+  },
+  "occurredAtUtc": "2026-11-24T09:59:53.0667808+00:00",
+  "id": "EVT-B920845A20FB43FA988C7E1B2E3422D4",
+  "type": "ServiceStatusChanged.v1",
+  "tenant": "training-a",
+  "correlationId": "4c061dec-33a9-47a8-b47c-8b5d2d0009b8"
 }

@@ -2,7 +2,7 @@
 
 Multi-Agent Orchestration: Coordinator Agents, Specialists and Collaboration Patterns.
 
-Ten independent .NET console projects cover the ten sections of the current GitBook unit. The six sections with blue examples map to their executable behavior; the four narrative sections add small demonstrations of the described contracts, permissions, state boundaries and scheduling patterns. The two possible exercise solutions are separate projects under `Exercises`.
+Ten independent .NET console projects cover the ten sections of the current GitBook unit. The six sections with blue examples map to their executable behavior; the four narrative sections add small demonstrations of the described contracts, permissions, state boundaries and scheduling patterns. 
 
 Stable configuration, contracts, agent instructions and orchestration live in `Shared/Unit08.Common`. Each example owns its `Program.cs`, project file and guide. All comments, prompts and documentation are in English.
 
@@ -128,8 +128,6 @@ A successful combined run invokes two specialists and one coordinator. Each call
 
 Every live invocation can incur model usage. `v06`, `v08`, `v09` and `v10` perform multiple cases or scheduling comparisons. Start with `v07` and inspect its source IDs, statuses and generated claims before larger runs. Source/action checks cannot mechanically prove every sentence in a generated explanation. Review meaning, especially invented recovery estimates or claims that a referral was executed.
 
-`ex01` is a local policy solution and supports only demo mode. In `ex02`, accepted reports are fixed C# inputs so the exercise isolates delivery semantics; `-Live` invokes only the coordinator once.
-
 ## Results, events and exit codes
 
 Every example writes one JSON object to standard output: `Example`, `Mode`, `Stage` and `Data`. Events go to standard error. `v07` places the original case outcome (`RunId`, `Stage`, `Reports`, `Brief`) inside `Data` so all projects share one result wrapper.
@@ -151,9 +149,6 @@ $result.Data.Reports
 
 No full exception details, token values or arbitrary user transcripts are emitted in failure events. A service host would add authorized diagnostics and correlation to its own error handling.
 
-## Exercise solutions and validation
-
-See [Exercises/README.md](Exercises/README.md) for the two instructor solutions. Baseline examples do not depend on either solution. The source GitBook remains unchanged.
 
 ```powershell
 & ./Scripts/Test-Examples.ps1 -NoBuild

@@ -3,6 +3,5 @@
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <ProjectReference Include="../Shared/Unit04.Common/Unit04.Common.csproj" />
-    <ProjectReference Include="../Exercises/ex02-expiring-conversations/ExpiringConversations.csproj" />
   </ItemGroup>
 </Project>

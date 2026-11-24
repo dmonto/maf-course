@@ -1,0 +1,21 @@
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
+COPY Directory.Build.props NuGet.Config global.json ./
+COPY Shared/Unit14.Common/Unit14.Common.csproj Shared/Unit14.Common/packages.lock.json ./Shared/Unit14.Common/
+COPY Shared/Unit14.Api/Unit14.Api.csproj Shared/Unit14.Api/packages.lock.json ./Shared/Unit14.Api/
+RUN dotnet restore Shared/Unit14.Api/Unit14.Api.csproj --locked-mode
+COPY Shared ./Shared
+RUN dotnet publish Shared/Unit14.Api/Unit14.Api.csproj -c Release --no-restore -o /out /p:UseAppHost=false
+
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
+ARG RELEASE_VERSION=14.1.0
+WORKDIR /app
+COPY --from=build /out ./
+ENV ASPNETCORE_HTTP_PORTS=8080 \
+    DOTNET_EnableDiagnostics=0 \
+    Runner__Mode=fixture \
+    Runner__Release=${RELEASE_VERSION} \
+    MAF_UNIT14_CONTAINER=true
+USER $APP_UID
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "Unit14.Api.dll"]

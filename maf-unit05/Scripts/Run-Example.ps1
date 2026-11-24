@@ -12,7 +12,7 @@ $ErrorActionPreference='Stop'
 if ($Demo -and $Live) { throw 'Select either -Demo or -Live.' }
 $unit05Root=Split-Path $PSScriptRoot -Parent
 $manifest=Get-Content (Join-Path $unit05Root 'manifest.json') -Raw | ConvertFrom-Json
-$match=@((@($manifest.examples)+@($manifest.exercises)) | Where-Object { $_.id -eq $Example -or $_.directory -eq $Example })
+$match=@((@($manifest.examples) | Where-Object { $_.id -eq $Example -or $_.directory -eq $Example })
 if ($match.Count -ne 1) { throw 'Use v01 through v09, ex01 or ex02.' }
 $forwardArgs=@('run','--project',(Join-Path $unit05Root $match[0].project))
 if ($NoBuild) { $forwardArgs+='--no-build' }

@@ -45,10 +45,6 @@
       "section": "Model observability"
     }
   ],
-  "exercise_solutions": [
-    "Exercises/ex01-provider-selection",
-    "Exercises/ex02-provider-comparison"
-  ],
   "shared_environment": ".env",
   "shared_code": "Shared/Unit02.Common",
   "providers": [

@@ -1,0 +1,33 @@
+name: Unit 12 evaluation
+on:
+  pull_request:
+    paths:
+      - 'maf-unit12/**'
+      - '.github/workflows/unit12-evaluation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fixture:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: maf-unit12
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '10.0.x'
+      - run: dotnet restore Maf.Unit12.slnx --locked-mode -m:1
+      - run: dotnet build Maf.Unit12.slnx --no-restore --configuration Release -m:1
+      - name: Validate the positive and negative fixture gate
+        shell: pwsh
+        run: ./Scripts/Test-FixtureGate.ps1 -Configuration Release -NoBuild
+      - name: Run local verification
+        run: dotnet run --no-build --configuration Release --project Verification/Unit12.Checks.csproj
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: unit12-evaluation
+          path: maf-unit12/artifacts/
+          if-no-files-found: warn

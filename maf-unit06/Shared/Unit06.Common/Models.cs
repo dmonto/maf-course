@@ -5,7 +5,7 @@ using Microsoft.Extensions.AI;
 namespace Unit06.Common;
 
 public sealed record ActorContext(string TenantId, string UserId);
-// The exercise may extend this record without changing the stable repository.
+
 public record CaseState(string CaseId, string Service, string Stage);
 public sealed record StoredConversation(long Revision, string AgentConfig,
     JsonElement BusinessState, JsonElement Session, long ExpiresUnix)

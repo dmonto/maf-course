@@ -13,7 +13,6 @@ Source: [Unit 6](https://diego-montoliu.gitbook.io/maf-course/session-3/unit-6),
 | 7 | Consistency control | v06-consistency-control | Deliberate stale-revision rejection |
 | 8 | Security in persistent memory | Shared/Unit06.Common and Verification | Scoped access, current tool authorization, bounded trusted snapshots and expiry; no separate blue example |
 | 9 | Conversation auditing | v07-conversation-auditing | Metadata inspection and process-restart script |
-| 10 | Robust state design | Shared/Unit06.Common and Exercises/ex02-configurable-idle-expiry | Compatibility, schema, failure paths and separate exercise solution |
 
 ## Explicit package adaptations
 
@@ -24,7 +23,6 @@ Source: [Unit 6](https://diego-montoliu.gitbook.io/maf-course/session-3/unit-6),
 - Explicit scripted-demo mode enables deterministic local inspection of real MAF session and tool mechanics; live mode uses the assigned Azure deployment. Providers have different compatibility keys.
 - v05 simulates independent replicas on one machine. It does not add a networked database backend absent from the source.
 - v06 stages overlapping revisions deterministically rather than relying on nondeterministic terminal timing.
-- The repository serializes the runtime business-state type and exposes a lifetime parameter so the exercise-specific domain and validation code can remain inside Exercises. Baseline examples keep the original case fields and fixed 24-hour policy.
 - The reducer rejects character budgets below two, the minimum size of its empty JSON array.
 
-No GitBook content or exercise statements were changed by creating this package.
+

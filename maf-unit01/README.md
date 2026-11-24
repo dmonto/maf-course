@@ -2,16 +2,12 @@
 
 Introduction to Microsoft Agent Framework: Successor to Semantic Kernel and AutoGen.
 
-The other blue examples are conceptual examples. They do not require additional executable projects. The two exercise solutions are kept under `exercise-solutions/`.
-
 ## Contents
 
 | Path | Purpose |
 | --- | --- |
 | `v01-native-integration/` | The read-only service-status agent from section 7 |
 | `shared/` | Shared .env loading, Azure connection, console execution and synthetic catalog |
-| `exercise-solutions/ex01-decision-design/` | A possible process diagram and decision table for exercise 1; no code is required by this exercise |
-| `exercise-solutions/ex02-evidence-limit/` | A complete executable solution for exercise 2, adding dated observations and a 30-minute freshness rule |
 | `scripts/` | Shared configuration and evidence-recording helpers |
 | `Directory.Packages.props` | The package versions  |
 | `docs/source-map.md` | Mapping between GitBook sections and this package |
@@ -52,8 +48,6 @@ Existing process environment variables take precedence over `.env`. The loader s
 
 The endpoint must be the Azure OpenAI resource endpoint. The deployment value is the **Azure deployment name**, not necessarily the underlying model name. The application uses `AzureCliCredential` and does not require an API key.
 
-`EVIDENCE_NOW_UTC` is used only by exercise 2. It sets an explicit synthetic evaluation clock, so the exercise produces the same ages on any date.
-
 ## 2. Restore and build
 
 ```powershell
@@ -74,14 +68,6 @@ dotnet run --project .\v01-native-integration\Unit01.Intro.csproj --no-build -- 
 ```
 
 Expected JSON statuses: `degraded`, `healthy` and `unknown`, respectively. Each call prints a `[tool] GetServiceStatus(...)` line. `--catalog` is a packaging convenience that invokes the function directly; it does not demonstrate model-driven tool selection.
-
-Check the exercise 2 solution:
-
-```powershell
-dotnet run --project .\exercise-solutions\ex02-evidence-limit\Unit01.Exercise02.csproj --no-build -- --offline
-```
-
-With the supplied clock, payroll is `fresh` at 10 minutes, VPN is `stale` at 50 minutes, and billing is `unknown` with no observation timestamp. See the exercise solution README for boundary cases.
 
 ## 4. Sign in for live agent runs
 
@@ -118,22 +104,6 @@ dotnet run --project .\v01-native-integration\Unit01.Intro.csproj -- "What is th
 | Billing | `billing`, `unknown` | Explain that the catalog has no matching entry |
 
 Live runs should print a tool-call line before `Agent: ...`. Exact model wording can vary. The agent exposes a read-only tool; it cannot create tickets or restart services. Each live invocation has the same 45-second cancellation budget and 2,000-character input limit as the  example.
-
-## 6. Run the exercise solution
-
-```powershell
-.\run.ps1 exercise02 "What is the status of the payroll service?"
-.\run.ps1 exercise02 "Is the VPN service healthy?"
-.\run.ps1 exercise02 "What is the status of the billing service?"
-```
-
-To capture an actual three-row evidence table from live agent runs:
-
-```powershell
-.\scripts\Record-Exercise02Evidence.ps1
-```
-
-This runs three Azure-backed agent requests and writes `reports/exercise02-evidence.csv` and `.json`, containing each question, actual tool result(s) and actual final answer. The script fails if a run fails, the status tool is not called, or a final answer is missing. Inspect whether the answer respects the freshness result; recording is not an automatic semantic evaluation.
 
 The reference answers in the solution README are illustrative expectations. They are not presented as captured Azure responses.
 

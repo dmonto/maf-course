@@ -16,4 +16,3 @@ The significant implementation is in `Shared/LegacyAdapter.cs and Program.cs`. `
 
 The assigned API root exposes `GET legacy/status/{service}` with a bearer credential attached by the host. Its JSON fields are `serviceCode`, `tenant`, `health` and `observedUtc`. Service mappings are VPN01/vpn, ERP01/erp and PAY01/payroll. Health mappings are H/healthy, D/degraded and U/unavailable. The timestamp uses the round-trip ISO 8601 format with an explicit UTC offset. Unsupported codes/flags, tenant mismatches and stale observations fail validation.
 
-The packaged loopback fixture exposes this route. The maintenance-freeze endpoint and rule belong exclusively to Exercise 2.

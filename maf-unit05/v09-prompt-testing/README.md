@@ -14,7 +14,7 @@ For the assigned Azure deployment, fill in the root `.env`, run `Scripts/Login-A
 
 Eighteen run reports per pass. Candidate v2 failures determine the process exit code; baseline v1 failures remain recorded. Case results are saved under output/v09-results.json; semantic review remains required.
 
-The demo client is explicitly labelled deterministic synthetic software. It exercises the real MAF tool and typed-output pipeline but does not measure Azure connectivity, model behavior or prompt quality. Live failures do not fall back to demo output.
+The demo client is explicitly labelled deterministic synthetic software. It checks the real MAF tool and typed-output pipeline but does not measure Azure connectivity, model behavior or prompt quality. Live failures do not fall back to demo output.
 
 ## Shared source
 

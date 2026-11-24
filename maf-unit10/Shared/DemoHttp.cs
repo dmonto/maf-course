@@ -11,7 +11,7 @@ internal sealed class DemoHttp : HttpMessageHandler
     public string Case { get; set; } = "normal";
     public List<FixtureRequest> Requests { get; } = [];
     public int SuccessfulPosts { get; private set; }
-    // Generic route overrides let isolated exercises supply their own response fixtures.
+    
     public Dictionary<string, string> JsonOverrides { get; } = new(StringComparer.Ordinal);
     public static HttpResponseMessage Json(object value, HttpStatusCode status = HttpStatusCode.OK) =>
         Raw(JsonSerializer.Serialize(value, Output.Json), status);

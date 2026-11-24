@@ -17,8 +17,6 @@ Copy-Item .env.example .env
 .\Scripts\Test-Examples.ps1
 ```
 
-The runner builds the selected project automatically. Add `-NoBuild` after a successful build. Default execution is explicitly labelled `local-demo`; pass `-Live` to use Azure. Read the last `RESULT` JSON line. Errors return a nonzero exit code. The deliberately failing exercise regression is expected to return 1.
-
 Each directory can also run directly, from any working directory:
 
 ```powershell
@@ -42,7 +40,7 @@ Direct `dotnet run` calls accept the corresponding lowercase `--profile`, `--que
 | `v09` | Integration with corporate storage | `v09-corporate-storage` |
 | `v10` | Best practices for enterprise environments | `v10-enterprise-pattern` |
 
-The two blue examples in Document indexing share v02. Concept-only blue examples in RAG fundamentals, Permission control, Accuracy evaluation and Best practices also have executable projects. Both exercise statements are implemented under `Exercises/`, separate from v01–v10.
+The two blue examples in Document indexing share v02. Concept-only blue examples in RAG fundamentals, Permission control, Accuracy evaluation and Best practices also have executable projects. 
 
 ## Common configuration and Azure execution
 
@@ -73,7 +71,6 @@ if ($LASTEXITCODE -ne 0) { throw 'Subscription selection failed.' }
 | Search documents | Search Index Data Reader |
 | Download Blob fixture | Storage Blob Data Reader |
 
-Azure AI User on a Foundry project does not provide these Search roles. Search must allow RBAC, and network access, index capacity and deployments must already be configured. Query-only users can use a populated index supplied by the instructor. V02, v07 and ex01 perform live Search writes; all other examples perform reads or model calls. V07 stages a second catalog in the same index and does not promote it. No example deploys Azure resources, changes IAM or submits a business operation.
 
 ## What to run and what to expect
 
@@ -91,30 +88,15 @@ Azure AI User on a Foundry project does not provide these Search roles. Search m
 | `./Scripts/Run-Example.ps1 -Example v08 -Demo -Case payroll-denied` | Restricted payroll text is absent |
 | `./Scripts/Run-Example.ps1 -Example v09 -Demo` | Local copy of the five-file Blob fixture is parsed; no index write |
 | `./Scripts/Run-Example.ps1 -Example v10 -Demo -Service payroll -Profile payroll` | Synthetic degraded status is separate from guide evidence; human review required; no action executed |
-| `./Scripts/Run-Example.ps1 -Example ex01 -Demo` | Expired and missing-expiry chunks excluded; future chunks returned; payroll ACL retained |
-| `./Scripts/Run-Example.ps1 -Example ex02 -Demo` | Five labeled retrieval cases and a passing reports/exercise02-regressions.json |
-| `./Scripts/Run-Example.ps1 -Example ex02 -Demo -ForceFailure` | JSON report marks a deliberate missing-document expectation; nonzero exit |
 | `./Scripts/Run-Example.ps1 -Example verify -Demo` | Dependency-failure, filter and indexing boundary checks pass |
-
-For live execution, replace `-Demo` with `-Live`. Live model wording and Search relevance can vary. V08 is an interactive, single-case matrix inspection; it does not implement the aggregate regression exercise. Ex02 owns that solution.
 
 ## Blob fixture
 
 V09 uses the existing manifest/source-file ingestion boundary. In live mode the assigned training container must already contain `unit09/knowledge.json`, `unit09/vpn-guide.md`, `unit09/payroll-guide.md`, `unit09/password-guide.md` and `unit09/tenant-b-vpn.md`. The downloader uses Azure CLI identity, a Storage bearer token and HTTPS Blob REST requests; it writes to ignored `data/blob-fixture/`. It does not upload, index or publish the downloaded files. The local demonstration copies the exact fixture instead. No signed URLs or storage tokens enter prompts or output.
 
-## Instructor solutions
-
-`Exercises/ex01-expired-knowledge` implements the UTC expiry field, per-chunk values, query predicate and checks for expired/current/missing-expiry knowledge. Tenant, group and catalog filters are preserved. In live mode it changes schema and source values in the assigned index; indexing visibility is polled with a finite deadline. It restores valid expiry metadata after the checks.
-
-`Exercises/ex02-retrieval-regressions` implements a five-case retrieval report with expected-document hits, forbidden-document counts, empty-scope checking and failure exit status. It generates query embeddings but never invokes the chat model. `--force-failure` deliberately creates an impossible expected document.
-
-These directories are instructor material. The GitBook exercise statements have not been edited or replaced by solutions.
-
 ## Shared implementation and differences from the page
 
 The authoritative `RagTypes.cs`, `SearchStore.cs`, complete original `Program.cs`, project dependencies, knowledge files and instruction text were recovered from the current GitBook page. The dependency versions remain Azure.AI.OpenAI 2.9.0-beta.1, Azure.Identity 1.21.0 and Microsoft.Agents.AI.OpenAI 1.24.0.
-
-The executable pack adds root `.env` loading, a reusable application host, independent section entry points, local dependency simulation, runnable conceptual examples and isolated instructor solutions. The shared Search adapter retains the page's actual schema, OData ACL filter, Search REST API 2025-09-01, three-chunk context limit, ten vector candidates, preFilter, per-item indexing checks and embedding-size validation. It adds a general index-extension hook; only ex01 supplies the expiry implementation. The optional ValidUntil metadata is unused by ordinary examples.
 
 `Reference/` keeps the page snapshot and original source listings as text for comparison. They are not extra projects and are not compiled into examples. `Prompts/knowledge.txt` retains the page's grounding instructions.
 

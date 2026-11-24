@@ -55,17 +55,5 @@
       "project": "v09-prompt-testing/Unit05.V09.csproj",
       "heading": "Prompt testing"
     }
-  ],
-  "exercises": [
-    {
-      "id": "ex01",
-      "directory": "Exercises/ex01-maintenance-contract",
-      "project": "Exercises/ex01-maintenance-contract/MaintenanceContract.csproj"
-    },
-    {
-      "id": "ex02",
-      "directory": "Exercises/ex02-human-review",
-      "project": "Exercises/ex02-human-review/HumanReview.csproj"
-    }
   ]
 }

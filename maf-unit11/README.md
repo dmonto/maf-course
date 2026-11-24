@@ -42,8 +42,6 @@ All one-shot projects finish with a `RESULT` JSON line and return a nonzero exit
 
 ## One shared .env and execution modes
 
-The default `MAF_EXECUTION_MODE=demo` uses the same deterministic `FixtureReasoner` behavior as the GitBook listing. It exercises durable intake, background workers, retry and streaming mechanics without calling a model. It is labelled `local-fixture` and does not establish model quality or Azure connectivity.
-
 `-Live` or `--live` selects the Azure-backed `MafReasoner` in v02, v03 and v07. It uses the pinned MAF `AIAgent`, `AsAIAgent` and `RunStreamingAsync` APIs from the source unit. A failed live run remains failed; there is no automatic switch to fixture text. v01, v04, v05, v06  require demo mode because they demonstrate deterministic queue or failure behavior.
 
 Nonempty process environment variables take precedence over the file. The CLI `-Demo` and `-Live` switches override the execution mode. Values are literal assignments; the loader never evaluates shell code, expands variables or prints credentials. Open a fresh terminal or clear an existing process variable when intentionally replacing a value already imported into the shell.
@@ -156,14 +154,10 @@ Invoke-RestMethod 'http://127.0.0.1:5117/jobs'
 
 The sender confirms broker acceptance; the bridge confirms inbox persistence before broker completion; the worker records the generation outcome separately. A broker failure is never replaced by a local simulation. Matching redeliveries are deduplicated by the inbox even if broker duplicate detection is unavailable or its window has expired.
 
-Its one-shot demo submits twelve events concurrently: four are admitted and eight rejected without rows. It then accepts a duplicate at capacity, completes one job and admits a previously rejected saved envelope. The HTTP regression checks exercise 429 responses and later retry with a gated consumer, avoiding timing-dependent assertions.
-
 ## Reproduce local verification
 
 ```powershell
 .\Scripts\Test-Examples.ps1
 ```
-
-The script builds the solution, runs the six one-shot example entry points, and the C# HTTP/durability checks. v03's HTTP path is exercised by the checks instead of leaving a server running. Checks include simultaneous duplicates, payload conflict, expired-owner fencing, persistent completion, abandoned final attempt, retry limit, oversized generated output, HTTP boundaries, freshness rejection and atomic admission.
 
 The recorded validation in `VALIDATION.md` covers local execution. Azure model inference and a real Service Bus namespace require the assigned environment and are not part of the offline checks.

@@ -5,7 +5,6 @@ static void Check(bool condition, string message)
     if (!condition) throw new Exception(message);
 }
 Check(Costs.Estimate(1500, 250, .40m, 1.60m) == .001m, "GitBook per-call cost");
-Check(Costs.Estimate(400, 100, 1m, 4m) * 9000 == 7.20m, "Exercise 2 counts all calls");
 Check(Costs.Estimate(null, 100, 1m, 4m) is null, "Unknown usage must stay unknown");
 Check(Math.Abs(Statistics.Percentile([1, 2, 3, 4, 5], .95) - 4.8) < .0001, "Interpolated percentile");
 var incident = Tasks.Incidents[0];

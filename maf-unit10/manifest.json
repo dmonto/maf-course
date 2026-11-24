@@ -57,20 +57,6 @@
       "title": "Integration best practices"
     }
   ],
-  "exercises": [
-    {
-      "id": "ex01",
-      "directory": "Exercises/ex01-owner-scoped-tickets",
-      "project": "Exercises/ex01-owner-scoped-tickets/Unit10.EX01.csproj",
-      "title": "Exercise 1: add an owner-scoped ticket tool"
-    },
-    {
-      "id": "ex02",
-      "directory": "Exercises/ex02-legacy-maintenance-freeze",
-      "project": "Exercises/ex02-legacy-maintenance-freeze/Unit10.EX02.csproj",
-      "title": "Exercise 2: enforce a legacy maintenance freeze"
-    }
-  ],
   "verification": [
     {
       "id": "verify",

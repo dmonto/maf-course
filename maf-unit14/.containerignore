@@ -1,0 +1,13 @@
+**/bin
+**/obj
+**/.git
+**/.env
+**/.env.*
+**/*.env.ps1
+artifacts
+Reference
+Exercises
+Verification
+**/credentials*
+**/*.pfx
+**/*.pem

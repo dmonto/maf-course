@@ -10,7 +10,5 @@
   <Project Path="v08-scalability/Unit08.V08.csproj" />
   <Project Path="v09-collaborative-patterns/Unit08.V09.csproj" />
   <Project Path="v10-coordination-checks/Unit08.V10.csproj" />
-  <Project Path="Exercises/ex01-scoped-identity-delegation/Unit08.EX01.csproj" />
-  <Project Path="Exercises/ex02-idempotent-report-acceptance/Unit08.EX02.csproj" />
   <Project Path="Verification/Unit08.Checks.csproj" />
 </Solution>

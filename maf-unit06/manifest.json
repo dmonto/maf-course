@@ -51,19 +51,5 @@
       "section": "Conversation auditing",
       "purpose": "Inspect the latest ten committed-turn metadata rows."
     }
-  ],
-  "exercises": [
-    {
-      "id": "ex01",
-      "directory": "Exercises/ex01-confirmed-operating-system",
-      "project": "Exercises/ex01-confirmed-operating-system/ConfirmedOperatingSystem.csproj",
-      "title": "Preserve a confirmed fact beyond the conversation window"
-    },
-    {
-      "id": "ex02",
-      "directory": "Exercises/ex02-configurable-idle-expiry",
-      "project": "Exercises/ex02-configurable-idle-expiry/ConfigurableIdleExpiry.csproj",
-      "title": "Make the memory lifetime explicit and test expiry"
-    }
   ]
 }

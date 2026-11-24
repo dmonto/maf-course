@@ -13,9 +13,6 @@ Source: [Unit 7](https://diego-montoliu.gitbook.io/maf-course/session-3/unit-7),
 | Task parallelization | v07 | Narrative `Task.WhenAll` inspection example with measurable delays and `--serial` comparison |
 | Workflow persistence | v08 | Original file checkpoint pause/resume flow, run in separate processes |
 | Workflow observability | v09 | Original console event/live-drafting example with elapsed metadata |
-| Real-world enterprise use cases | Exercise 2 | Design table and exercise; no separate blue runnable example |
-| Exercise 1 | Exercises/ex01-evidence-quality-gate | Possible solution, isolated from examples |
-| Exercise 2 | Exercises/ex02-idempotent-escalation | Possible solution, isolated from examples |
 
 ## Preserved behavior
 
@@ -37,7 +34,5 @@ The original `student.env.ps1` dependency becomes one package-root `.env`, with 
 Project-relative data folders and `--state` isolate runs. Provider/configuration checks replace the original minimal bookmark check. New `--decision yes|no` values are labelled synthetic CLI test decisions. Retry-attempt and evidence-duration metadata make the narrative examples inspectable. `--serial` is a comparison option; the default retains the source's local parallelism.
 
 The host buffers business outputs until the event stream and optional order check succeed. It still reports workflow events as they occur. A review port may complete twice, once for the request and once for the response; v06 checks both phases.
-
-The baseline has no timestamp gate, escalation repository, write executor or idempotency mechanism. Those additions are confined to the exercise projects. The exercise-2 recovery host opts into a failed-run bookmark so the post-write failure scenario can resume.
 
 All source-code comments and instructional text in the package are in English. This is a versioned teaching package, not a reimplementation using whichever newer MAF APIs happen to be available.

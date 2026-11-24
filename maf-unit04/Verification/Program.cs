@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.AI;
 using Microsoft.Extensions.DependencyInjection;
 using Unit04.Common;
-using Unit04.Exercise02;
 
 Environment.SetEnvironmentVariable("Agent__PromptVersion", "v1");
 Environment.SetEnvironmentVariable("MAX_CONVERSATION_TURNS", "6");
@@ -37,7 +36,7 @@ bool Evidence(JsonElement reply, string service, string status) => reply.GetProp
     .Any(e => e.GetProperty("ok").GetBoolean() && e.GetProperty("data").GetProperty("service").GetString() == service
         && e.GetProperty("data").GetProperty("status").GetString() == status);
 
-// Exercise every section profile; no Azure credential or network inference is used.
+// Check every section profile; no Azure credential or network inference is used.
 for (int i = 1; i <= 10; i++)
 {
     var profile = i == 1 ? LabProfile.ConfigurationOnly : i == 2 ? LabProfile.Registration : i == 3 ? LabProfile.Tools : LabProfile.Full;
@@ -97,7 +96,7 @@ for (int i = 1; i <= 10; i++)
         string failedId = Id(await Chat(client, "Payroll status"));
         await Chat(client, "simulate-failure", failedId, 502);
         await Chat(client, "Payroll status", failedId, 404);
-        // The dynamic Responses endpoint and streaming adapter are actually exercised.
+        // The dynamic Responses endpoint and streaming adapter are actually checked.
         var protocol = await client.PostAsJsonAsync("/v1/responses", new { agent = new { name = "service-desk" }, input = "What is the current status of VPN?", stream = false });
         var protocolJson = await Json(protocol, 200);
         Check(protocolJson.GetRawText().Contains("healthy"), "protocol response contains grounded VPN answer");

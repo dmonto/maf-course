@@ -18,7 +18,7 @@ if ($Approve -and $Live) { throw '-Approve is available only for the local demo.
 if ($Approve -and -not $Send) { throw 'Use -Send with the local demo -Approve switch.' }
 $unit10Root = Split-Path $PSScriptRoot -Parent
 $manifest = Get-Content (Join-Path $unit10Root 'manifest.json') -Raw | ConvertFrom-Json
-$items = @($manifest.examples) + @($manifest.exercises) + @($manifest.verification)
+$items = @($manifest.examples) + @($manifest.verification)
 $match = @($items | Where-Object { $_.id -eq $Example -or $_.directory -eq $Example })
 if ($match.Count -ne 1) { throw 'Choose v01 through v09, ex01, ex02 or verify.' }
 $runArguments = @('run', '--project', (Join-Path $unit10Root $match[0].project))

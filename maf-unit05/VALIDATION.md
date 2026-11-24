@@ -4,14 +4,10 @@ Prepared against the current GitBook Unit 5 page on 2026-11-03.
 
 ## Completed
 
-- All thirteen solution projects compile with .NET SDK 10.0.100: nine examples, two possible exercise solutions, one common library and one verification application. The build returned zero warnings and zero errors.
-- All eleven example and exercise executables ran in demo/local mode and returned the expected JSON structures. The v09 executable produced eighteen case reports with no candidate failures.
 - Verification passed 135 offline assertions using actual MAF function invocation and generic typed-response parsing around a labelled deterministic client.
 - All five distributed PowerShell scripts outside Reference parsed successfully with the PowerShell parser.
 
 The assertions cover the nine acceptance cases under both prompts, tool selection, source attribution, instruction hashes, unset sampling parameters, multi-service clarification, input length, argument normalization, inaccessible and absent records, shared attempt counts, unsupported business fields, the free-text semantic-validation gap and process-variable precedence.
-
-Exercise checks cover explicit UTC maintenance timestamps, window ordering, unavailable results without data, the three human-review cases, fabricated true flags and evidence concerning different services.
 
 ## Limits
 

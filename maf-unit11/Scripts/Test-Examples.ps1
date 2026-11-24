@@ -13,4 +13,4 @@ foreach ($example in 'v01','v02','v04','v05','v06','v07') {
 
 dotnet run --no-build --project (Join-Path $unitRoot 'Tests/Unit11.Checks/Unit11.Checks.csproj') -- --demo
 if ($LASTEXITCODE -ne 0) { throw 'The HTTP or durable processing checks failed.' }
-Write-Host 'All local examples and exercise checks passed. No Azure or Service Bus calls were made.'
+Write-Host 'All local examples checks passed. No Azure or Service Bus calls were made.'

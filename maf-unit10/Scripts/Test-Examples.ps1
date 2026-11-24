@@ -7,7 +7,7 @@ if (-not $NoBuild) {
     if ($LASTEXITCODE -ne 0) { throw 'Unit 10 build failed.' }
 }
 $manifest = Get-Content (Join-Path $unit10TestRoot 'manifest.json') -Raw | ConvertFrom-Json
-foreach ($item in @($manifest.examples) + @($manifest.exercises) + @($manifest.verification)) {
+foreach ($item in @($manifest.examples) + @($manifest.verification)) {
     $testArguments = @('run', '--project', (Join-Path $unit10TestRoot $item.project), '--no-build', '--', '--demo')
     if ($item.id -eq 'v09') { $testArguments += @('--case', 'acceptance') }
     & dotnet @testArguments

@@ -15,4 +15,4 @@ $session = 'replica-' + [Guid]::NewGuid().ToString('N').Substring(0, 8)
 & (Join-Path $PSScriptRoot 'Run-Example.ps1') -Example ex01 -Demo -NoBuild -Session "ex01-$suffix" -ConfirmOS 'Windows 11'
 & (Join-Path $PSScriptRoot 'Run-Example.ps1') -Example ex02 -Demo -NoBuild -VerifyExpiry
 & (Join-Path $PSScriptRoot 'Test-Memory.ps1')
-Write-Host 'PASS: all example projects and both exercise projects executed in explicit demo mode.'
+Write-Host 'PASS: all example projects executed in explicit demo mode.'

@@ -14,8 +14,6 @@ Source: [Unit 8](https://app.gitbook.com/s/5NyZDQFujwe6GeJ3CBCA/session-4/unit-8
 | Multi-agent scalability | v08 | Blue required-specialist failure example plus the narrative per-case versus host concurrency example |
 | Collaborative patterns | v09 | Narrative sequential/concurrent comparison made executable through the same supervisor |
 | Coordination best practices | v10 | Blue five-case control-flow verification matrix |
-| Exercise 1 | Exercises/ex01-scoped-identity-delegation | Separate possible solution to the current identity-delegation statement |
-| Exercise 2 | Exercises/ex02-idempotent-report-acceptance | Separate possible solution to the current idempotent-reducer statement |
 
 ## Preserved behavior
 
@@ -28,7 +26,7 @@ The shared library retains the published contracts, VPN/payroll observations, ro
 * A uniform `Example`/`Mode`/`Stage`/`Data` JSON wrapper surrounds each demonstration. In v07, `Data` contains the published case outcome fields.
 * Configurable demo delays, per-case concurrency of one or two and a serial comparison support observable timing. Defaults retain the same maximum of two specialists and 30/30/90-second deadlines.
 * Binding checks for transported reports reject a changed run, task or assigned observation. These make the communication boundary testable.
-* The instructor solutions add identity scoping and a replay reducer only inside `Exercises`. Baseline examples do not implement those solutions.
+
 
 `AsAIFunction`, handoff, group chat and Magentic are discussed by the source as alternative mechanisms. v04 demonstrates the source's typed message protocol; v09 demonstrates application-owned sequential/concurrent scheduling. Neither project substitutes an unlabelled simulation of those SDK orchestrators.
 

@@ -9,7 +9,7 @@ from pathlib import Path
 
 root = Path(__file__).resolve().parents[1]
 manifest = json.loads((root / 'manifest.json').read_text())
-projects = {v['id']: v['project'] for v in manifest['examples'] + manifest['exercises']}
+projects = {v['id']: v['project'] for v in manifest['examples']}
 prefix = 'verify-' + uuid.uuid4().hex[:8]
 dotnet = os.environ.get('DOTNET_COMMAND', 'dotnet')
 results = []

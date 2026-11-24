@@ -1,6 +1,4 @@
 <Solution>
-  <Project Path="Exercises/ex01-evidence-diagnosis/EvidenceDiagnosis.csproj" />
-  <Project Path="Exercises/ex02-expiring-conversations/ExpiringConversations.csproj" />
   <Project Path="Shared/Unit04.Common/Unit04.Common.csproj" />
   <Project Path="Verification/Unit04.Checks.csproj" />
   <Project Path="v01-initial-project-configuration/Unit04.V01.csproj" />

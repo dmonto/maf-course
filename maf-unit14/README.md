@@ -2,15 +2,13 @@
 
 Scalability and Deployment of MAF Agents in Containers, AKS and App Service.
 
-Ten independent .NET 10 entry projects cover the ten GitBook sections, including descriptive examples without a code listing. Stable code lives in `Shared/Unit14.Common`; `Shared/Unit14.Api` is the container entry point. Every section uses one unit-root `.env`. Two possible instructor exercise resolutions are isolated in `Exercises`. Comments, prompts and documentation are in English.
-
 Source: [Unit 14 in GitBook](https://app.gitbook.com/s/5NyZDQFujwe6GeJ3CBCA/session-6/unit-14), read on 8 November 2026. `Reference/unit14-gitbook.md` and `Reference/OriginalListing` retain the source and its complete listings. The Python probe is copied verbatim. GitBook was read without modification.
 
 ## Installation and first run
 
 Keep the complete `maf-unit14` directory under the existing `maf-course` checkout. The ZIP contains this single top-level directory: extract it into `maf-course`. Existing units have their own files and remain independent.
 
-Requirements for local examples: the established .NET 10 SDK and Python 3.10 or later. On Windows, use the installed Windows PowerShell 5.1; the scripts also work in PowerShell Core when already available. Podman is needed to build/run a container. Azure CLI and kubectl are needed only for the corresponding hosted deployment commands. Use the organization's approved PowerShell execution policy.
+Requirements for local examples: .NET 10 SDK, PowerShell 7 and Python 3.10 or later. Podman is needed to build/run a container. Azure CLI and kubectl are needed only for the corresponding hosted deployment commands. Use the organization's approved PowerShell execution policy.
 
 From the `maf-course` root:
 
@@ -48,11 +46,7 @@ All examples finish with `RESULT` containing the exact new artifact directory. A
 .\Scripts\Run-Example.ps1 -Example v03 -NoBuild
 .\Scripts\Run-Example.ps1 -Example v07 -NoBuild
 .\Scripts\Run-Example.ps1 -Example v10 -NoBuild
-.\Scripts\Run-Example.ps1 -Example ex01 -NoBuild
-.\Scripts\Run-Example.ps1 -Example ex02 -NoBuild
 ```
-
-`Test-All.ps1` runs all ten section entries, both exercise resolutions, .NET HTTP/boundary checks and isolated PowerShell deployment-command simulations. Its final expected line is `ALL UNIT 14 LOCAL CHECKS PASSED`.
 
 ## Shared environment
 
@@ -64,8 +58,6 @@ All entry projects locate the unit root from their executable directory. There i
 | `Runner__Identity` | `cli` locally, `managed` for an App Service system identity, `workload` for AKS |
 | `Runner__Release` | Local expected release and Podman build label; default `14.1.0` |
 | `Runner__Concurrency` | Per-process accepted work limit, 1–32; default 2 |
-| `Runner__RequestTimeoutSeconds` | Whole-request budget, including identity and model calls; 1–180, default 90 |
-| `Runner__MaxOutputTokens` | Maximum output tokens per model completion; 128–8192, default 2048 |
 | `PYTHON_COMMAND` | Python executable name or full path, without arguments |
 | `TENANT_ID`, `SUBSCRIPTION_ID` | Assigned Azure CLI context |
 | `RESOURCE_GROUP`, `WEBAPP_NAME` | Existing assigned App Service target |
@@ -102,21 +94,13 @@ For actual Azure model calls, complete the assigned Azure values in the shared `
 .\Scripts\Run-Example.ps1 -Example v05 -Mode azure -NoBuild
 ```
 
-The host uses `AzureOpenAIClient`, `AsAIAgent`, `AIFunctionFactory.Create`, a bounded `FunctionInvokingChatClient` and `RunAsync`. Each request gets a new request-bound tool and independent agent run. Accepted output must copy the synthetic service evidence exactly. The tool loop is bounded at three invocation iterations. `Runner__RequestTimeoutSeconds` bounds the complete request (default 90 seconds), including credential acquisition and all model rounds. `Runner__MaxOutputTokens` bounds each model completion (default 2048). Missing keys in an existing `.env` use these defaults. Local fixture execution calls the read tool directly and does not test model behavior.
-
-The API acquires the credential token separately before invoking the agent. Failed responses retain `requestId`, `phase` (`identity`, `model`, `contract` or `fixture`) and safe operational fields. A deadline response includes the configured budget and cancellation reason. A dependency error can include its HTTP status and exception type. Exception messages, tokens and model bodies are not returned. A phase identifies the boundary; it does not prove a particular network, identity or model root cause.
-
-The HTTP handler also bounds its wait with `Task.WaitAsync`; passing a cancellation token to an SDK alone does not bound how long the handler waits. Accepted work starts behind the concurrency gate, including synchronous SDK setup. If a dependency keeps running after the response deadline, the API returns HTTP 504 and retains that operation's admission slot until it actually completes. Late failures are observed and a late token cannot start a new model call after cancellation. Retries receive HTTP 429 when all slots remain occupied. `/health/ready` reports `deadlinePolicy=bounded-wait-v1`, `activeOperations` and `drainingOperations`. Health remains a process check; those counters do not establish successful inference. A dependency that never stops retains its slot until process replacement.
-
-The probe defaults to a 120-second per-request timeout. Override it with `Scripts/Probe-Deployment.ps1 -TimeoutSeconds <seconds>` (or Python `--timeout`), keeping the client timeout above the API budget. The report distinguishes `readiness`, `liveness` and `functional` failures, keeps failed functional rows and stops after a failed batch. The PowerShell wrapper prints the evidence path before execution and safe failure details when available. For an initial hosted diagnosis, use `-Requests 1` and an explicit `-Output`.
-
-After updating source, rebuild and push a new release label, deploy the newly printed immutable digest, then inspect `/health/ready` for its release and effective limits. Changing local files does not replace the DLL in an already running image. Neither a passing health response nor a higher timeout proves that model inference succeeds.
+The host uses `AzureOpenAIClient`, `AsAIAgent`, `AIFunctionFactory.Create`, a bounded `FunctionInvokingChatClient` and `RunAsync`. Each request gets a new request-bound tool and independent agent run. Accepted output must copy the synthetic service evidence exactly. The tool loop is bounded at three invocation iterations and each accepted request has a 20-second budget. Local fixture execution calls the read tool directly and does not test model behavior.
 
 The fixture catalog is synthetic in both modes. This package does not implement the corporate authentication/authorization layer or business-data adapter from other units. Keep authenticated or restricted ingress and resource policies when deploying it with real dependencies. The Azure credential determines the workload's model access; it does not authenticate an end user.
 
 ## Prepare Podman on Windows
 
-Install Podman or Podman Desktop and use the existing Windows PowerShell terminal. Initialize the common environment as above, then:
+Install Podman or Podman Desktop and use PowerShell 7. Initialize the common environment as above, then:
 
 ```powershell
 .\Scripts\Initialize-Podman.ps1
@@ -211,7 +195,7 @@ The workflow is a fixture portability gate. Add the existing Unit 12 evaluation 
 
 | Symptom | Check |
 | --- | --- |
-| An old script still requires PowerShell 7 | Apply the current update; runnable scripts now target Windows PowerShell 5.1 |
+| PowerShell says version requirement is unmet | Run the scripts in PowerShell 7 (`pwsh`) |
 | Locked restore fails | Retain all package lock files and restore from the unit root with .NET 10 |
 | Python cannot start | Set `PYTHON_COMMAND` to one Python executable, including a full path if needed |
 | A child probe prints FAIL in v07/v10/ex02/checks | Check that its enclosing `RESULT` and the final suite pass; those rejections are deliberate |

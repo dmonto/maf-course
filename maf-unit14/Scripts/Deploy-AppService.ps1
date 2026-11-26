@@ -4,10 +4,12 @@ $ErrorActionPreference='Stop'
 . (Join-Path $PSScriptRoot 'Common.ps1')
 if (-not $ImageRef) { $ImageRef=$env:APPROVED_IMAGE }
 if (-not $Apply) {
+    Write-UnitTrace -Kind 'CONCLUSION' -Text 'Plan only. No Azure operation was executed. Add -Apply to configure the App Service.'
     @{planOnly=$true;imageRef=$ImageRef;mode=$Mode;targetPort=8080;identity='managed';
       required='Assigned sitecontainers app, main container name main, ingress and registry/model roles'} | ConvertTo-Json
     return
 }
+Write-UnitTrace -Kind 'MILESTONE' -Text 'Apply to App Service: check the sidecar-enabled app, set app settings, create the main container, set the health check.'
 Assert-ImageReference -Image $ImageRef
 Assert-Assigned -Names @('RESOURCE_GROUP','WEBAPP_NAME')
 Assert-AzureContext
@@ -31,5 +33,5 @@ $unit14Health=Join-Path $unit14Artifacts 'health-config.json'
 $null=Invoke-UnitTool -Executable az -Arguments @('webapp','config','set','-g',$env:RESOURCE_GROUP,
     '-n',$env:WEBAPP_NAME,'--generic-configurations',"@$unit14Health")
 $unit14App=Read-AzJson -Arguments @('webapp','show','-g',$env:RESOURCE_GROUP,'-n',$env:WEBAPP_NAME)
-Write-Host "Applied image: $ImageRef"
-Write-Host "Run Probe-Deployment.ps1 against https://$($unit14App.defaultHostName) in mode $Mode."
+Write-UnitTrace -Kind 'CONCLUSION' -Text "Applied image: $ImageRef"
+Write-UnitTrace -Kind 'NEXT' -Text "Run Probe-Deployment.ps1 against https://$($unit14App.defaultHostName) in mode $Mode."

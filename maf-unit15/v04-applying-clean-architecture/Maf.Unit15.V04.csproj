@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><OutputType>Exe</OutputType></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../Shared/Maf.Unit15.Examples/Maf.Unit15.Examples.csproj" /></ItemGroup>
+</Project>

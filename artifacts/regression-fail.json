@@ -1,0 +1,152 @@
+{
+  "suite": "unit16-contract-v2",
+  "qualification": "maf-runtime-with-fixture-model",
+  "passed": false,
+  "count": 4,
+  "failures": 2,
+  "createdAtUtc": "2026-11-25T16:15:51.6264966+00:00",
+  "cases": [
+    {
+      "id": "vpn",
+      "service": "vpn",
+      "passed": false,
+      "baseline": {
+        "service": "vpn",
+        "status": "degraded",
+        "summary": "Adapted legacy boundary recording."
+      },
+      "candidate": {
+        "service": "vpn",
+        "status": "healthy",
+        "summary": "Synthetic evidence: VPN connectivity is degraded."
+      },
+      "mode": "fixture-model",
+      "toolTrace": [
+        {
+          "name": "GetServiceStatus",
+          "argument": "vpn",
+          "result": {
+            "service": "vpn",
+            "status": "degraded",
+            "summary": "Synthetic evidence: VPN connectivity is degraded."
+          }
+        }
+      ],
+      "toolEvidence": "recorded_by_application",
+      "checks": {
+        "baselineMatchesOracle": true,
+        "candidateMatchesOracle": false,
+        "parity": false,
+        "readToolEvidence": true,
+        "noWriteTools": true,
+        "answerMatchesTool": false
+      },
+      "elapsedMs": 119,
+      "errorType": null
+    },
+    {
+      "id": "email",
+      "service": "email",
+      "passed": true,
+      "baseline": {
+        "service": "email",
+        "status": "healthy",
+        "summary": "Adapted legacy boundary recording."
+      },
+      "candidate": {
+        "service": "email",
+        "status": "healthy",
+        "summary": "Synthetic evidence: email is healthy."
+      },
+      "mode": "fixture-model",
+      "toolTrace": [
+        {
+          "name": "GetServiceStatus",
+          "argument": "email",
+          "result": {
+            "service": "email",
+            "status": "healthy",
+            "summary": "Synthetic evidence: email is healthy."
+          }
+        }
+      ],
+      "toolEvidence": "recorded_by_application",
+      "checks": {
+        "baselineMatchesOracle": true,
+        "candidateMatchesOracle": true,
+        "parity": true,
+        "readToolEvidence": true,
+        "noWriteTools": true,
+        "answerMatchesTool": true
+      },
+      "elapsedMs": 2,
+      "errorType": null
+    },
+    {
+      "id": "normalization",
+      "service": "vpn",
+      "passed": false,
+      "baseline": {
+        "service": "vpn",
+        "status": "degraded",
+        "summary": "Adapted legacy boundary recording."
+      },
+      "candidate": {
+        "service": "vpn",
+        "status": "healthy",
+        "summary": "Synthetic evidence: VPN connectivity is degraded."
+      },
+      "mode": "fixture-model",
+      "toolTrace": [
+        {
+          "name": "GetServiceStatus",
+          "argument": "vpn",
+          "result": {
+            "service": "vpn",
+            "status": "degraded",
+            "summary": "Synthetic evidence: VPN connectivity is degraded."
+          }
+        }
+      ],
+      "toolEvidence": "recorded_by_application",
+      "checks": {
+        "baselineMatchesOracle": true,
+        "candidateMatchesOracle": false,
+        "parity": false,
+        "readToolEvidence": true,
+        "noWriteTools": true,
+        "answerMatchesTool": false
+      },
+      "elapsedMs": 0,
+      "errorType": null
+    },
+    {
+      "id": "unknown",
+      "service": "payroll",
+      "passed": true,
+      "baseline": {
+        "service": "payroll",
+        "status": "unknown_service",
+        "summary": "No supported service was assessed."
+      },
+      "candidate": {
+        "service": "payroll",
+        "status": "unknown_service",
+        "summary": "No supported service was assessed."
+      },
+      "mode": "rejected_before_agent",
+      "toolTrace": [],
+      "toolEvidence": "recorded_by_application",
+      "checks": {
+        "baselineMatchesOracle": true,
+        "candidateMatchesOracle": true,
+        "parity": true,
+        "readToolEvidence": true,
+        "noWriteTools": true,
+        "answerMatchesTool": true
+      },
+      "elapsedMs": 0,
+      "errorType": null
+    }
+  ]
+}

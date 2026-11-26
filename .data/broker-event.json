@@ -4,9 +4,9 @@
     "service": "vpn",
     "summary": "Synthetic training observation for vpn."
   },
-  "occurredAtUtc": "2026-11-24T09:59:53.0667808+00:00",
-  "id": "EVT-B920845A20FB43FA988C7E1B2E3422D4",
+  "occurredAtUtc": "2026-11-24T14:04:01.5972159+00:00",
+  "id": "EVT-B26F76B88A0B4DAE8CB567EFA6E49983",
   "type": "ServiceStatusChanged.v1",
   "tenant": "training-a",
-  "correlationId": "4c061dec-33a9-47a8-b47c-8b5d2d0009b8"
+  "correlationId": "dce42289-39ba-46ee-a6e1-3d91d8b537a7"
 }

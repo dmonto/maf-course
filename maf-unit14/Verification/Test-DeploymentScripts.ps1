@@ -76,6 +76,15 @@ function global:podman {
         if ($global:Unit14EngineFails) { $global:LASTEXITCODE=1; return }
         '{"host":{"arch":"amd64"}}'; return
     }
+    if ($unit14NativeArgs[0] -eq 'build') {
+        $global:Unit14EmbeddedRelease=(Get-TestArgument $unit14NativeArgs '--build-arg').Substring('RELEASE_VERSION='.Length)
+        'simulated build'; return
+    }
+    if (($unit14NativeArgs -join ' ').StartsWith('image inspect')) {
+        if ($global:Unit14WrongImageRelease) { 'Runner__Release=old-release' }
+        else { "Runner__Release=$global:Unit14EmbeddedRelease" }
+        return
+    }
     if ($unit14NativeArgs[0] -eq 'login') {
         $unit14Input=@($input)
         Assert-Test ($unit14NativeArgs -contains '--password-stdin') 'Token must use stdin.'
@@ -123,6 +132,9 @@ Assert-Test ($unit14Deployment.spec.template.spec.serviceAccountName -eq 'maf-ag
 Assert-Test ($unit14Deployment.spec.template.metadata.labels['azure.workload.identity/use'] -eq 'true') 'Workload identity label missing.'
 Assert-Test (@($global:Unit14Applied.items | Where-Object kind -eq 'HorizontalPodAutoscaler').Count -eq 1) 'HPA was not included.'
 Assert-Test (@($global:Unit14Applied.items | Where-Object kind -eq 'ServiceAccount').Count -eq 1) 'ServiceAccount was not included.'
+& (Join-Path $unit14TestRoot 'Scripts/Deploy-Aks.ps1') -Mode azure -UseExistingNamespace -Apply
+Assert-Test (@($global:Unit14Applied.items | Where-Object kind -eq 'Namespace').Count -eq 0) 'Namespace-scoped deployment tried to modify the Namespace.'
+Assert-Test (@($global:Unit14Applied.items | Where-Object kind -eq 'Deployment').Count -eq 1) 'Namespace filtering removed the workload.'
 
 $unit14TestArtifacts=Join-Path $unit14TestRoot ('artifacts/script-checks/' + [guid]::NewGuid().ToString('N'))
 New-Item -ItemType Directory -Path $unit14TestArtifacts -Force | Out-Null
@@ -144,6 +156,20 @@ Assert-Test ((Get-TestArgument $unit14Build.args '--file').EndsWith('Containerfi
 Assert-Test ((Get-TestArgument $unit14Build.args '-t') -eq 'localhost/maf-status:14.1.0') 'Short-name local image used.'
 $unit14Push=@($global:Unit14Calls | Where-Object { $_.tool -eq 'podman' -and $_.args[0] -eq 'push' })[-1]
 Assert-Test ((Get-TestArgument $unit14Push.args '--format') -eq 'v2s2') 'Image format changed.'
+$unit14Published=& (Join-Path $unit14TestRoot 'Scripts/Build-Container.ps1') -Release '14.1.2-check' -NoCache -PushImage -PassThru
+Assert-Test ($unit14Published.release -eq '14.1.2-check' -and $unit14Published.imageRef -eq $global:Unit14Image) 'Publish result did not retain the exact release and immutable reference.'
+$unit14Build=@($global:Unit14Calls | Where-Object { $_.tool -eq 'podman' -and $_.args[0] -eq 'build' })[-1]
+Assert-Test ($unit14Build.args -contains '--no-cache' -and
+    (Get-TestArgument $unit14Build.args '--build-arg') -eq 'RELEASE_VERSION=14.1.2-check') 'Explicit release did not override a stale environment or bypass the cache.'
+Assert-Test ($unit14Build.args[-1] -eq $unit14TestRoot) 'Build context must follow all build options.'
+$unit14PriorPushes=@($global:Unit14Calls | Where-Object { $_.tool -eq 'podman' -and $_.args[0] -eq 'push' }).Count
+$global:Unit14WrongImageRelease=$true
+$unit14Rejected=$false
+try { & (Join-Path $unit14TestRoot 'Scripts/Build-Container.ps1') -PushImage }
+catch { $unit14Rejected=$_.Exception.Message.StartsWith('Built image release differs') }
+Assert-Test $unit14Rejected 'An image with the wrong embedded release was published.'
+Assert-Test (@($global:Unit14Calls | Where-Object { $_.tool -eq 'podman' -and $_.args[0] -eq 'push' }).Count -eq $unit14PriorPushes) 'Push ran after image validation failed.'
+$global:Unit14WrongImageRelease=$false
 $unit14PriorPushes=@($global:Unit14Calls | Where-Object { $_.tool -eq 'podman' -and $_.args[0] -eq 'push' }).Count
 $global:Unit14LoginFails=$true
 $unit14Rejected=$false

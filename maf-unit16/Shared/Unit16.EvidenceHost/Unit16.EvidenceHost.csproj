@@ -1,0 +1,5 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <ProjectReference Include="../Unit16.Common/Unit16.Common.csproj" />
+  </ItemGroup>
+</Project>

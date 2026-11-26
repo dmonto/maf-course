@@ -7,23 +7,24 @@ $ErrorActionPreference='Stop'
 . (Join-Path $PSScriptRoot 'Common.ps1')
 if (-not $Release) { $Release=$env:Runner__Release }
 if (-not $Output) { $Output=Join-Path (New-UnitArtifactDirectory -Name 'probe') 'smoke.json' }
-$unit14Python=if ($env:PYTHON_COMMAND) { $env:PYTHON_COMMAND } else { 'python' }
-Write-Host "Probe evidence: $Output"
+Write-UnitTrace -Kind 'MILESTONE' -Text "Run the C# probe against $BaseUri (release $Release, mode $Mode); report: $Output"
 $unit14ProbeStarted=[DateTime]::UtcNow
 try {
-    $null=Invoke-UnitTool -Executable $unit14Python -Arguments @((Join-Path $unit14Root 'Python/smoke.py'),
+    $null=Invoke-UnitTool -Executable dotnet -Arguments @('run','--project',
+        (Join-Path $unit14Root 'Shared/Unit14.Probe/Unit14.Probe.csproj'),'--no-launch-profile','--',
         '--base',$BaseUri,'--release',$Release,'--mode',$Mode,'--requests',"$Requests",'--parallel',"$Parallel",
-        '--timeout',"$TimeoutSeconds",'--output',$Output)
+        '--timeout',"$TimeoutSeconds",'--output',$Output) -Echo
 } catch {
     # A previous report must not be mistaken for evidence from this failed invocation.
     if ((Test-Path -LiteralPath $Output) -and (Get-Item -LiteralPath $Output).LastWriteTimeUtc -ge $unit14ProbeStarted) {
         try {
             $unit14Report=Get-Content -LiteralPath $Output -Raw -Encoding UTF8 | ConvertFrom-UnitJson
-            Write-Host "Probe failed at $($unit14Report.failureStage): $($unit14Report.failurePath)"
+            Write-UnitTrace -Kind 'FAILURE' -Text "Probe failed at $($unit14Report.failureStage): $($unit14Report.failurePath)"
             foreach ($unit14Row in $unit14Report.results) {
-                Write-Host "Service=$($unit14Row.service) HTTP=$($unit14Row.httpStatus) Phase=$($unit14Row.phase) Failure=$($unit14Row.failureType)"
+                Write-UnitTrace -Kind 'FAILURE' -Text "Service=$($unit14Row.service) HTTP=$($unit14Row.httpStatus) Phase=$($unit14Row.phase) Failure=$($unit14Row.failureType)"
             }
-        } catch { Write-Host 'The probe report could not be read.' }
+        } catch { Write-UnitTrace -Kind 'FAILURE' -Text 'The probe report could not be read.' }
     }
     throw
 }
+Write-UnitTrace -Kind 'CONCLUSION' -Text "Probe passed. Evidence: $Output"

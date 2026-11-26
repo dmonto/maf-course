@@ -9,6 +9,7 @@ if (-not $unit14Probe.passed -or $unit14Probe.mode -ne $Mode -or
     $unit14Probe.release -ne $env:APPROVED_RELEASE) { throw 'Use matching successful probe evidence for APPROVED_RELEASE and its actual mode.' }
 $unit14Record=@{platform=$Target;release=$unit14Probe.release;mode=$Mode;configRevision=$ConfigRevision;
     probeReport=(Resolve-Path -LiteralPath $ProbeReport).Path;capturedAt=[DateTimeOffset]::UtcNow.ToString('O')}
+Write-UnitTrace -Kind 'MILESTONE' -Text "Capture the approved-release recovery record for $Target (read-only queries)."
 if ($Target -eq 'aks') {
     Assert-Assigned -Names @('KUBE_CONTEXT','KUBE_NAMESPACE')
     $unit14DeploymentText=@(Invoke-UnitTool -Executable kubectl -Arguments @('--context',$env:KUBE_CONTEXT,
@@ -39,4 +40,4 @@ if ($Target -eq 'aks') {
 Assert-ImageReference -Image $unit14Record.imageRef
 if (-not $Output) { $Output=Join-Path (New-UnitArtifactDirectory -Name 'approved-release') 'release.json' }
 $unit14Record | ConvertTo-Json -Depth 35 | Set-UnitContent $Output
-Write-Host "Recovery record: $Output"
+Write-UnitTrace -Kind 'CONCLUSION' -Text "Recovery record: $Output"

@@ -92,9 +92,11 @@ public static class AgentHost
     {
         cancellationToken.ThrowIfCancellationRequested();
         var tools = new StatusTools(service);
+        LabConsole.Write("REQUEST", $"service={service}; mode={settings.Mode}");
         Evidence answer;
         if (model is null)
         {
+            LabConsole.Write("MODEL FIXTURE", $"No Azure request: call the tool directly GetServiceStatus(service=\"{service}\").");
             await Task.Delay(settings.FixtureDelayMs, cancellationToken);
             answer = tools.GetServiceStatus(service);
         }
@@ -103,10 +105,12 @@ public static class AgentHost
             // Resolve credentials separately so a deadline identifies this boundary.
             // Managed identity credentials reuse their cached token for SDK model calls.
             progress.Phase = "identity";
+            LabConsole.Write("AZURE", "credential.GetTokenAsync(scope=https://cognitiveservices.azure.com/.default)");
             _ = await credential!.GetTokenAsync(
                 new TokenRequestContext(["https://cognitiveservices.azure.com/.default"]), cancellationToken);
             cancellationToken.ThrowIfCancellationRequested();
             progress.Phase = "model";
+            LabConsole.Write("MAF", "model.GetChatClient(deployment).AsAIAgent(...); tool=AIFunctionFactory.Create(GetServiceStatus); MaximumIterationsPerRequest=3");
             AIAgent agent = model.GetChatClient(deployment).AsAIAgent(new ChatClientAgentOptions
             {
                 Name = "portable-service-status",
@@ -124,13 +128,16 @@ public static class AgentHost
                 }
             }, clientFactory: inner => new FunctionInvokingChatClient(inner)
                 { MaximumIterationsPerRequest = 3 });
+            LabConsole.Write("MAF", $"await agent.RunAsync(\"Requested service: {service}\")");
             string raw = (await agent.RunAsync($"Requested service: {service}",
                 cancellationToken: cancellationToken)).Text;
             cancellationToken.ThrowIfCancellationRequested();
+            LabConsole.Write("MAF RESULT", raw);
             progress.Phase = "contract";
             answer = JsonSerializer.Deserialize<Evidence>(raw, Lab.Json)
                 ?? throw new InvalidOperationException("Empty model contract.");
         }
+        LabConsole.Write("TOOL", $"GetServiceStatus called {tools.Calls} time(s); evidence={answer.Service}/{answer.Status}");
         if (tools.Calls == 0 || answer != Catalog.Items[service])
             throw new InvalidOperationException("Evidence contract failed.");
         // Only the local recovery rehearsal can inject a deliberately bad HTTP contract.
@@ -166,6 +173,7 @@ public static class AgentHost
             throw new ArgumentException("Invalid request deadline or output token limit.");
         if (settings.WrongFixtureContract && settings.Mode != "fixture")
             throw new ArgumentException("Fault injection is restricted to local fixtures.");
+        LabConsole.Write("MILESTONE", $"AgentHost.Build: mode={settings.Mode}, release={settings.Release}, concurrency={settings.Concurrency}, timeout={settings.RequestTimeoutSeconds}s, maxTokens={settings.MaxOutputTokens}");
         var builder = WebApplication.CreateBuilder(Array.Empty<string>());
         builder.Logging.ClearProviders();
         builder.Logging.AddJsonConsole();
@@ -182,6 +190,7 @@ public static class AgentHost
         if (settings.Mode == "azure")
         {
             Uri endpoint = EndpointPolicy.Validate(EnvironmentFile.Required("AZURE_OPENAI_ENDPOINT"));
+            LabConsole.Write("AZURE", $"Endpoint {endpoint} (validated: https, *.openai.azure.com, resource root)");
             deployment = EnvironmentFile.Required("AZURE_OPENAI_DEPLOYMENT_NAME");
             credential = credentialOverride ?? (settings.Identity switch
             {
@@ -190,9 +199,12 @@ public static class AgentHost
                 "workload" => new WorkloadIdentityCredential(),
                 _ => throw new ArgumentException("Use cli, managed or workload identity.")
             });
+            LabConsole.Write("AZURE", $"new AzureOpenAIClient(endpoint, {credential.GetType().Name}); deployment=\"{deployment}\"; identity={settings.Identity}");
             model = new AzureOpenAIClient(endpoint, credential);
         }
+        else LabConsole.Write("MODE", "Fixture mode: no Azure OpenAI client, no credential, no model request.");
         var app = builder.Build();
+        LabConsole.Write("HOST", "Routes: GET /health/live, GET /health/ready, POST /api/status");
         app.Lifetime.ApplicationStopped.Register(capacity.Dispose);
         string instance = Environment.GetEnvironmentVariable("WEBSITE_INSTANCE_ID")
             ?? Environment.GetEnvironmentVariable("HOSTNAME") ?? Environment.MachineName;
@@ -206,6 +218,7 @@ public static class AgentHost
         app.MapPost("/api/status", async Task<IResult> (StatusRequest request, HttpContext http) =>
         {
             string service = request.Service?.Trim().ToLowerInvariant() ?? "";
+            LabConsole.Write("HOST REQUEST", $"POST /api/status service=\"{service}\"");
             if (!Catalog.Items.ContainsKey(service)) return Results.BadRequest(new { error = "unknown_service" });
             if (!await capacity.WaitAsync(0, http.RequestAborted))
             {

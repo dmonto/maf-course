@@ -1,0 +1,16 @@
+<Solution>
+  <Project Path="Shared/Unit16.Common/Unit16.Common.csproj" />
+  <Project Path="Shared/Unit16.EvidenceHost/Unit16.EvidenceHost.csproj" />
+  <Project Path="exercise-solutions/01-stop-rule/Unit16.EX01.csproj" />
+  <Project Path="exercise-solutions/02-canary/Unit16.EX02.csproj" />
+  <Project Path="v01-architecture/Unit16.V01.csproj" />
+  <Project Path="v02-prompts/Unit16.V02.csproj" />
+  <Project Path="v03-tools/Unit16.V03.csproj" />
+  <Project Path="v04-memory/Unit16.V04.csproj" />
+  <Project Path="v05-workflow/Unit16.V05.csproj" />
+  <Project Path="v06-evaluation/Unit16.V06.csproj" />
+  <Project Path="v07-validation/Unit16.V07.csproj" />
+  <Project Path="v08-debt/Unit16.V08.csproj" />
+  <Project Path="v09-rollout/Unit16.V09.csproj" />
+  <Project Path="v10-best-practices/Unit16.V10.csproj" />
+</Solution>

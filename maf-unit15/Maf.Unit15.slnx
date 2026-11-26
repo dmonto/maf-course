@@ -1,0 +1,20 @@
+<Solution>
+  <Project Path="EvidenceHost/Maf.Unit15.EvidenceHost.csproj" />
+  <Project Path="Exercises/Ex01.TransactionBoundaries/Ex01.TransactionBoundaries.csproj" />
+  <Project Path="Exercises/Ex02.ReportingConsumer/Ex02.ReportingConsumer.csproj" />
+  <Project Path="Shared/Maf.Unit15.Application/Maf.Unit15.Application.csproj" />
+  <Project Path="Shared/Maf.Unit15.Domain/Maf.Unit15.Domain.csproj" />
+  <Project Path="Shared/Maf.Unit15.Examples/Maf.Unit15.Examples.csproj" />
+  <Project Path="Shared/Maf.Unit15.Infrastructure/Maf.Unit15.Infrastructure.csproj" />
+  <Project Path="Verification/Verification.csproj" />
+  <Project Path="v01-separation-of-responsibilities/Maf.Unit15.V01.csproj" />
+  <Project Path="v02-integration-with-microservices/Maf.Unit15.V02.csproj" />
+  <Project Path="v03-event-driven-design/Maf.Unit15.V03.csproj" />
+  <Project Path="v04-applying-clean-architecture/Maf.Unit15.V04.csproj" />
+  <Project Path="v05-advanced-dependency-injection/Maf.Unit15.V05.csproj" />
+  <Project Path="v06-contract-management/Maf.Unit15.V06.csproj" />
+  <Project Path="v07-cross-cutting-observability/Maf.Unit15.V07.csproj" />
+  <Project Path="v08-dependency-control/Maf.Unit15.V08.csproj" />
+  <Project Path="v09-modularity/Maf.Unit15.V09.csproj" />
+  <Project Path="v10-structural-scalability/Maf.Unit15.V10.csproj" />
+</Solution>

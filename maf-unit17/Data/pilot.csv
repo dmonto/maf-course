@@ -1,0 +1,6 @@
+service,state,correct_ticket,cost_eur
+vpn,completed,1,0.03
+vpn,completed,1,0.03
+vpn,rejected,0,0.02
+email,no_action,0,0.01
+vpn,expired,0,0.02

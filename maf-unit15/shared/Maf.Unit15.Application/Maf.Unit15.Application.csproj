@@ -1,0 +1,3 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup><ProjectReference Include="../Maf.Unit15.Domain/Maf.Unit15.Domain.csproj" /></ItemGroup>
+</Project>

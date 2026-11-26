@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "dependencies": {
+    "net10.0": {
+      "maf.unit15.domain": {
+        "type": "Project"
+      }
+    }
+  }
+}

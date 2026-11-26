@@ -1,6 +1,7 @@
 <Solution>
   <Project Path="Shared/Unit14.Common/Unit14.Common.csproj" />
   <Project Path="Shared/Unit14.Api/Unit14.Api.csproj" />
+  <Project Path="Shared/Unit14.Probe/Unit14.Probe.csproj" />
   <Project Path="v01-agent-containerization/Unit14.V01.csproj" />
   <Project Path="v02-app-service-deployment/Unit14.V02.csproj" />
   <Project Path="v03-aks-architecture/Unit14.V03.csproj" />
@@ -11,5 +12,7 @@
   <Project Path="v08-version-control/Unit14.V08.csproj" />
   <Project Path="v09-environment-management/Unit14.V09.csproj" />
   <Project Path="v10-rollback-strategies/Unit14.V10.csproj" />
+  <Project Path="Exercises/ex01-boundary-diagnosis/Unit14.Ex01.csproj" />
+  <Project Path="Exercises/ex02-recovery-decision/Unit14.Ex02.csproj" />
   <Project Path="Verification/Unit14.Checks.csproj" />
 </Solution>

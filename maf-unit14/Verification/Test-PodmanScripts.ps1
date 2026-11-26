@@ -1,11 +1,11 @@
 #requires -Version 5.1
 param([switch]$InternalChild)
-# Check command boundaries without requiring an installed container engine.
+# Exercise command boundaries without requiring an installed container engine.
 $ErrorActionPreference='Stop'
 . (Join-Path (Split-Path -Parent $PSScriptRoot) 'Scripts/Compatibility.ps1')
 if (-not $InternalChild) {
     $unit14Shell=Get-UnitShellPath
-    & $unit14Shell -NoProfile -File $PSCommandPath -InternalChild
+    & $unit14Shell -NoProfile -ExecutionPolicy Bypass -File $PSCommandPath -InternalChild
     if ($LASTEXITCODE -ne 0) { throw 'Simulated Podman lifecycle checks failed.' }
     return
 }
@@ -14,9 +14,9 @@ $global:Unit14PodmanCalls=[System.Collections.Generic.List[object]]::new()
 $global:Unit14MachineState='ready'
 $global:Unit14ProbeFails=$false
 $env:Runner__Release='14.1.0'
-$env:PYTHON_COMMAND='unit14-fake-python'
 function Assert-Test([bool]$Condition,[string]$Message) { if (-not $Condition) { throw $Message } }
-function global:unit14-fake-python {
+function global:dotnet {
+    Assert-Test ($args -contains (Join-Path $unit14TestRoot 'Shared/Unit14.Probe/Unit14.Probe.csproj')) 'Unexpected probe project.'
     $global:LASTEXITCODE=if ($global:Unit14ProbeFails) { 17 } else { 0 }
 }
 function global:podman {

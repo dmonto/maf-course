@@ -9,6 +9,7 @@ using Unit14;
 return await Entry.RunAsync("checks", args, async context =>
 {
     context.FixtureOnly();
+    await ProbeChecks.RunAsync(context);
     await using (var host = await ApiSession.StartAsync(ApiSettings.Read("fixture") with
         { RequestTimeoutSeconds = 1, FixtureDelayMs = 2500 }))
     {
@@ -101,7 +102,7 @@ return await Entry.RunAsync("checks", args, async context =>
             Lab.Require(responses.Where(r => (int)r.StatusCode == 429).All(r => r.Headers.RetryAfter is not null), "Busy response has no Retry-After.");
         }
         finally { foreach (var response in responses) response.Dispose(); }
-        var wrongMode = await PythonProbe.RunAsync(context, host.Address, context.Release, "azure", "mode-rejected.json", 1);
+        var wrongMode = await HttpProbe.RunAsync(context, host.Address, context.Release, "azure", "mode-rejected.json", 1);
         Lab.Require(wrongMode.ExitCode == 1, "Fixture evidence was accepted as Azure evidence.");
     }
     using (var manifests = JsonDocument.Parse(JsonSerializer.Serialize(Kubernetes.Render("<APPROVED_IMAGE>", context.Release, true), Lab.Json)))

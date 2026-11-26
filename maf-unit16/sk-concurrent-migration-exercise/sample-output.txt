@@ -1,0 +1,18 @@
+[    0 ms] [BUILD] ProcessBuilder.Build(): workflow definition created.
+[    5 ms] [STATE] EvidencePending
+[    5 ms] [SK] StartAsync(kernel, event: Start): activate both evidence branches.
+[   60 ms] [BEGIN] status
+[   69 ms] [BEGIN] policy
+[ 1062 ms] [END] status
+[ 1570 ms] [END] policy
+[ 1586 ms] [JOIN] Both required inputs received. ValidateEvidenceStep executes once.
+[ 1586 ms] [STATE] EvidenceValidated
+[ 1586 ms] [SK EVENT] EmitEventAsync(RequestReview)
+[ 1590 ms] [STATE] ReviewPending
+[ 1690 ms] [REVIEW STUB] Synthetic outcome=approved. No real approval is collected.
+[ 1690 ms] [SK EVENT] EmitEventAsync(TrustedReview)
+[ 1693 ms] [STATE] Completed | case=INC-DEMO-001 | service=vpn
+[ 1701 ms] [CHECK] PASS | Evidence branches overlap in time
+[ 1701 ms] [CHECK] PASS | Join executed exactly once
+[ 1701 ms] [CHECK] PASS | One expected terminal outcome
+[ 1701 ms] [CONCLUSION] Both evidence branches overlapped; the join ran once; one terminal outcome was reached.

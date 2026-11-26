@@ -6,10 +6,12 @@ $unit14Record=Get-Content -LiteralPath $ReleaseRecord -Raw -Encoding UTF8 | Conv
 Assert-ImageReference -Image $unit14Record.imageRef
 if (-not $unit14Record.configRevision -or $unit14Record.mode -notin @('fixture','azure')) { throw 'Incomplete recovery record.' }
 if (-not $Apply) {
+    Write-UnitTrace -Kind 'CONCLUSION' -Text 'Plan only. Nothing was restored. Add -Apply to execute the rollback.'
     @{planOnly=$true;platform=$unit14Record.platform;imageRef=$unit14Record.imageRef;
         release=$unit14Record.release;configRevision=$unit14Record.configRevision;requiresFinalFunctionalProbe=$true} | ConvertTo-Json
     return
 }
+Write-UnitTrace -Kind 'MILESTONE' -Text "Restore $($unit14Record.platform) to image $($unit14Record.imageRef)"
 if ($unit14Record.platform -eq 'aks') {
     Assert-Assigned -Names @('KUBE_CONTEXT','KUBE_NAMESPACE')
     if ($unit14Record.context -ne $env:KUBE_CONTEXT -or $unit14Record.namespace -ne $env:KUBE_NAMESPACE) {
@@ -49,4 +51,4 @@ if ($unit14Record.platform -eq 'aks') {
     $null=Invoke-UnitTool -Executable az -Arguments @('webapp','sitecontainers','update','-g',$env:RESOURCE_GROUP,
         '-n',$env:WEBAPP_NAME,'--container-name','main','--image',$unit14Record.imageRef)
 } else { throw 'Unsupported recovery platform.' }
-Write-Host "Run the functional probe for release $($unit14Record.release), mode $($unit14Record.mode), and retain the recovery report."
+Write-UnitTrace -Kind 'CONCLUSION' -Text "Restore applied. Run the functional probe for release $($unit14Record.release), mode $($unit14Record.mode), and retain the recovery report."

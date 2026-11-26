@@ -137,22 +137,24 @@ public static class Recovery
         {
             release = "14.2.0", modelDeployment = "candidate-changed-deployment", mode = "fixture"
         });
+        LabConsole.Write("MILESTONE", "Step 1: start release 14.2.0 with an injected wrong contract; the probe must reject it.");
         ApiSettings good = ApiSettings.Read("fixture") with { Release = "14.1.0" };
         await using (var badHost = await ApiSession.StartAsync(good with { Release = "14.2.0", WrongFixtureContract = true }))
         {
-            var bad = await PythonProbe.RunAsync(context, badHost.Address, "14.2.0", "fixture", "failed-release.json", requests: 2);
-            Lab.Require(bad.ExitCode == 1 && !bad.Report.GetProperty("passed").GetBoolean(), "Bad HTTP contract was promoted.");
+            var bad = await HttpProbe.RunAsync(context, badHost.Address, "14.2.0", "fixture", "failed-release.json", requests: 2);
+            LabConsole.Check("The bad release is rejected by the probe", bad.ExitCode == 1 && !bad.Report.GetProperty("passed").GetBoolean());
         }
+        LabConsole.Write("MILESTONE", "Step 2: restore the approved configuration snapshot over the active one.");
         // Rehearse restoring a real local configuration file alongside the previous contract.
         File.Copy(approvedConfiguration, activeConfiguration, overwrite: true);
         using var restoredConfig = JsonDocument.Parse(File.ReadAllText(activeConfiguration));
-        Lab.Require(restoredConfig.RootElement.GetProperty("modelDeployment").GetString() == "approved-fixture-deployment",
-            "Previous fixture model mapping was not restored.");
+        LabConsole.Check("The previous model mapping was restored", restoredConfig.RootElement.GetProperty("modelDeployment").GetString() == "approved-fixture-deployment");
+        LabConsole.Write("MILESTONE", "Step 3: start the restored release 14.1.0 and probe it.");
         good = good with { Release = restoredConfig.RootElement.GetProperty("release").GetString()! };
         await using (var restoredHost = await ApiSession.StartAsync(good))
         {
-            var restored = await PythonProbe.RunAsync(context, restoredHost.Address, "14.1.0", "fixture", "restored-release.json", requests: 2);
-            Lab.Require(restored.ExitCode == 0, "Restored release did not pass the probe.");
+            var restored = await HttpProbe.RunAsync(context, restoredHost.Address, "14.1.0", "fixture", "restored-release.json", requests: 2);
+            LabConsole.Check("The restored release passes the probe", restored.ExitCode == 0);
         }
         context.Save("recovery-plan.json", new { mode = "fixture", steps = Plan(),
             previousModelMappingRestored = true, mappingEvidence = "Local active-configuration.json restored from its approved snapshot; no Azure configuration was changed.",

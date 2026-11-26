@@ -8,12 +8,15 @@ $ErrorActionPreference='Stop'
 . (Join-Path $PSScriptRoot 'Import-Environment.ps1')
 if ($Mode -eq 'azure' -and $Example -notin @('v01','v05')) { throw 'Use v01 or v05 for Azure-mode execution.' }
 if ($Serve -and $Example -notin @('v01','v05')) { throw 'Serve is supported by v01 and v05.' }
-$unit14Entry=(Get-Content (Join-Path $unit14Root 'examples.json') -Raw -Encoding UTF8 | ConvertFrom-Json) |
-    ForEach-Object { $_ } | Where-Object id -eq $Example
-if (-not $unit14Entry) { throw "Example $Example not found in examples.json." }
+$unit14Entry=Get-Content (Join-Path $unit14Root 'examples.json') -Raw -Encoding UTF8 | ConvertFrom-Json |
+    Where-Object id -eq $Example
+if (-not $unit14Entry) { throw "Example $Example is not included in this package." }
 $unit14Args=@('run','--project',(Join-Path $unit14Root $unit14Entry.project),'--no-launch-profile')
 if ($NoBuild) { $unit14Args+='--no-build' }
 $unit14Args+=@('--','--mode',$Mode)
 if ($Serve) { $unit14Args+='--serve' }
+Write-Host "[MILESTONE] Run example $Example in $Mode mode."
+Write-Host ('[COMMAND] dotnet ' + ($unit14Args -join ' '))
 & dotnet @unit14Args
 if ($LASTEXITCODE -ne 0) { throw "Example $Example failed." }
+Write-Host "[CONCLUSION] Example $Example completed."

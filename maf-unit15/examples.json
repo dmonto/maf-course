@@ -1,0 +1,77 @@
+{
+  "unit": 15,
+  "language": "C#",
+  "examples": [
+    {
+      "id": "v01",
+      "directory": "v01-separation-of-responsibilities",
+      "section": "Separation of responsibilities",
+      "purpose": "Assign evidence, assessment and review ownership.",
+      "project": "v01-separation-of-responsibilities/Maf.Unit15.V01.csproj"
+    },
+    {
+      "id": "v02",
+      "directory": "v02-integration-with-microservices",
+      "section": "Integration with microservices",
+      "purpose": "Replace the fixture evidence adapter with the Unit 14 HTTP contract.",
+      "project": "v02-integration-with-microservices/Maf.Unit15.V02.csproj"
+    },
+    {
+      "id": "v03",
+      "directory": "v03-event-driven-design",
+      "section": "Event-driven design",
+      "purpose": "Commit a fact, deliver its event and replay the same event safely.",
+      "project": "v03-event-driven-design/Maf.Unit15.V03.csproj"
+    },
+    {
+      "id": "v04",
+      "directory": "v04-applying-clean-architecture",
+      "section": "Applying Clean Architecture",
+      "purpose": "Run the complete outbox/inbox lab and recover an acknowledgement failure.",
+      "project": "v04-applying-clean-architecture/Maf.Unit15.V04.csproj"
+    },
+    {
+      "id": "v05",
+      "directory": "v05-advanced-dependency-injection",
+      "section": "Advanced dependency injection",
+      "purpose": "Compose replaceable evidence ports and isolate per-operation state.",
+      "project": "v05-advanced-dependency-injection/Maf.Unit15.V05.csproj"
+    },
+    {
+      "id": "v06",
+      "directory": "v06-contract-management",
+      "section": "Contract management",
+      "purpose": "Reject unsupported contracts and conflicting event identity reuse.",
+      "project": "v06-contract-management/Maf.Unit15.V06.csproj"
+    },
+    {
+      "id": "v07",
+      "directory": "v07-cross-cutting-observability",
+      "section": "Cross-cutting observability",
+      "purpose": "Follow operation, correlation and event identity through diagnostic stages.",
+      "project": "v07-cross-cutting-observability/Maf.Unit15.V07.csproj"
+    },
+    {
+      "id": "v08",
+      "directory": "v08-dependency-control",
+      "section": "Dependency control",
+      "purpose": "Inspect standard-library imports and run a model-independent healthy path.",
+      "project": "v08-dependency-control/Maf.Unit15.V08.csproj"
+    },
+    {
+      "id": "v09",
+      "directory": "v09-modularity",
+      "section": "Modularity",
+      "purpose": "Model approval, repair request and verification as durable synthetic transitions.",
+      "project": "v09-modularity/Maf.Unit15.V09.csproj"
+    },
+    {
+      "id": "v10",
+      "directory": "v10-structural-scalability",
+      "section": "Structural scalability",
+      "purpose": "Recover an independent audit consumer without blocking review creation.",
+      "project": "v10-structural-scalability/Maf.Unit15.V10.csproj"
+    }
+  ],
+  "version": "15.2.0"
+}

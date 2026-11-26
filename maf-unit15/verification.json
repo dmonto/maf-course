@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "checks": [
+    "v01: fixture project completed",
+    "v02: fixture project completed",
+    "v03: fixture project completed",
+    "v04: fixture project completed",
+    "v05: fixture project completed",
+    "v06: fixture project completed",
+    "v07: fixture project completed",
+    "v08: fixture project completed",
+    "v09: fixture project completed",
+    "v10: fixture project completed",
+    "Two instructor solutions passed",
+    "Schema version JSON type enforced",
+    "Atomic consumer rollback passed",
+    "Existing SQLite schema and original event bytes preserved",
+    "v02: real .NET HTTP fixture passed",
+    "v04: real .NET HTTP fixture passed",
+    "v07: real .NET HTTP fixture passed"
+  ],
+  "azureInferenceTested": false,
+  "toolchain": ".NET 10 and C#"
+}

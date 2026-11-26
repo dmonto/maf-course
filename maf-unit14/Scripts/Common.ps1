@@ -1,9 +1,13 @@
 . (Join-Path $PSScriptRoot 'Compatibility.ps1')
 . (Join-Path $PSScriptRoot 'Import-Environment.ps1')
 function Invoke-UnitTool {
-    param([string]$Executable,[string[]]$Arguments)
+    param([string]$Executable,[string[]]$Arguments,[switch]$Echo)
+    Write-UnitTrace -Kind 'COMMAND' -Text (Format-UnitCommand -Executable $Executable -Arguments $Arguments)
     $unit14Output = & $Executable @Arguments
+    # Echo only output known to be safe (our own C# traces); az/podman output may contain secrets.
+    if ($Echo) { foreach ($unit14Line in @($unit14Output)) { Write-Host $unit14Line } }
     if ($LASTEXITCODE -ne 0) { throw "$Executable failed with exit code $LASTEXITCODE." }
+    Write-UnitTrace -Kind 'EXIT' -Text "$Executable exit code 0"
     return $unit14Output
 }
 function Read-AzJson {
@@ -21,6 +25,7 @@ function Assert-Assigned {
     }
 }
 function Assert-AzureContext {
+    Write-UnitTrace -Kind 'MILESTONE' -Text 'Verify the Azure CLI is logged into the assigned tenant and subscription.'
     Assert-Assigned -Names @('TENANT_ID','SUBSCRIPTION_ID')
     $unit14Account=Read-AzJson -Arguments @('account','show')
     if ($unit14Account.id -ne $env:SUBSCRIPTION_ID -or $unit14Account.tenantId -ne $env:TENANT_ID) {
@@ -41,18 +46,21 @@ function New-UnitArtifactDirectory {
 }
 function Invoke-Section {
     param([string]$Id)
+    Write-UnitTrace -Kind 'SECTION' -Text "Run C# section $Id in fixture mode (no Azure model request)."
     $unit14Examples=Get-Content (Join-Path $unit14Root 'examples.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     $unit14Example=$unit14Examples | Where-Object id -eq $Id
     if (-not $unit14Example) { throw 'Unknown section id.' }
     $unit14Output=@(Invoke-UnitTool -Executable dotnet -Arguments @('run','--project',
-        (Join-Path $unit14Root $unit14Example.project),'--no-build','--no-launch-profile','--','--mode','fixture'))
+        (Join-Path $unit14Root $unit14Example.project),'--no-build','--no-launch-profile','--','--mode','fixture') -Echo)
     $unit14Result=$unit14Output | Where-Object { $_ -is [string] -and $_.StartsWith('RESULT ') } | Select-Object -Last 1
     if (-not $unit14Result) { throw 'Section did not produce a result.' }
+    Write-UnitTrace -Kind 'RESULT' -Text $unit14Result.Substring(7)
     return $unit14Result.Substring(7) | ConvertFrom-Json
 }
 
 
 function Assert-PodmanReady {
+    Write-UnitTrace -Kind 'MILESTONE' -Text 'Check that the Podman engine answers.'
     if (-not (Get-Command podman -ErrorAction SilentlyContinue)) {
         throw 'Install Podman, reopen the terminal and run Initialize-Podman.ps1.'
     }

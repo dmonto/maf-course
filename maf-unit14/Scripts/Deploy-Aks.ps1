@@ -1,5 +1,6 @@
 #requires -Version 5.1
-param([ValidateSet('fixture','azure')][string]$Mode='fixture',[string]$ImageRef,[switch]$WithHpa,[switch]$Apply)
+param([ValidateSet('fixture','azure')][string]$Mode='fixture',[string]$ImageRef,[switch]$WithHpa,
+    [switch]$UseExistingNamespace,[switch]$Apply)
 $ErrorActionPreference='Stop'
 . (Join-Path $PSScriptRoot 'Common.ps1')
 if (-not $ImageRef) { $ImageRef=$env:APPROVED_IMAGE }
@@ -31,14 +32,19 @@ if ($Mode -eq 'azure') {
     # Put the service account before the workload; federation remains an infrastructure prerequisite.
     $unit14Manifest.items=@($unit14Manifest.items[0],$unit14ServiceAccount)+@($unit14Manifest.items | Select-Object -Skip 1)
 }
+if ($UseExistingNamespace) {
+    # Namespace-scoped lab users cannot create or patch the cluster-scoped Namespace object.
+    $unit14Manifest.items=@($unit14Manifest.items | Where-Object { $_.kind -ne 'Namespace' })
+}
 $unit14Artifacts=New-UnitArtifactDirectory -Name 'aks'
 $unit14Path=Join-Path $unit14Artifacts 'deployment.json'
 $unit14Manifest | ConvertTo-Json -Depth 35 | Set-UnitContent $unit14Path
-Write-Host "Manifest: $unit14Path"
-if (-not $Apply) { Write-Host 'Plan only. No Kubernetes operation was executed.'; return }
+Write-UnitTrace -Kind 'MILESTONE' -Text "Kubernetes manifest written to $unit14Path (mode $Mode, hpa=$WithHpa, image=$ImageRef)"
+if (-not $Apply) { Write-UnitTrace -Kind 'CONCLUSION' -Text 'Plan only. No Kubernetes operation was executed. Add -Apply to run kubectl apply.'; return }
+Write-UnitTrace -Kind 'MILESTONE' -Text 'Apply the manifest and wait for the rollout.'
 Assert-ImageReference -Image $ImageRef
 Assert-Assigned -Names @('KUBE_CONTEXT')
 $null=Invoke-UnitTool -Executable kubectl -Arguments @('--context',$env:KUBE_CONTEXT,'apply','-f',$unit14Path)
 $null=Invoke-UnitTool -Executable kubectl -Arguments @('--context',$env:KUBE_CONTEXT,'rollout','status',
     'deployment/maf-status','-n',$unit14Namespace,'--timeout=180s')
-Write-Host "Use kubectl --context $env:KUBE_CONTEXT port-forward service/maf-status 8081:80 -n $unit14Namespace and probe it in mode $Mode."
+Write-UnitTrace -Kind 'CONCLUSION' -Text "Rollout complete. Use kubectl --context $env:KUBE_CONTEXT port-forward service/maf-status 8081:80 -n $unit14Namespace and probe it in mode $Mode."

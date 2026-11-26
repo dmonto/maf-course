@@ -1,0 +1,152 @@
+{
+  "suite": "unit16-contract-v2",
+  "qualification": "azure",
+  "passed": true,
+  "count": 4,
+  "failures": 0,
+  "createdAtUtc": "2026-11-25T16:19:42.0996589+00:00",
+  "cases": [
+    {
+      "id": "vpn",
+      "service": "vpn",
+      "passed": true,
+      "baseline": {
+        "service": "vpn",
+        "status": "degraded",
+        "summary": "Adapted legacy boundary recording."
+      },
+      "candidate": {
+        "service": "vpn",
+        "status": "degraded",
+        "summary": "Synthetic evidence: VPN connectivity is degraded."
+      },
+      "mode": "azure",
+      "toolTrace": [
+        {
+          "name": "GetServiceStatus",
+          "argument": "vpn",
+          "result": {
+            "service": "vpn",
+            "status": "degraded",
+            "summary": "Synthetic evidence: VPN connectivity is degraded."
+          }
+        }
+      ],
+      "toolEvidence": "recorded_by_application",
+      "checks": {
+        "baselineMatchesOracle": true,
+        "candidateMatchesOracle": true,
+        "parity": true,
+        "readToolEvidence": true,
+        "noWriteTools": true,
+        "answerMatchesTool": true
+      },
+      "elapsedMs": 4575,
+      "errorType": null
+    },
+    {
+      "id": "email",
+      "service": "email",
+      "passed": true,
+      "baseline": {
+        "service": "email",
+        "status": "healthy",
+        "summary": "Adapted legacy boundary recording."
+      },
+      "candidate": {
+        "service": "email",
+        "status": "healthy",
+        "summary": "Synthetic evidence: email is healthy."
+      },
+      "mode": "azure",
+      "toolTrace": [
+        {
+          "name": "GetServiceStatus",
+          "argument": "email",
+          "result": {
+            "service": "email",
+            "status": "healthy",
+            "summary": "Synthetic evidence: email is healthy."
+          }
+        }
+      ],
+      "toolEvidence": "recorded_by_application",
+      "checks": {
+        "baselineMatchesOracle": true,
+        "candidateMatchesOracle": true,
+        "parity": true,
+        "readToolEvidence": true,
+        "noWriteTools": true,
+        "answerMatchesTool": true
+      },
+      "elapsedMs": 3282,
+      "errorType": null
+    },
+    {
+      "id": "normalization",
+      "service": "vpn",
+      "passed": true,
+      "baseline": {
+        "service": "vpn",
+        "status": "degraded",
+        "summary": "Adapted legacy boundary recording."
+      },
+      "candidate": {
+        "service": "vpn",
+        "status": "degraded",
+        "summary": "Synthetic evidence: VPN connectivity is degraded."
+      },
+      "mode": "azure",
+      "toolTrace": [
+        {
+          "name": "GetServiceStatus",
+          "argument": "vpn",
+          "result": {
+            "service": "vpn",
+            "status": "degraded",
+            "summary": "Synthetic evidence: VPN connectivity is degraded."
+          }
+        }
+      ],
+      "toolEvidence": "recorded_by_application",
+      "checks": {
+        "baselineMatchesOracle": true,
+        "candidateMatchesOracle": true,
+        "parity": true,
+        "readToolEvidence": true,
+        "noWriteTools": true,
+        "answerMatchesTool": true
+      },
+      "elapsedMs": 2870,
+      "errorType": null
+    },
+    {
+      "id": "unknown",
+      "service": "payroll",
+      "passed": true,
+      "baseline": {
+        "service": "payroll",
+        "status": "unknown_service",
+        "summary": "No supported service was assessed."
+      },
+      "candidate": {
+        "service": "payroll",
+        "status": "unknown_service",
+        "summary": "No supported service was assessed."
+      },
+      "mode": "rejected_before_agent",
+      "toolTrace": [],
+      "toolEvidence": "recorded_by_application",
+      "checks": {
+        "baselineMatchesOracle": true,
+        "candidateMatchesOracle": true,
+        "parity": true,
+        "readToolEvidence": true,
+        "noWriteTools": true,
+        "answerMatchesTool": true
+      },
+      "elapsedMs": 0,
+      "errorType": null
+    }
+  ]
+}

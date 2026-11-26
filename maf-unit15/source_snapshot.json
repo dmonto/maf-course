@@ -1,0 +1,15 @@
+{
+  "unit": 15,
+  "language": "C#",
+  "targetFramework": "net10.0",
+  "gitbookUrl": "https://diego-montoliu.gitbook.io/maf-course/session-7/unit-15",
+  "documentationPath": "Documentation/Unit15.md",
+  "documentationSha256": "3c5f6d9f0537a5c32e4fe6859611eb08221046cfa8dfbe960890df6455a24199",
+  "examples": 10,
+  "exerciseSolutions": 2,
+  "sharedEnvironment": ".env",
+  "verification": "Scripts/Test-All.ps1",
+  "azureInferenceTested": false,
+  "documentationGitCommit": "ab872fe506756677bb9fc269dc1d2b6122e79307",
+  "gitSyncVerified": true
+}
